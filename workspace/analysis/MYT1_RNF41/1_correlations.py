@@ -52,7 +52,7 @@ for gene in genes_of_interest:
 # They were reported to interact by collaborators, and Ardigen found them to correlate
 
 feat_cols = [x for x in df.columns if not x.startswith("Metadata")]
-translator_crispr_jump_gene = {v["crispr"]: k for k, v in gene_matches.items()}
+translator_crispr_jump_gene = {v.get("crispr"): k for k, v in gene_matches.items()}
 subset = df.loc[df["Metadata_JCP2022"].isin(translator_crispr_jump_gene)]
 subset.set_index(
     subset["Metadata_JCP2022"].map(translator_crispr_jump_gene),

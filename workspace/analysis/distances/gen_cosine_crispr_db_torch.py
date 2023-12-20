@@ -5,15 +5,32 @@ Calculate cosine similarity of the CRISPR profiles using GPU
 Based off
 https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/util.py#L31
 """
-from collections.abc import Iterable
 from pathlib import Path
 
+import joblib
 import numpy as np
 import polars as pl
 import torch
+from broad_babel.query import run_query
 from torch import Tensor, device
 
+from utils import batch_processing, parallel
+
 device = device("cuda" if torch.cuda.is_available() else "cpu")
+
+assert device.type == "cuda", "Not running on GPUs"
+
+
+def get_first_last_n(tensor: Tensor, n: int):
+    return tensor[:, [range(n), range(-n - 1, -1)]].reshape(-1, 2 * n)
+
+
+@batch_processing
+def jcp_to_standard(x):
+    return run_query(query=x, input_column="JCP2022", output_column="standard_key")[0][
+        0
+    ]
+
 
 filename = "harmonized_no_sphering_profiles"
 dir_path = Path("../../profiles/")
@@ -37,20 +54,15 @@ df = pl.read_parquet(profiles_path)
 vals = Tensor(df.select(pl.all().exclude("^Metadata.*$")).to_numpy())
 
 # Calculate cosine similarty
-cosine_sim = cos_sim(tensor, tensor)
+cosine_sim = cos_sim(vals, vals)
 
 # Save the upper triangle compressed
-linear = cosine_sim[np.triu_indices(len(cosine_sim))]
-joblib.dump(linear, "cosine_joblib", compress=("lzma", 9))
+joblib.dump(cosine_sim[np.triu_indices(len(cosine_sim))], "cosine_joblib.gz")
 
 # Sort by correlation
 _sorted = cosine_sim.sort(axis=1)
 
 n_vals_used = 25
-
-
-def get_first_last_n(tensor: Tensor, n: int):
-    return tensor[:, [range(n), range(-n - 1, -1)]].reshape(-1, 2 * n)
 
 
 indices, values = [
@@ -77,3 +89,22 @@ jcp_df = pl.DataFrame(
 jcp_df.write_parquet("cosine_similarity_best.parquet")
 
 # And then proceed to add gene names (TODO incorporate NCBI ids once they are in babel)
+uniq_jcp = jcp_df.select(pl.col("JCP2022")).to_series().unique().to_list()
+mapper_values = parallel(uniq_jcp, jcp_to_standard)
+mapper = {jcp: std for jcp, std in zip(uniq_jcp, mapper_values)}
+
+jcp_translated = jcp_df.with_columns(
+    pl.col("JCP2022").replace(mapper).alias("standard_key"),
+    pl.col("matched_JCP2022").replace(mapper),
+).rename({"matched_JCP2022": "matched_standard_key"})
+final_version = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
+
+# TODO add differentiating features when compared to their controls
+
+db_name = "crispr.db"
+final_version.write_database(
+    table_name="babel",
+    connection=f"sqlite:{db_name}",
+    if_exists="replace",
+    engine="adbc",
+)

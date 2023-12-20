@@ -97,14 +97,11 @@ jcp_translated = jcp_df.with_columns(
     pl.col("JCP2022").replace(mapper).alias("standard_key"),
     pl.col("matched_JCP2022").replace(mapper),
 ).rename({"matched_JCP2022": "matched_standard_key"})
-final_version = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
+final_version = jcp_translated.select(
+    reversed(sorted(jcp_translated.columns))
+).with_columns(pl.col("JCP2022").str.replace("JCP2022_", "").cast(pl.Int32))
 
 # TODO add differentiating features when compared to their controls
 
-db_name = "crispr.db"
-final_version.write_database(
-    table_name="babel",
-    connection=f"sqlite:{db_name}",
-    if_exists="replace",
-    engine="adbc",
-)
+
+final_version.write_parquet("crispr.parquet", compression="zstd")

@@ -69,7 +69,21 @@ indices, values = [
     get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
 ]
 
+
 meta = df.select(pl.col("^Metadata_.*$"))
+url_col = "url"
+meta = meta.with_columns(
+    pl.concat_str(
+        pl.col("Metadata_Source"),
+        pl.col("Metadata_Plate"),
+        pl.col("Metadata_Well"),
+        separator="/",
+    )
+    .str.replace(r"^", "https://phenaid.ardigen.com/static-jumpcpexplorer/images/")
+    .str.replace("$", "_1.jpg")
+    .alias(url_col)
+)
+
 jcp_col = "Metadata_JCP2022"
 jcp_df = pl.DataFrame(
     {
@@ -81,6 +95,7 @@ jcp_df = pl.DataFrame(
         .to_numpy()[indices.flatten()]
         .astype("<U15"),
         "cosine_distance": values.flatten().numpy(),
+        url_col: np.repeat(meta.get_column("url"), n_vals_used * 2).astype("U"),
     }
 )
 
@@ -97,9 +112,10 @@ jcp_translated = jcp_df.with_columns(
     pl.col("JCP2022").replace(mapper).alias("standard_key"),
     pl.col("matched_JCP2022").replace(mapper),
 ).rename({"matched_JCP2022": "matched_standard_key"})
-final_version = jcp_translated.select(
-    reversed(sorted(jcp_translated.columns))
-).with_columns(pl.col("JCP2022").str.replace("JCP2022_", "").cast(pl.Int32))
+matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
+# .with_columns(pl.col("JCP2022").str.replace("JCP2022_", "").cast(pl.Int32))
+
+# Add a link to one of the Ardigen images
 
 # TODO add differentiating features when compared to their controls
 

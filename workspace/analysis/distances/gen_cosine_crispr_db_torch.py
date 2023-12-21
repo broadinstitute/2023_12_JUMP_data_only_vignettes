@@ -1,8 +1,9 @@
 #!/usr/bin/env jupyter
 """
-Calculate cosine similarity of the CRISPR profiles using GPU
+Calculate cosine similarity of the CRISPR profiles using GPU,
+then wrangle information and produce an explorable data frame.
 
-Based off
+The GPU section is based off this function
 https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/util.py#L31
 """
 from pathlib import Path
@@ -45,61 +46,72 @@ def cos_sim(a: Tensor, b: Tensor) -> Tensor:
 filename = "harmonized_no_sphering_profiles"
 dir_path = Path("../../profiles/")
 profiles_path = dir_path / f"{filename}.parquet"
+checkpoint_path = Path("jcp_df.parquet")
+
+# Set names
+jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
+url_col = "example_image_standard_key"
+match_url_col = "example_image_match"
+url_prefix = "https://phenaid.ardigen.com/static-jumpcpexplorer/images/"
+url_suffix = "_1.jpg"
 
 # Load Metadata
 df = pl.read_parquet(profiles_path)
 
-vals = Tensor(df.select(pl.all().exclude("^Metadata.*$")).to_numpy())
+if checkpoint_path.exists():
+    jcp_df = pl.read_parquet(checkpoint_path)
+else:
+    vals = Tensor(df.select(pl.all().exclude("^Metadata.*$")).to_numpy())
 
-# Calculate cosine similarty
-cosine_sim = cos_sim(vals, vals)
+    # Calculate cosine similarty
+    cosine_sim = cos_sim(vals, vals)
 
-# Save the upper triangle compressed
-# joblib.dump(cosine_sim[np.triu_indices(len(cosine_sim))], "cosine_joblib.gz")
+    # Sort by correlation
+    _sorted = cosine_sim.sort(axis=1)
 
-# Sort by correlation
-_sorted = cosine_sim.sort(axis=1)
+    n_vals_used = 25
 
-n_vals_used = 25
+    indices, values = [
+        get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
+    ]
 
-
-indices, values = [
-    get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
-]
-
-
-meta = df.select(pl.col("^Metadata_.*$"))
-url_col = "url"
-meta = meta.with_columns(
-    pl.concat_str(
-        pl.col("Metadata_Source"),
-        pl.col("Metadata_Plate"),
-        pl.col("Metadata_Well"),
-        separator="/",
+    # Add a link to one of the Ardigen images
+    meta = df.select(pl.col("^Metadata_.*$"))
+    meta = meta.with_columns(
+        pl.concat_str(
+            pl.col("Metadata_Source"),
+            pl.col("Metadata_Plate"),
+            pl.col("Metadata_Well"),
+            separator="/",
+        )
+        .str.replace(r"^", url_prefix)
+        .str.replace("$", url_suffix)
+        .alias(url_col)
     )
-    .str.replace(r"^", "https://phenaid.ardigen.com/static-jumpcpexplorer/images/")
-    .str.replace("$", "_1.jpg")
-    .alias(url_col)
-)
 
-jcp_col = "Metadata_JCP2022"
-jcp_df = pl.DataFrame(
-    {
-        "JCP2022": np.repeat(meta.select(pl.col(jcp_col)), n_vals_used * 2).astype(
-            "<U15"
-        ),
-        "matched_JCP2022": meta.select(pl.col(jcp_col))
-        .to_series()
-        .to_numpy()[indices.flatten()]
-        .astype("<U15"),
-        "cosine_distance": values.flatten().numpy(),
-        url_col: np.repeat(meta.get_column("url"), n_vals_used * 2).astype("U"),
-    }
-)
+    jcp_df = pl.DataFrame(
+        {
+            "JCP2022": np.repeat(meta.select(pl.col(jcp_col)), n_vals_used * 2).astype(
+                "<U15"
+            ),
+            "match_JCP2022": meta.select(pl.col(jcp_col))
+            .to_series()
+            .to_numpy()[indices.flatten()]
+            .astype("<U15"),
+            "cosine_distance": values.flatten().numpy(),
+            url_col: np.repeat(meta.get_column("url"), n_vals_used * 2).astype("U"),
+            match_url_col: list(
+                map(
+                    lambda x: url_prefix + "/".join(x) + url_suffix,
+                    meta.select(
+                        pl.col(["Metadata_Source", "Metadata_Plate", "Metadata_Well"])
+                    ).to_numpy()[indices.flatten()],
+                )
+            ),
+        }
+    )
 
-
-# We save our matrix
-jcp_df.write_parquet("cosine_similarity_best.parquet")
+    jcp_df.write_parquet("cosine_similarity_best.parquet", compression="zstd")
 
 # And then proceed to add gene names (TODO incorporate NCBI ids once they are in babel)
 uniq_jcp = jcp_df.select(pl.col("JCP2022")).to_series().unique().to_list()
@@ -108,14 +120,10 @@ mapper = {jcp: std for jcp, std in zip(uniq_jcp, mapper_values)}
 
 jcp_translated = jcp_df.with_columns(
     pl.col("JCP2022").replace(mapper).alias("standard_key"),
-    pl.col("matched_JCP2022").replace(mapper),
-).rename({"matched_JCP2022": "matched_standard_key"})
+    pl.col("match_JCP2022").replace(mapper),
+).rename({"match_JCP2022": "match_standard_key"})
 matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
 # .with_columns(pl.col("JCP2022").str.replace("JCP2022_", "").cast(pl.Int32))
-
-# Add a link to one of the Ardigen images
-
-# TODO add differentiating features when compared to their controls
 
 
 final_output = "crispr.parquet"
@@ -152,4 +160,11 @@ new = requests.post(depos.json()["links"]["newversion"], params=params, headers=
 d = r.post(depos_url.json(""))
 curl -X POST-H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" https://sandbox.zenodo.org/api/deposit/depositions/165/actions/newversion
 
+"""
+
+"""
+Future plans:
+- Add example of matched profile
+- Find a way to compress URLs for easier visualisation
+- TODO add differentiating features when compared to their controls
 """

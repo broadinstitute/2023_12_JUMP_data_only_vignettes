@@ -118,4 +118,38 @@ matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.column
 # TODO add differentiating features when compared to their controls
 
 
-final_version.write_parquet("crispr.parquet", compression="zstd")
+final_output = "crispr.parquet"
+matches_translated.write_parquet(final_output, compression="zstd")
+
+
+# Upload to zenodo
+# Automated uploads are not working
+# https://github.com/zenodo/zenodo/issues/2506
+
+"""
+from os.path import expanduser
+import requests
+with open(expanduser("~") + "/.zenodo") as f:
+    for line in f.readlines():
+        name, access_token = line.strip("\n").split(": ")
+
+params = {"access_token": access_token}
+bucket_url = "https://zenodo.org/api/files/9ffb1b5b-1e3c-4618-ad91-36255e87b57e"
+headers = {"Content-Type": "application/json"}
+with open(final_output, "rb") as fp:
+    r = requests.post(
+        f"{bucket_url}?access_token={params['access_token']}",
+        data=fp,
+        headers=headers,
+        params=params,
+    )
+
+
+depos_url =  "https://zenodo.org/api/deposit/depositions/10416605"
+depos=requests.get(depos_url,params=params)
+new = requests.post(depos.json()["links"]["newversion"], params=params, headers={"Accept": "application/json" ,**headers})
+
+d = r.post(depos_url.json(""))
+curl -X POST-H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" https://sandbox.zenodo.org/api/deposit/depositions/165/actions/newversion
+
+"""

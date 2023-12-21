@@ -56,7 +56,7 @@ vals = Tensor(df.select(pl.all().exclude("^Metadata.*$")).to_numpy())
 cosine_sim = cos_sim(vals, vals)
 
 # Save the upper triangle compressed
-joblib.dump(cosine_sim[np.triu_indices(len(cosine_sim))], "cosine_joblib.gz")
+# joblib.dump(cosine_sim[np.triu_indices(len(cosine_sim))], "cosine_joblib.gz")
 
 # Sort by correlation
 _sorted = cosine_sim.sort(axis=1)

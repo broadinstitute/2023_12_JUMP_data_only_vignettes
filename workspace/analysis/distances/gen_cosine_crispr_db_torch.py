@@ -7,7 +7,6 @@ https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformer
 """
 from pathlib import Path
 
-import joblib
 import numpy as np
 import polars as pl
 import torch

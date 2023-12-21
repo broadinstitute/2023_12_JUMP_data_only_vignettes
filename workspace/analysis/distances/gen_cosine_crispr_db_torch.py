@@ -32,11 +32,6 @@ def jcp_to_standard(x):
     ]
 
 
-filename = "harmonized_no_sphering_profiles"
-dir_path = Path("../../profiles/")
-profiles_path = dir_path / f"{filename}.parquet"
-
-
 def cos_sim(a: Tensor, b: Tensor) -> Tensor:
     """
     Computes the cosine similarity cos_sim(a[i], b[j]) for all i and j.
@@ -47,6 +42,10 @@ def cos_sim(a: Tensor, b: Tensor) -> Tensor:
     b_norm = torch.nn.functional.normalize(b, p=2, dim=1)
     return torch.mm(a_norm, b_norm.transpose(0, 1))
 
+
+filename = "harmonized_no_sphering_profiles"
+dir_path = Path("../../profiles/")
+profiles_path = dir_path / f"{filename}.parquet"
 
 # Load Metadata
 df = pl.read_parquet(profiles_path)

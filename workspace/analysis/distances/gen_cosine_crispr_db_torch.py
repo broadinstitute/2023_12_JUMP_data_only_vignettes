@@ -90,9 +90,9 @@ df = df.with_columns(
 )
 grouped = df.group_by("Metadata_JCP2022")
 med = grouped.median()
-meta = grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
+meta = grouped.agg(pl.col("^Metadata_.*$").map_elements(cycle))
 
-urls = grouped.agg(pl.col(url_col).map_elements(lambda x: cycle(x)))
+urls = grouped.agg(pl.col(url_col).map_elements(cycle))
 
 for srs in meta.iter_columns():
     med.replace_column(med.columns.index(srs.name), srs)

@@ -67,8 +67,9 @@ jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
 url_col = "Metadata_image"
 match_jcp_col = "Match"
 match_url_col = "example_image_match"
-url_prefix = "https://phenaid.ardigen.com/static-jumpcpexplorer/images/"
-url_suffix = "_{}.jpg"
+url_prefix = ("{\"href\": \"https://phenaid.ardigen.com/"
+              "static-jumpcpexplorer/images/")
+url_suffix = "_{}.jpg\", \"label\": \"example\"}"
 n_vals_used = 25
 
 # %% Load Metadata

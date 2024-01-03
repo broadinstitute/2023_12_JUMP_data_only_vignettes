@@ -65,12 +65,13 @@ checkpoint_path = Path("jcp_df.parquet")
 
 # %% Set names
 jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
-url_col = "Metadata_image"
+url_col = "Metadata_image"  # Must start with "Metadata"
 match_jcp_col = "Match"
-match_url_col = "example_image_match"
-url_prefix = ("{{\"href\": \"https://phenaid.ardigen.com/"
-              "static-jumpcpexplorer/images/")
-url_suffix = "_{}.jpg\", \"label\": \"example\"}}"
+match_url_col = "Match Example"
+url_template = (
+    '"https://phenaid.ardigen.com/static-jumpcpexplorer/' 'images/{}_{{}}.jpg"'
+)
+img_formatter = '{{"img_src": {}, "href": {}, "width": 200}}'
 n_vals_used = 25
 
 # %% Load Metadata
@@ -78,60 +79,65 @@ df = pl.read_parquet(profiles_path)
 
 # %% add build url from individual wells
 df = df.with_columns(
-        pl.concat_str(
-            pl.col("Metadata_Source"),
-            pl.col("Metadata_Plate"),
-            pl.col("Metadata_Well"),
-            separator="/",
-        )
-        .str.replace(r"^", url_prefix)
-        .str.replace("$", url_suffix)
-        .alias(url_col)
+    pl.concat_str(
+        pl.col("Metadata_Source"),
+        pl.col("Metadata_Plate"),
+        pl.col("Metadata_Well"),
+        separator="/",
     )
-if checkpoint_path.exists():
-    jcp_df = pl.read_parquet(checkpoint_path)
-else:
-    grouped = df.group_by("Metadata_JCP2022")
-    med = grouped.median()
-    meta = grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
+    .map_elements(lambda x: url_template.format(x))
+    .alias(url_col)
+)
+grouped = df.group_by("Metadata_JCP2022")
+med = grouped.median()
+meta = grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
 
-    urls = grouped.agg(pl.col(url_col).map_elements(lambda x: cycle(x)))
+urls = grouped.agg(pl.col(url_col).map_elements(lambda x: cycle(x)))
 
-    # grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
-    for srs in meta.iter_columns():
-        med.replace_column(med.columns.index(srs.name), srs)
+for srs in meta.iter_columns():
+    med.replace_column(med.columns.index(srs.name), srs)
 
-    vals = Tensor(med.select(pl.all().exclude("^Metadata.*$")).to_numpy())
+vals = Tensor(med.select(pl.all().exclude("^Metadata.*$")).to_numpy())
 
-    # Calculate cosine similarty
-    cosine_sim = cos_sim(vals, vals)
+# Calculate cosine similarty
+cosine_sim = cos_sim(vals, vals)
 
-    # Sort by correlation
-    _sorted = cosine_sim.sort(axis=1)
+# Sort by correlation
+_sorted = cosine_sim.sort(axis=1)
 
+indices, values = [
+    get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
+]
+## Build a dataframe containing matches
+# Minimise repetition
+jcp_ids = urls.select(pl.col(jcp_col)).to_series().to_numpy().astype("<U15")
+moving_idx = np.repeat(cycle(range(9)), len(vals))
+urls_vals = urls.get_column(url_col).to_numpy()
 
-    indices, values = [
-        get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
-    ]
+jcp_df = pl.DataFrame(
+    {
+        "JCP2022": np.repeat(jcp_ids, n_vals_used * 2),
+        match_jcp_col: jcp_ids[indices.flatten()].astype("<U15"),
+        "Cosine Similarity": values.flatten().numpy(),
+        url_col: [
+            img_formatter.format(img_src, img_src)
+            for x in urls.get_column(url_col).to_numpy()
+            for j in range(n_vals_used * 2)
+            if (img_src := next(x).format(j % 9))
+        ],
+        match_url_col: [
+            img_formatter.format(img_src, img_src)
+            for url, idx in zip(
+                urls_vals[indices.flatten()], moving_idx[indices.flatten()]
+            )
+            if (img_src := next(url).format(next(idx)))
+        ],
+    }
+)
 
+jcp_df.write_parquet(checkpoint_path, compression="zstd")
 
-    jcp_ids = urls.select(pl.col(jcp_col)).to_series().to_numpy().astype("<U15")
-    moving_idx = np.repeat(cycle(range(9)), len(vals))
-    urls_vals = urls.get_column(url_col).to_numpy()
-    jcp_df = pl.DataFrame(
-        {
-            "JCP2022": np.repeat(jcp_ids, n_vals_used * 2),
-            match_jcp_col: jcp_ids[indices.flatten()]
-            .astype("<U15"),
-            "Cosine Similarity": values.flatten().numpy(),
-            url_col: [next(x).format(j % 9)  for x in urls.get_column(url_col).to_numpy() for j in range(n_vals_used * 2) ],
-            match_url_col: [next( url ).format(next( idx )) for url, idx in zip(urls_vals[indices.flatten()],moving_idx[indices.flatten()])],
-        }
-    )
-
-    jcp_df.write_parquet(checkpoint_path, compression="zstd")
-
-# And then proceed to add gene names (TODO incorporate NCBI ids once they are in babel)
+# %% And then proceed to add gene names (TODO incorporate NCBI ids once they are in babel)
 uniq_jcp = jcp_df.select(pl.col("JCP2022")).to_series().unique().to_list()
 mapper_values = parallel(uniq_jcp, jcp_to_standard)
 mapper = {jcp: std for jcp, std in zip(uniq_jcp, mapper_values)}
@@ -140,6 +146,8 @@ jcp_translated = jcp_df.with_columns(
     pl.col("JCP2022").replace(mapper).alias("standard_key"),
     pl.col(match_jcp_col).replace(mapper),
 )
+
+
 matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
 
 
@@ -147,11 +155,12 @@ final_output = "crispr.parquet"
 matches_translated.write_parquet(final_output, compression="zstd")
 
 
-# Upload to zenodo
+"""
+
+# %% Upload to Zenodo
 # Automated uploads are not working
 # https://github.com/zenodo/zenodo/issues/2506
 
-"""
 from os.path import expanduser
 import requests
 with open(expanduser("~") + "/.zenodo") as f:

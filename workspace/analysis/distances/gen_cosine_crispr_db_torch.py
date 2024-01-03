@@ -62,36 +62,20 @@ dir_path = Path("../../profiles/")
 profiles_path = dir_path / f"{filename}.parquet"
 checkpoint_path = Path("jcp_df.parquet")
 
-# Set names
+# %% Set names
 jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
-url_col = "example_image_standard_key"
+url_col = "Metadata_image"
+match_jcp_col = "Match"
 match_url_col = "example_image_match"
 url_prefix = "https://phenaid.ardigen.com/static-jumpcpexplorer/images/"
-url_suffix = "_1.jpg"
+url_suffix = "_{}.jpg"
+n_vals_used = 25
 
-# Load Metadata
+# %% Load Metadata
 df = pl.read_parquet(profiles_path)
 
-if checkpoint_path.exists():
-    jcp_df = pl.read_parquet(checkpoint_path)
-else:
-    vals = Tensor(df.select(pl.all().exclude("^Metadata.*$")).to_numpy())
-
-    # Calculate cosine similarty
-    cosine_sim = cos_sim(vals, vals)
-
-    # Sort by correlation
-    _sorted = cosine_sim.sort(axis=1)
-
-    n_vals_used = 25
-
-    indices, values = [
-        get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
-    ]
-
-    # Add a link to one of the Ardigen images
-    meta = df.select(pl.col("^Metadata_.*$"))
-    meta = meta.with_columns(
+# %% add build url from individual wells
+df = df.with_columns(
         pl.concat_str(
             pl.col("Metadata_Source"),
             pl.col("Metadata_Plate"),
@@ -102,30 +86,48 @@ else:
         .str.replace("$", url_suffix)
         .alias(url_col)
     )
+if checkpoint_path.exists():
+    jcp_df = pl.read_parquet(checkpoint_path)
+else:
+    grouped = df.group_by("Metadata_JCP2022")
+    med = grouped.median()
+    meta = grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
 
+    urls = grouped.agg(pl.col(url_col).map_elements(lambda x: cycle(x)))
+
+    # grouped.agg(pl.col("^Metadata_.*$").map_elements(lambda x: cycle(x)))
+    for srs in meta.iter_columns():
+        med.replace_column(med.columns.index(srs.name), srs)
+
+    vals = Tensor(med.select(pl.all().exclude("^Metadata.*$")).to_numpy())
+
+    # Calculate cosine similarty
+    cosine_sim = cos_sim(vals, vals)
+
+    # Sort by correlation
+    _sorted = cosine_sim.sort(axis=1)
+
+
+    indices, values = [
+        get_first_last_n(x, n_vals_used) for x in (_sorted.indices, _sorted.values)
+    ]
+
+
+    jcp_ids = urls.select(pl.col(jcp_col)).to_series().to_numpy().astype("<U15")
+    moving_idx = np.repeat(cycle(range(9)), len(vals))
+    urls_vals = urls.get_column(url_col).to_numpy()
     jcp_df = pl.DataFrame(
         {
-            "JCP2022": np.repeat(meta.select(pl.col(jcp_col)), n_vals_used * 2).astype(
-                "<U15"
-            ),
-            "match_JCP2022": meta.select(pl.col(jcp_col))
-            .to_series()
-            .to_numpy()[indices.flatten()]
+            "JCP2022": np.repeat(jcp_ids, n_vals_used * 2),
+            match_jcp_col: jcp_ids[indices.flatten()]
             .astype("<U15"),
-            "cosine_distance": values.flatten().numpy(),
-            url_col: np.repeat(meta.get_column("url"), n_vals_used * 2).astype("U"),
-            match_url_col: list(
-                map(
-                    lambda x: url_prefix + "/".join(x) + url_suffix,
-                    meta.select(
-                        pl.col(["Metadata_Source", "Metadata_Plate", "Metadata_Well"])
-                    ).to_numpy()[indices.flatten()],
-                )
-            ),
+            "Cosine Similarity": values.flatten().numpy(),
+            url_col: [next(x).format(j % 9)  for x in urls.get_column(url_col).to_numpy() for j in range(n_vals_used * 2) ],
+            match_url_col: [next( url ).format(next( idx )) for url, idx in zip(urls_vals[indices.flatten()],moving_idx[indices.flatten()])],
         }
     )
 
-    jcp_df.write_parquet("cosine_similarity_best.parquet", compression="zstd")
+    jcp_df.write_parquet(checkpoint_path, compression="zstd")
 
 # And then proceed to add gene names (TODO incorporate NCBI ids once they are in babel)
 uniq_jcp = jcp_df.select(pl.col("JCP2022")).to_series().unique().to_list()
@@ -134,10 +136,9 @@ mapper = {jcp: std for jcp, std in zip(uniq_jcp, mapper_values)}
 
 jcp_translated = jcp_df.with_columns(
     pl.col("JCP2022").replace(mapper).alias("standard_key"),
-    pl.col("match_JCP2022").replace(mapper),
-).rename({"match_JCP2022": "match_standard_key"})
+    pl.col(match_jcp_col).replace(mapper),
+)
 matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
-# .with_columns(pl.col("JCP2022").str.replace("JCP2022_", "").cast(pl.Int32))
 
 
 final_output = "crispr.parquet"

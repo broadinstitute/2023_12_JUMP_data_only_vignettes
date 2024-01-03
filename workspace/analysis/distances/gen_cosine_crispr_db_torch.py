@@ -20,6 +20,7 @@ then wrangle information and produce an explorable data frame.
 The GPU section is based off this function
 https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/util.py#L31
 """
+from itertools import cycle
 from pathlib import Path
 
 import numpy as np
@@ -67,9 +68,9 @@ jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
 url_col = "Metadata_image"
 match_jcp_col = "Match"
 match_url_col = "example_image_match"
-url_prefix = ("{\"href\": \"https://phenaid.ardigen.com/"
+url_prefix = ("{{\"href\": \"https://phenaid.ardigen.com/"
               "static-jumpcpexplorer/images/")
-url_suffix = "_{}.jpg\", \"label\": \"example\"}"
+url_suffix = "_{}.jpg\", \"label\": \"example\"}}"
 n_vals_used = 25
 
 # %% Load Metadata

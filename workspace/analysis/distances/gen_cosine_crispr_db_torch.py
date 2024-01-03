@@ -1,4 +1,18 @@
 #!/usr/bin/env jupyter
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: percent
+#       format_version: '1.3'
+#       jupytext_version: 1.15.2
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
+
 """
 Calculate cosine similarity of the CRISPR profiles using GPU,
 then wrangle information and produce an explorable data frame.

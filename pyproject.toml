@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
-PyYAML = "5.3.1"
+PyYAML = "5.4"
 # plotly = "4.14.3"
 # dvc-s3 = "^2.23.0"
 jupyter = "^1.0.0"

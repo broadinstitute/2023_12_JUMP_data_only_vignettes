@@ -320,13 +320,13 @@ css = ["tinycss2 (>=1.1.0,<1.3)"]
 
 [[package]]
 name = "broad-babel"
-version = "0.1.8"
+version = "0.1.9"
 description = "A translator of Broad and JUMP ids to more conventional names."
 optional = false
 python-versions = ">=3.9,<4.0"
 files = [
-    {file = "broad_babel-0.1.8-py3-none-any.whl", hash = "sha256:4172ac158ad9631066d8404d46aa3a4b66617025cdaa5de64c6b35c9a9ed5fa3"},
-    {file = "broad_babel-0.1.8.tar.gz", hash = "sha256:7c18e54a78c1b60848912ef48247e7e21ed96cbe9818397598588e11ac116eff"},
+    {file = "broad_babel-0.1.9-py3-none-any.whl", hash = "sha256:7d67a871686570f38c0ea554bd84d497b536d01ba4c511b9e65eb912f9bade01"},
+    {file = "broad_babel-0.1.9.tar.gz", hash = "sha256:36d6e001eae200648e1356ea4fe386c37828784619e629ee3807702f2f0cd6c6"},
 ]
 
 [package.dependencies]
@@ -3933,4 +3933,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0"
-content-hash = "76399110aae846836c4822e3cbdde00800b7b1eb6b3f6ad571243313e778a1a0"
+content-hash = "43394624778f1ade0117648184d3113eb871e09913e47781cc4d52664b2e4381"

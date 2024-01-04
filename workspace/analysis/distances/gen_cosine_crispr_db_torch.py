@@ -47,6 +47,13 @@ def jcp_to_standard(x):
     ]
 
 
+@batch_processing
+def jcp_to_ncbi(x):
+    return run_query(query=x, input_column="JCP2022", output_column="NCBI_Gene_ID")[0][
+        0
+    ]
+
+
 def cos_sim(a: Tensor, b: Tensor) -> Tensor:
     """
     Computes the cosine similarity cos_sim(a[i], b[j]) for all i and j.
@@ -68,6 +75,9 @@ jcp_col = "Metadata_JCP2022"  # Name of columns in input data frames
 url_col = "Metadata_image"  # Must start with "Metadata"
 match_jcp_col = "Match"
 match_url_col = "Match Example"
+std_outname = "Gene/Compound"
+ext_links_col = "Match resources"
+ncbi_formatter = '{{"href": "https://www.ncbi.nlm.nih.gov/gene/{}", "label":"NCBI"}}'
 url_template = (
     '"https://phenaid.ardigen.com/static-jumpcpexplorer/' 'images/{}_{{}}.jpg"'
 )
@@ -118,7 +128,7 @@ jcp_df = pl.DataFrame(
     {
         "JCP2022": np.repeat(jcp_ids, n_vals_used * 2),
         match_jcp_col: jcp_ids[indices.flatten()].astype("<U15"),
-        "Cosine Similarity": values.flatten().numpy(),
+        "Similarity": values.flatten().numpy(),
         url_col: [
             img_formatter.format(img_src, img_src)
             for x in urls.get_column(url_col).to_numpy()
@@ -142,14 +152,32 @@ uniq_jcp = jcp_df.select(pl.col("JCP2022")).to_series().unique().to_list()
 mapper_values = parallel(uniq_jcp, jcp_to_standard)
 mapper = {jcp: std for jcp, std in zip(uniq_jcp, mapper_values)}
 
+ncbi_mapper_values = parallel(uniq_jcp, jcp_to_ncbi)
+ncbi_mapper = {
+    jcp: ncbi_formatter.format(idx) for jcp, idx in zip(uniq_jcp, ncbi_mapper_values)
+}
+
 jcp_translated = jcp_df.with_columns(
-    pl.col("JCP2022").replace(mapper).alias("standard_key"),
+    pl.col("JCP2022").replace(mapper).alias(std_outname),
     pl.col(match_jcp_col).replace(mapper),
+    pl.col(match_jcp_col).replace(ncbi_mapper).alias(ext_links_col),
 )
 
 
-matches_translated = jcp_translated.select(reversed(sorted(jcp_translated.columns)))
+matches = jcp_translated.with_columns(
+    (pl.col("Similarity") * 1000).cast(pl.Int16)
+).rename({url_col: f"{std_outname} Example"})
 
+order = [
+    std_outname,
+    "Match",
+    "Gene/Compound Example",
+    match_url_col,
+    "Similarity",
+    ext_links_col,
+    "JCP2022",
+]
+matches_translated = matches.select(order)
 
 final_output = "crispr.parquet"
 matches_translated.write_parquet(final_output, compression="zstd")
@@ -190,7 +218,7 @@ curl -X POST-H "Accept: application/json" -H "Content-Type: application/json" -H
 
 """
 Future plans:
-- Add example of matched profile
-- Find a way to compress URLs for easier visualisation
+- TODO Incorporate NCBI ids (already added on broad-babel)
 - TODO add differentiating features when compared to their controls
+- TODO add Average precision metrics
 """

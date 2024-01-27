@@ -19,19 +19,19 @@ fpath = Path(
 genes_of_interest = ("RAB40B", "RAB40C", "INSYN1", "PIK3R3")
 
 
-df = pl.read_parquet( fpath )
+df = pl.read_parquet(fpath)
 sub_df = df.filter(pl.col("Metadata_Symbol").is_in(genes_of_interest))
-groups = dict((x,f"{'RAB40B/C' if x.startswith('RAB') else 'INS/PIK'}") for x in genes_of_interest)
+groups = dict(
+    (x, f"{'RAB40B/C' if x.startswith('RAB') else 'INS/PIK'}")
+    for x in genes_of_interest
+)
 
-clusters = sub_df.with_columns(pl.col("Metadata_Symbol").replace(groups).alias("Metadata_Cluster"))
+clusters = sub_df.with_columns(
+    pl.col("Metadata_Symbol").replace(groups).alias("Metadata_Cluster")
+)
 
 
-medians=clusters.group_by("Metadata_Cluster").median()
- wk
-diff = medians.select(pl.all().exclude(pl.Utf8).diff())
-to_plot = diff.filter(~pl.all_horizontal(pl.all().is_null())).melt().to_pandas()
-import seaborn as sns
-import matplotlib.pyplot as plt
-sns.scatterplot(data=to_plot, x="variable",y="value")
-plt.savefig("distribution.png",dpi=200)
-plt.close()
+medians = clusters.group_by("Metadata_Cluster").median()
+diff = medians.select(pl.all().exclude("^Metadata.*$").diff())
+feature_diff = diff.filter(~pl.all_horizontal(pl.all().is_null())).melt()
+feature_diff.sort(by="value").write_csv("feature_diffs.csv")

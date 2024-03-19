@@ -6,13 +6,13 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.15.2
+#       jupytext_version: 1.16.1
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
-# %% [markdown] Overview
+# %% Overview [markdown]
 # # Basic JUMP data access
 # This is a tutorial on how to access
 # We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow.

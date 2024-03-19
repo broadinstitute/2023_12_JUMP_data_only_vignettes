@@ -64,7 +64,6 @@ results_df = results_df.dropna()
 
 # Apply multiple testing correction
 
-# corrected_pvals = multipletests(results_df["P-Value"], method="fdr_bh")[1]
 corrected_pvals = multipletests(results_df["P-Value"], method="fdr_bh")[1]
 results_df["Corrected P-Value"] = corrected_pvals
 

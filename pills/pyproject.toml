@@ -1,10 +1,9 @@
 [tool.poetry]
-name = "jump-examples"
+name = "pills"
 version = "0.0.0"
 description = "Examples that show how to interact with JUMP data"
 authors = ["Alan Munoz"]
 readme = "README.md"
-packages = [{include = "jump_examples", from= "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -22,6 +21,6 @@ pytest = "^7.4.1"
 ruff-lsp = "^0.0.48"
 ruff = "<0.2.0"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.jupytext.formats]
+"notebooks/" = ".qmd"
+"scripts/" = "py:percent"

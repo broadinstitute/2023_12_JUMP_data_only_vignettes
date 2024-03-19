@@ -12,9 +12,8 @@
 #     language: python
 #     name: python3
 # ---
-
-
 # %% [markdown] Overview
+# # Basic JUMP data access
 # This is a tutorial on how to access
 # We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow.
 # We prefer lazy loading because the data can be too big to be handled in memory.
@@ -24,10 +23,11 @@ from pyarrow.dataset import dataset
 from s3fs import S3FileSystem
 
 # %% [markdown]
-# The shapes of the available datasets are>
-# - crispr:
-# - orf:
-# - compounds:
+# The shapes of the available datasets are:
+# - crispr: Knock-out genetic perturbations.
+# - orf: Overexpression genetic perturbations.
+# - compounds: Chemical genetic perturbations.
+#
 # The aws paths of the dataframes are shown below:
 # %% Paths
 prefix = (

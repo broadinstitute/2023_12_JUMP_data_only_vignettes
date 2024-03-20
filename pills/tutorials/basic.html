@@ -234,14 +234,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a tutorial on how to access We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="e8255cca" class="cell" title="Imports" data-execution_count="1">
+<div id="f1b5e04c" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyarrow.dataset <span class="im">import</span> dataset</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> s3fs <span class="im">import</span> S3FileSystem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The shapes of the available datasets are: - crispr: Knock-out genetic perturbations. - orf: Overexpression genetic perturbations. - compounds: Chemical genetic perturbations.</p>
 <p>The aws paths of the dataframes are shown below:</p>
-<div id="4af82a30" class="cell" title="Paths" data-execution_count="2">
+<div id="fd96d3c3" class="cell" title="Paths" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>prefix <span class="op">=</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"s3://cellpainting-gallery/cpg0016-jump-integrated/source_all/workspace/profiles"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We use a S3FileSystem to avoid the need of credentials.</p>
-<div id="40267c46" class="cell" data-execution_count="3">
+<div id="1b807ed2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lazy_load(path: <span class="bu">str</span>) <span class="op">-&gt;</span> pl.DataFrame:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fs <span class="op">=</span> S3FileSystem(anon<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    myds <span class="op">=</span> dataset(path, filesystem<span class="op">=</span>fs)</span>
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will lazy load the data to visualise its columns</p>
-<div id="470a3059" class="cell" data-execution_count="4">
+<div id="e49d39b3" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Width, or number of columns."</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> lazy_load(path)</span>
@@ -273,14 +273,438 @@ orf: 882, containing 20 metadata columns
 compound: 979, containing 10 metadata columns</code></pre>
 </div>
 </div>
-<p>Let us now focus on the crispr dataset and print its first few lines.</p>
-<div id="96e51fb5" class="cell" data-execution_count="5">
+<p>Let us now focus on the crispr dataset and use a regex to select the metadata columns. Note that the collect() method enforces loading some data into memory.</p>
+<div id="0ead865f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> lazy_load(filepaths[<span class="st">"crispr"</span>])</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<i>naive plan: (run <b>LazyFrame.explain(optimized=True)</b> to see the optimized plan)</i>
-    <p></p>
-    <div>SLICE[offset: 0, len: 5]<p></p><p></p>    PYTHON SCAN <p></p>    PROJECT */1119 COLUMNS</div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data.select(pl.col(<span class="st">"^Metadata.*$"</span>)).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (51_185, 8)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Metadata_Source</th>
+<th data-quarto-table-cell-role="th">Metadata_Plate</th>
+<th data-quarto-table-cell-role="th">Metadata_Well</th>
+<th data-quarto-table-cell-role="th">Metadata_JCP2022</th>
+<th data-quarto-table-cell-role="th">Metadata_Batch</th>
+<th data-quarto-table-cell-role="th">Metadata_PlateType</th>
+<th data-quarto-table-cell-role="th">Metadata_Row</th>
+<th data-quarto-table-cell-role="th">Metadata_Column</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"B02"</td>
+<td>"JCP2022_800001…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"B"</td>
+<td>"02"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"J15"</td>
+<td>"JCP2022_805434…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"J"</td>
+<td>"15"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"F22"</td>
+<td>"JCP2022_805491…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"F"</td>
+<td>"22"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"E11"</td>
+<td>"JCP2022_805505…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"E"</td>
+<td>"11"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"I15"</td>
+<td>"JCP2022_805552…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"I"</td>
+<td>"15"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"K17"</td>
+<td>"JCP2022_805564…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"K"</td>
+<td>"17"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"N09"</td>
+<td>"JCP2022_805577…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"N"</td>
+<td>"09"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"M12"</td>
+<td>"JCP2022_805399…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"M"</td>
+<td>"12"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"G03"</td>
+<td>"JCP2022_805580…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"G"</td>
+<td>"03"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"A17"</td>
+<td>"JCP2022_805583…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"A"</td>
+<td>"17"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"A20"</td>
+<td>"JCP2022_805590…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"A"</td>
+<td>"20"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R1-19"</td>
+<td>"C15"</td>
+<td>"JCP2022_805591…</td>
+<td>"20220914_Run1"</td>
+<td>"CRISPR"</td>
+<td>"C"</td>
+<td>"15"</td>
+</tr>
+<tr class="odd">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O19"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"19"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O17"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"17"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O15"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"15"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O13"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"13"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O11"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"11"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O09"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"09"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O07"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"07"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O05"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"05"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O03"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"03"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"O01"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"O"</td>
+<td>"01"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R6-28"</td>
+<td>"P06"</td>
+<td>"JCP2022_800002…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"P"</td>
+<td>"06"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R8-02"</td>
+<td>"K06"</td>
+<td>"JCP2022_807737…</td>
+<td>"20221120_Run6"</td>
+<td>"CRISPR"</td>
+<td>"K"</td>
+<td>"06"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>The previous block shows that the data frame has 51,850 rows. We can print features The regular expression used here to show the features present alongside the metadata.</p>
+<div id="c898964f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>header <span class="op">=</span> data.select(pl.col(<span class="st">"^X_harmony_000[0-4]$"</span>)).head().collect()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>header</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 5)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">X_harmony_0000</th>
+<th data-quarto-table-cell-role="th">X_harmony_0001</th>
+<th data-quarto-table-cell-role="th">X_harmony_0002</th>
+<th data-quarto-table-cell-role="th">X_harmony_0003</th>
+<th data-quarto-table-cell-role="th">X_harmony_0004</th>
+</tr>
+<tr class="odd">
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>8.044376</td>
+<td>-12.273039</td>
+<td>5.13129</td>
+<td>-7.660898</td>
+<td>-4.988223</td>
+</tr>
+<tr class="even">
+<td>-9.560802</td>
+<td>9.855314</td>
+<td>-3.877071</td>
+<td>3.07043</td>
+<td>-6.270789</td>
+</tr>
+<tr class="odd">
+<td>-5.656524</td>
+<td>8.234575</td>
+<td>3.745233</td>
+<td>-0.52367</td>
+<td>8.401932</td>
+</tr>
+<tr class="even">
+<td>-14.888161</td>
+<td>12.315203</td>
+<td>-13.380857</td>
+<td>5.450933</td>
+<td>6.240777</td>
+</tr>
+<tr class="odd">
+<td>185.398895</td>
+<td>42.928982</td>
+<td>-2.823193</td>
+<td>30.665529</td>
+<td>10.213488</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Finally, we can convert this to pandas if we want to analyse it using that way. Note that if we convert the entire dataframe to pandas it will load it all into memory.</p>
+<div id="f26faa77" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>header.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">X_harmony_0000</th>
+<th data-quarto-table-cell-role="th">X_harmony_0001</th>
+<th data-quarto-table-cell-role="th">X_harmony_0002</th>
+<th data-quarto-table-cell-role="th">X_harmony_0003</th>
+<th data-quarto-table-cell-role="th">X_harmony_0004</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>8.044376</td>
+<td>-12.273039</td>
+<td>5.131290</td>
+<td>-7.660898</td>
+<td>-4.988223</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-9.560802</td>
+<td>9.855314</td>
+<td>-3.877071</td>
+<td>3.070430</td>
+<td>-6.270789</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-5.656524</td>
+<td>8.234575</td>
+<td>3.745233</td>
+<td>-0.523670</td>
+<td>8.401932</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-14.888161</td>
+<td>12.315203</td>
+<td>-13.380857</td>
+<td>5.450933</td>
+<td>6.240777</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>185.398895</td>
+<td>42.928982</td>
+<td>-2.823193</td>
+<td>30.665529</td>
+<td>10.213488</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </div>
 

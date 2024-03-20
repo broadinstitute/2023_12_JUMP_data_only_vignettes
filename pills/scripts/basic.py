@@ -61,7 +61,19 @@ for name, path in filepaths.items():
     print(f"{name}: {data.width}, containing {len(metadata_cols)} metadata columns")
 
 # %% [markdown]
-# Let us now focus on the crispr dataset and print its first few lines.
+# Let us now focus on the crispr dataset and use a regex to select the metadata columns.
+# Note that the collect() method enforces loading some data into memory.
 # %%
 data = lazy_load(filepaths["crispr"])
-data.head()
+data.select(pl.col("^Metadata.*$").shuffle()).head().collect()
+# %% [markdown]
+# The previous block shows that the data frame has 51,850 rows.
+# We can print features The regular expression used here to show the features present alongside the metadata.
+# %%
+header = data.select(pl.col("^X_harmony_000[0-4]$")).head().collect()
+header
+# %% [markdown]
+# Finally, we can convert this to pandas if we want to analyse it using that way.
+# Note that if we convert the entire dataframe to pandas it will load it all into memory.
+# %%
+header.to_pandas()

@@ -52,14 +52,20 @@ def lazy_load(path: str) -> pl.DataFrame:
 
 
 # %% [markdown]
-# We will lazy load the data to visualise its columns
+# We will lazy-load the dataframes and print the number of rows and clumns
 # %%
-print("Width, or number of columns.")
+info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}
 for name, path in filepaths.items():
     data = lazy_load(path)
-    metadata_cols = [col for col in data.columns if col.startswith("Metadata")]
-    print(f"{name}: {data.width}, containing {len(metadata_cols)} metadata columns")
+    n_rows = data.select(pl.count()).collect().item()
+    metadata_cols = data.select(pl.col("^Metadata.*$")).columns
+    n_cols = data.width
+    n_meta_cols = len(metadata_cols)
+    estimated_size = int(round(4.03 * n_rows * n_cols / 1e6, 0))  # B -> MB
+    for k, v in zip(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):
+        info[k].append(v)
 
+pl.DataFrame(info)
 # %% [markdown]
 # Let us now focus on the crispr dataset and use a regex to select the metadata columns.
 # Note that the collect() method enforces loading some data into memory.

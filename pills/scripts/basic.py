@@ -46,6 +46,7 @@ filepaths = dict(
 # %% [markdown]
 # We use a S3FileSystem to avoid the need of credentials.
 
+
 # %%
 def lazy_load(path: str) -> pl.DataFrame:
     fs = S3FileSystem(anon=True)
@@ -55,7 +56,7 @@ def lazy_load(path: str) -> pl.DataFrame:
 
 
 # %% [markdown]
-# We will lazy-load the dataframes and print the number of rows and clumns
+# We will lazy-load the dataframes and print the number of rows and columns
 
 # %%
 info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}

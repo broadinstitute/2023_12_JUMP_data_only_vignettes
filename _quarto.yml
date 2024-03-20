@@ -24,5 +24,6 @@ format:
     theme:
       light: flatly
       dark: darkly
+    code-fold: true
   ipynb:
     default-image-extension: svg

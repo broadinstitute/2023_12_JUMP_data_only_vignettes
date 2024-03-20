@@ -12,6 +12,7 @@
 #     language: python
 #     name: python3
 # ---
+
 # %% Overview [markdown]
 # # Basic JUMP data access
 # This is a tutorial on how to access
@@ -60,6 +61,7 @@ for name, path in filepaths.items():
     print(f"{name}: {data.width}, containing {len(metadata_cols)} metadata columns")
 
 # %% [markdown]
-# Let us now focus on the crispr dataset
+# Let us now focus on the crispr dataset and print its first few lines.
 # %%
 data = lazy_load(filepaths["crispr"])
+data.head()

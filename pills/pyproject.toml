@@ -22,5 +22,5 @@ ruff-lsp = "^0.0.48"
 ruff = "<0.2.0"
 
 [tool.jupytext.formats]
-"notebooks/" = ".qmd"
+"tutorials/" = ".qmd"
 "scripts/" = "py:percent"

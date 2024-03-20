@@ -215,14 +215,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a tutorial on how to access We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="e1bcc795" class="cell" title="Imports" data-execution_count="1">
+<div id="1797e30a" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyarrow.dataset <span class="im">import</span> dataset</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> s3fs <span class="im">import</span> S3FileSystem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The shapes of the available datasets are: - crispr: Knock-out genetic perturbations. - orf: Overexpression genetic perturbations. - compounds: Chemical genetic perturbations.</p>
+<p>The shapes of the available datasets are:</p>
+<ol type="a">
+<li>crispr: Knock-out genetic perturbations.</li>
+<li>orf: Overexpression genetic perturbations.</li>
+<li>compounds: Chemical genetic perturbations.</li>
+</ol>
 <p>The aws paths of the dataframes are shown below:</p>
-<div id="a8a00840" class="cell" title="Paths" data-execution_count="2">
+<div id="e974ff86" class="cell" title="Paths" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>prefix <span class="op">=</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"s3://cellpainting-gallery/cpg0016-jump-integrated/source_all/workspace/profiles"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -233,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We use a S3FileSystem to avoid the need of credentials.</p>
-<div id="1db2c406" class="cell" data-execution_count="3">
+<div id="adb53155" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lazy_load(path: <span class="bu">str</span>) <span class="op">-&gt;</span> pl.DataFrame:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fs <span class="op">=</span> S3FileSystem(anon<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    myds <span class="op">=</span> dataset(path, filesystem<span class="op">=</span>fs)</span>
@@ -241,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will lazy load the data to visualise its columns</p>
-<div id="62904133" class="cell" data-execution_count="4">
+<div id="4f8ab016" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Width, or number of columns."</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> lazy_load(path)</span>
@@ -255,7 +260,7 @@ compound: 979, containing 10 metadata columns</code></pre>
 </div>
 </div>
 <p>Let us now focus on the crispr dataset</p>
-<div id="2be92f22" class="cell" data-execution_count="5">
+<div id="143b5515" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> lazy_load(filepaths[<span class="st">"crispr"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 

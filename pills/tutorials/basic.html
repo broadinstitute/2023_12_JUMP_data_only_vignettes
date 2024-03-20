@@ -234,14 +234,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a tutorial on how to access We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="f7d1f50d" class="cell" title="Imports" data-execution_count="1">
+<div id="4d4c9944" class="cell" title="Imports" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyarrow.dataset <span class="im">import</span> dataset</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> s3fs <span class="im">import</span> S3FileSystem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>The shapes of the available datasets are: a) crispr: Knock-out genetic perturbations. a) orf: Overexpression genetic perturbations. a) compounds: Chemical genetic perturbations.</p>
 <p>The aws paths of the dataframes are shown below:</p>
-<div id="6ba65889" class="cell" title="Paths" data-execution_count="2">
+<div id="3163b3a6" class="cell" title="Paths" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>prefix <span class="op">=</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"s3://cellpainting-gallery/cpg0016-jump-integrated/source_all/workspace/profiles"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -250,17 +255,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    orf<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">/chandrasekaran_2024_0000000/orf/wellpos_cellcount_mad_outlier_nan_featselect_harmony.parquet"</span>,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    compound<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">/arevalo_2023_e834481/compound/mad_int_featselect_harmony.parquet/"</span>,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We use a S3FileSystem to avoid the need of credentials.</p>
-<div id="be446c12" class="cell" data-execution_count="3">
+<div id="e8b520c0" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lazy_load(path: <span class="bu">str</span>) <span class="op">-&gt;</span> pl.DataFrame:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fs <span class="op">=</span> S3FileSystem(anon<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    myds <span class="op">=</span> dataset(path, filesystem<span class="op">=</span>fs)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pl.scan_pyarrow_dataset(myds)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>We will lazy-load the dataframes and print the number of rows and clumns</p>
-<div id="c616ae18" class="cell" data-execution_count="4">
+<div id="ce8441be" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> lazy_load(path)</span>
@@ -273,7 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        info[k].append(v)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div><style>
 .dataframe > thead > tr,
@@ -329,10 +341,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let us now focus on the crispr dataset and use a regex to select the metadata columns. We will then sample rows and display the overview. Note that the collect() method enforces loading some data into memory.</p>
-<div id="75b33ed5" class="cell" data-execution_count="5">
+<div id="be646607" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> lazy_load(filepaths[<span class="st">"crispr"</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data.select(pl.col(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="47">
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 <div><style>
 .dataframe > thead > tr,
@@ -423,10 +438,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The following line excludes the metadata columns:</p>
-<div id="e1dc2f56" class="cell" data-execution_count="6">
+<div id="7dadbc05" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data_only</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 <div><style>
 .dataframe > thead > tr,
@@ -986,9 +1004,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we can convert this to pandas if we want to perform analyses with that tool. Keep in mind that this loads the entire dataframe into memory.</p>
-<div id="77984593" class="cell" data-execution_count="7">
+<div id="4731811a" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 <div>
 

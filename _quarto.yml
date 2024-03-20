@@ -20,7 +20,9 @@ website:
 
 format:
   html:
+    default-image-extension: svg
     theme:
       light: flatly
       dark: solar
-  ipynb: default
+  ipynb:
+    default-image-extension: svg

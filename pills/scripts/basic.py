@@ -25,9 +25,9 @@ from s3fs import S3FileSystem
 
 # %% [markdown]
 # The shapes of the available datasets are:
-# - crispr: Knock-out genetic perturbations.
-# - orf: Overexpression genetic perturbations.
-# - compounds: Chemical genetic perturbations.
+# a) crispr: Knock-out genetic perturbations.
+# a) orf: Overexpression genetic perturbations.
+# a) compounds: Chemical genetic perturbations.
 #
 # The aws paths of the dataframes are shown below:
 # %% Paths
@@ -68,18 +68,18 @@ for name, path in filepaths.items():
 pl.DataFrame(info)
 # %% [markdown]
 # Let us now focus on the crispr dataset and use a regex to select the metadata columns.
+# We will then sample rows and display the overview.
 # Note that the collect() method enforces loading some data into memory.
 # %%
 data = lazy_load(filepaths["crispr"])
-data.select(pl.col("^Metadata.*$").shuffle()).head().collect()
+data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
 # %% [markdown]
-# The previous block shows that the data frame has 51,850 rows.
-# We can print features The regular expression used here to show the features present alongside the metadata.
+# The following line excludes the metadata columns:
 # %%
-header = data.select(pl.col("^X_harmony_000[0-4]$")).head().collect()
-header
+data_only = data.select(pl.all().exclude("^Metadata.*$").sample(n=5, seed=1)).collect()
+data_only
 # %% [markdown]
-# Finally, we can convert this to pandas if we want to analyse it using that way.
-# Note that if we convert the entire dataframe to pandas it will load it all into memory.
+# Finally, we can convert this to pandas if we want to perform analyses with that tool.
+# Keep in mind that this loads the entire dataframe into memory.
 # %%
-header.to_pandas()
+data_only.to_pandas()

@@ -1,5 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
+# title: Basic JUMP data access
 # jupyter:
 #   jupytext:
 #     text_representation:
@@ -13,11 +14,11 @@
 #     name: python3
 # ---
 
-# %% Overview [markdown]
-# # Basic JUMP data access
+# %% [markdown]
 # This is a tutorial on how to access
 # We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow.
 # We prefer lazy loading because the data can be too big to be handled in memory.
+
 # %% Imports
 import polars as pl
 from pyarrow.dataset import dataset
@@ -30,6 +31,7 @@ from s3fs import S3FileSystem
 # a) compounds: Chemical genetic perturbations.
 #
 # The aws paths of the dataframes are shown below:
+
 # %% Paths
 prefix = (
     "s3://cellpainting-gallery/cpg0016-jump-integrated/source_all/workspace/profiles"
@@ -43,6 +45,7 @@ filepaths = dict(
 
 # %% [markdown]
 # We use a S3FileSystem to avoid the need of credentials.
+
 # %%
 def lazy_load(path: str) -> pl.DataFrame:
     fs = S3FileSystem(anon=True)
@@ -53,6 +56,7 @@ def lazy_load(path: str) -> pl.DataFrame:
 
 # %% [markdown]
 # We will lazy-load the dataframes and print the number of rows and clumns
+
 # %%
 info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}
 for name, path in filepaths.items():
@@ -66,20 +70,26 @@ for name, path in filepaths.items():
         info[k].append(v)
 
 pl.DataFrame(info)
+
 # %% [markdown]
 # Let us now focus on the crispr dataset and use a regex to select the metadata columns.
 # We will then sample rows and display the overview.
 # Note that the collect() method enforces loading some data into memory.
+
 # %%
 data = lazy_load(filepaths["crispr"])
 data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
+
 # %% [markdown]
 # The following line excludes the metadata columns:
+
 # %%
 data_only = data.select(pl.all().exclude("^Metadata.*$").sample(n=5, seed=1)).collect()
 data_only
+
 # %% [markdown]
 # Finally, we can convert this to pandas if we want to perform analyses with that tool.
 # Keep in mind that this loads the entire dataframe into memory.
+
 # %%
 data_only.to_pandas()

@@ -23,6 +23,6 @@ format:
     default-image-extension: svg
     theme:
       light: flatly
-      dark: solar
+      dark: darkly
   ipynb:
     default-image-extension: svg

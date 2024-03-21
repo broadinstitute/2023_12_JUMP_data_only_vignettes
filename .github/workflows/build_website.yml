@@ -29,7 +29,6 @@ jobs:
     #     nix-build
     - uses: workflow/nix-shell-action@v3
       with:
-        packages: hello,docker
         script: |
           nix-shell
           poetry run jupytext --sync pills/scripts/*.py

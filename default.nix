@@ -6,8 +6,8 @@ let
   poetry2nix-src = fetchFromGitHub {
       owner = "nix-community";
       repo = "poetry2nix";
-      rev = "7df29134065172f24385177ea69e755cb90f196c";
-      sha256 = "0zz3qzp2b5i9gw4yfxfrq07iadcdadackph12h02w19bb3535rm6";
+      rev = "3c92540";
+      sha256 = "sha256-2GOiFTkvs5MtVF65sC78KNVxQSmsxtk0WmV1wJ9V2ck=";
   };
 
   poetry2nix = callPackage poetry2nix-src { };

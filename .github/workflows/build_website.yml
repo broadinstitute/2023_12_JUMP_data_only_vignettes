@@ -27,6 +27,7 @@ jobs:
     - name: Build development environment
       run: |
         nix-build
+        jupytext --sync pills/scripts/*.py
 
     - uses: quarto-dev/quarto-actions/setup@v2
       with:

@@ -30,6 +30,7 @@ jobs:
         nix-shell --run 'which python'
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         nix-shell --run 'quarto check'
+        nix-shell --run 'poetry run quarto check'
         nix-shell --run 'poetry run quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"

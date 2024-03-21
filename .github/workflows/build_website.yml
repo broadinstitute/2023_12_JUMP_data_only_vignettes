@@ -31,7 +31,7 @@ jobs:
       with:
         file: shell.nix
         script: |
-          poetry run jupytext --sync pills/scripts/*.py
+          jupytext --sync pills/scripts/*.py
           quarto publish gh-pages
 
     - uses: workflow/nix-shell-action@v3

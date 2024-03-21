@@ -27,6 +27,13 @@ jobs:
     # - name: Build development environment
     #   run: |
     #     nix-build
+    - uses: rrbutani/use-nix-shell-action@v1
+      with:
+        file: shell.nix
+        script: |
+          poetry run jupytext --sync pills/scripts/*.py
+          quarto publish gh-pages
+
     - uses: workflow/nix-shell-action@v3
       with:
         script: |

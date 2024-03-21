@@ -24,13 +24,14 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
-    #   run: |
-    #     nix-build
-    - name: Build development environment and run jupytext
+    - name: Build development environment, run jupytext and quarto
       uses: rrbutani/use-nix-shell-action@v1
       with:
         file: shell.nix
         script: |
           jupytext --sync pills/scripts/*.py --execute
+          git remote show origin
+          git status
           quarto publish gh-pages --no-prompt --no-render
-
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

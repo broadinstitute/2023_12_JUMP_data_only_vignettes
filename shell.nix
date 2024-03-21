@@ -15,5 +15,5 @@ let
     # It has to do with the maturin rust dependencies
   };
 in myAppEnv.env.overrideAttrs (oldAttrs: {
-  buildInputs = [ pkgs.quarto ];
+  buildInputs = [ pkgs.quarto pkgs.which ];
 })

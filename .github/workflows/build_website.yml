@@ -27,7 +27,7 @@ jobs:
     #   run: |
     #     nix-build
     - name: Build development environment and run jupytext
-    - uses: rrbutani/use-nix-shell-action@v1
+      uses: rrbutani/use-nix-shell-action@v1
       with:
         file: shell.nix
         script: |

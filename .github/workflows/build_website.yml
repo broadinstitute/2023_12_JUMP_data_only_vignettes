@@ -31,11 +31,6 @@ jobs:
       with:
         file: shell.nix
         script: |
-          jupytext --sync pills/scripts/*.py
-          quarto check
-          # quarto publish gh-pages --no-prompt
+          jupytext --sync pills/scripts/*.py --execute
+          quarto publish gh-pages --no-prompt --no-render
 
-    - name: Publish to GitHub Pages (and render)
-      uses: b-rodrigues/quarto-nix-actions/publish@main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -27,7 +27,7 @@ jobs:
     - name: Build development environment
       run: |
         nix-build
-        poetry run jupytext --sync pills/scripts/*.py
+        nix-shell --run 'jupytext --sync pills/scripts/*.py'
 
     - uses: quarto-dev/quarto-actions/setup@v2
       with:

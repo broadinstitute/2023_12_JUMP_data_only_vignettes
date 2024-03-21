@@ -15,7 +15,7 @@
 # ---
 
 # %% [markdown]
-# This is a tutorial on how to access
+# This is a tutorial on how to access JUMP-Cellpainting data.
 # We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow.
 # We prefer lazy loading because the data can be too big to be handled in memory.
 

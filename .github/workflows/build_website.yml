@@ -24,18 +24,23 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
-    - name: Build development environment
+    - name: Build development environment and run jupytext
       run: |
-        nix-build
+        # nix-build
+        nix-shell --run 'which python'
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
+        nix-shell --run 'quarto render'
+        git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
+        git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
+        nix-shell --run 'quarto publish gh-pages'
 
-    - uses: quarto-dev/quarto-actions/setup@v2
-      with:
-        version: 1.4.515
+    # - uses: quarto-dev/quarto-actions/setup@v2
+    #   with:
+    #     version: 1.4.515
 
-    - name: Publish to GitHub Pages (and render)
-      uses: b-rodrigues/quarto-nix-actions/publish@main
-      with:
-        target: gh-pages
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+    # - name: Publish to GitHub Pages (and render)
+    #   uses: b-rodrigues/quarto-nix-actions/publish@main
+    #   with:
+    #     target: gh-pages
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions

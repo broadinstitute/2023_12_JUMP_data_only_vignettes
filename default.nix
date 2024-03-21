@@ -14,6 +14,6 @@ in
   {
     buildenv = poetry2nix.mkPoetryEnv {
     projectDir = ./.;
-    preferWheels = true; # TODO use overrides to fix this
-    # It has to do with the maturin rust dependencies
-    };
+    preferwheels = true; # todo use overrides to fix this
+    # it has to do with the maturin rust dependencies
+  }

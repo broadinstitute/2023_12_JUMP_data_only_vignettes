@@ -37,12 +37,11 @@ jobs:
     - uses: workflow/nix-shell-action@v3
       with:
         script: |
-          nix-shell
-          poetry run jupytext --sync pills/scripts/*.py
-          quarto publish gh-pages
+          jupytext --sync pills/scripts/*.py
+          quarto publish gh-pages --no-prompt
 
 
-    # - name: Publish to GitHub Pages (and render)
-    #   uses: b-rodrigues/quarto-nix-actions/publish@main
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish to GitHub Pages (and render)
+      uses: b-rodrigues/quarto-nix-actions/publish@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

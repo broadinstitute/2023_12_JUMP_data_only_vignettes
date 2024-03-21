@@ -22,5 +22,6 @@ pytest = "^7.4.1"
 # ruff = "<0.2.0"
 
 [tool.jupytext.formats]
+"pills/tutorials/" = ".ipynb"
 "pills/tutorials/" = ".qmd"
 "pills/scripts/" = "py:percent"

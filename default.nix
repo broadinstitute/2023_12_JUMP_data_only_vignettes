@@ -11,8 +11,7 @@ let
   };
   poetry2nix = callPackage poetry2nix-src { };
 in
-  {
-    buildenv = poetry2nix.mkPoetryEnv {
+  poetry2nix.mkPoetryEnv {
     projectDir = ./.;
     preferwheels = true; # todo use overrides to fix this
     # it has to do with the maturin rust dependencies

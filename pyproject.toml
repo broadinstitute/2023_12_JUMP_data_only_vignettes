@@ -23,5 +23,5 @@ pytest = "^7.4.1"
 
 [tool.jupytext.formats]
 "pills/tutorials/" = ".ipynb"
-"pills/tutorials/" = ".qmd"
+"pills/tutorials_qmd/" = ".qmd"
 "pills/scripts/" = "py:percent"

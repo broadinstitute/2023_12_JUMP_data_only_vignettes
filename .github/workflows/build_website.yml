@@ -34,7 +34,7 @@ jobs:
         version: 1.4.515
 
     - name: Publish to GitHub Pages (and render)
-      uses: quarto-dev/quarto-actions/publish@v2
+      uses: b-rodrigues/quarto-nix-actions/publish@main
       with:
         target: gh-pages
       env:

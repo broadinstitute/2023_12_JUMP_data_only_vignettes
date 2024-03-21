@@ -32,6 +32,7 @@ jobs:
         file: shell.nix
         script: |
           jupytext --sync pills/scripts/*.py
+          quarto check
           # quarto publish gh-pages --no-prompt
 
     - name: Publish to GitHub Pages (and render)

@@ -20,6 +20,9 @@
 # We prefer lazy loading because the data can be too big to be handled in memory.
 
 # %% Imports
+import sys
+print(sys.path)
+
 import polars as pl
 from pyarrow.dataset import dataset
 from s3fs import S3FileSystem

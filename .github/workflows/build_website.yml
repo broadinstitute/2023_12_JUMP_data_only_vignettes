@@ -28,7 +28,9 @@ jobs:
       run: |
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         nix-shell --run 'poetry install -vv --with dev --no-root'
-        nix-shell --run 'poetry shell'
+        echo $PATH
+        nix-shell --run 'ls -a'
+        nix-shell --run 'poetry info'
         nix-shell --run 'quarto check'
         nix-shell --run 'quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"

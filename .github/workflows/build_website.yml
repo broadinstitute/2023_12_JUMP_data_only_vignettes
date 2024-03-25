@@ -24,13 +24,15 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
-    - name: Build development environment and run jupytext
+    - name: Build development environment and run code
       run: |
         echo "Running polars test"
         nix-shell --run 'python -c "import polars"'
+        nix-shell --run 'which python'
+        nix-shell --run 'python -c "import sys; sys.path"'
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
-        nix-shell --run 'poetry install -vv --with dev --no-root'
-        nix-shell --run 'poetry env info'
+        # nix-shell --run 'poetry install -vv --with dev --no-root'
+        # nix-shell --run 'poetry env info'
         nix-shell --run 'quarto check'
         nix-shell --run 'quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"

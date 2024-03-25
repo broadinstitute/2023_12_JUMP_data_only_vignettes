@@ -33,10 +33,9 @@ jobs:
         nix-shell --run 'python -c "import sys; print( sys.path )"'
         echo Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
-        # nix-shell --run 'poetry install -vv --with dev --no-root'
-        # nix-shell --run 'poetry env info'
-        # nix-shell --run 'poetry env info'
-        # nix-shell --run 'export QUARTO_PYTHON=$(poetry env info --executable)'
+        nix-shell --run 'poetry install -vv --with dev --no-root'
+        nix-shell --run 'poetry env info'
+        nix-shell --run 'export QUARTO_PYTHON=$(poetry env info --executable)'
         nix-shell --run 'quarto check jupyter'
         nix-shell --run 'quarto check'
         nix-shell --run 'quarto render'

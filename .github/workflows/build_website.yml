@@ -26,13 +26,18 @@ jobs:
 
     - name: Build development environment and run code
       run: |
-        echo "Running polars test"
+        nix-build
+        echo "Starting tests"
         nix-shell --run 'python -c "import polars"'
         nix-shell --run 'which python'
-        nix-shell --run 'python -c "import sys; sys.path"'
+        nix-shell --run 'python -c "import sys; print( sys.path )"'
+        echo Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         # nix-shell --run 'poetry install -vv --with dev --no-root'
         # nix-shell --run 'poetry env info'
+        # nix-shell --run 'poetry env info'
+        # nix-shell --run 'export QUARTO_PYTHON=$(poetry env info --executable)'
+        nix-shell --run 'quarto check jupyter'
         nix-shell --run 'quarto check'
         nix-shell --run 'quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
@@ -44,8 +49,4 @@ jobs:
     #     version: 1.4.515
 
     # - name: Publish to GitHub Pages (and render)
-    #   uses: b-rodrigues/quarto-nix-actions/publish@main
-    #   with:
-    #     target: gh-pages
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+    #   uses: b-r

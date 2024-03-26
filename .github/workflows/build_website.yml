@@ -24,9 +24,6 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
-
     - name: Build development environment and run code
       run: |
         nix-shell

@@ -34,7 +34,7 @@ jobs:
         echo "Printing internal polars and path"
         nix-shell --run 'python -c "import polars; print(polars)"'
         nix-shell --run 'python -c "import sys; print( sys.path )"'
-        echo Tests finished"
+        echo "Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         nix-shell --run 'export QUARTO_PYTHON=$(which python)'
         nix-shell --run 'quarto check'

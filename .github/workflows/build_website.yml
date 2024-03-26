@@ -34,10 +34,14 @@ jobs:
         echo "Printing internal polars and path"
         nix-shell --run 'python -c "import polars; print(polars)"'
         nix-shell --run 'python -c "import sys; print( sys.path )"'
+        nix-shell --run 'which jupytext'
         echo "Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
-        nix-shell --run 'export QUARTO_PYTHON=$(which python)'
-        nix-shell --run 'echo "$QUARTO_PYTHON" && quarto check'
+        nix-shell --run 'echo $(which jupytext)'
+
+        parent_dir=$(which jupytext)
+        parent2_dir="$(dirname "$parent_dir")"
+        nix-shell --run 'export PATH="$(dirname parent2_dir)/lib/python3.11/site-packages:$PATH" &&quarto check'
         nix-shell --run 'quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"

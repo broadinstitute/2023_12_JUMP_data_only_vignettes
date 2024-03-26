@@ -24,6 +24,9 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
+
     - name: Build development environment and run code
       run: |
         nix-shell
@@ -38,11 +41,9 @@ jobs:
         echo "Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         nix-shell --run 'echo $(which jupytext)'
-
-        parent_dir=$(which jupytext)
-        parent2_dir="$(dirname "$parent_dir")"
-        nix-shell --run 'export PATH="$(dirname parent2_dir)/lib/python3.11/site-packages:$PATH" &&quarto check'
-        nix-shell --run 'quarto render'
+        nix-shell --run 'quarto check'
+        nix-shell --run 'tmp=$(which jupytext) && export PATH="${tmp%/bin/*}/lib/python3.11/site-packages:$PATH" && quarto render'
+        # nix-shell --run 'export PATH="$(dirname $tmp):$PATH" && quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
         nix-shell --run 'poetry quarto publish gh-pages'

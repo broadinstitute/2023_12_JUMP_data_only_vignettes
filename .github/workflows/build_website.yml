@@ -30,6 +30,7 @@ jobs:
         jupytext --sync pills/scripts/*.py
         export QUARTO_PYTHON=$(which python)
         quarto check
+        quarto render
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
         quarto publish gh-pages

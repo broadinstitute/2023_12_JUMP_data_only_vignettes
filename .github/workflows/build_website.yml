@@ -36,9 +36,9 @@ jobs:
         nix-shell --run 'python -c "import sys; print( sys.path )"'
         echo "Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
-        nix-shell --run ''
-        nix-shell --run 'export QUARTO_PYTHON=$(which python) && quarto check'
-        nix-shell --run 'export QUARTO_PYTHON=$(which python) && quarto render'
+        nix-shell --run 'export QUARTO_PYTHON=$(which python)'
+        nix-shell --run 'echo "$QUARTO_PYTHON" && quarto check'
+        nix-shell --run 'quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
         nix-shell --run 'poetry quarto publish gh-pages'

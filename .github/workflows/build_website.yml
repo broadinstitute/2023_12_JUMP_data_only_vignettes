@@ -24,16 +24,13 @@ jobs:
     - name: Nix cache
       uses: DeterminateSystems/magic-nix-cache-action@main
 
+
     - name: Build development environment and run code
       run: |
-        nix-shell
-        jupytext --sync pills/scripts/*.py
-        export QUARTO_PYTHON=$(which python)
-        quarto check
-        quarto render
-        git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
-        git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
-        quarto publish gh-pages
+        nix-shell --run "jupytext --sync pills/scripts/*.py && export QUARTO_PYTHON=$(which python) && quarto check && quarto render"
+        git config --global user.email "quarto-github-actions-publish@example.com"
+        git config --global user.name  "Quarto GHA Workflow Runner"
+        nix-shell --ruin "quarto publish gh-pages --no-render"
 
     # - uses: quarto-dev/quarto-actions/setup@v2
     #   with:

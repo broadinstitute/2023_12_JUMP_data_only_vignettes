@@ -27,21 +27,21 @@ jobs:
     - name: Build development environment and run code
       run: |
         nix-shell
-        echo "Starting tests"
-        nix-shell --run 'python -c "import polars"'
+        echo "Printing paths"
+        nix-shell --run 'echo $PATH'
+        nix-shell --run 'python -c "import site; print(site.getsitepackages())"'
         nix-shell --run 'which python'
+        echo "Printing internal polars and path"
+        nix-shell --run 'python -c "import polars; print(polars)"'
         nix-shell --run 'python -c "import sys; print( sys.path )"'
         echo Tests finished"
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
-        nix-shell --run 'poetry install -vv --with dev --no-root'
-        nix-shell --run 'poetry env info'
-        nix-shell --run 'export QUARTO_PYTHON=$(poetry env info --executable)'
-        nix-shell --run 'quarto check jupyter'
+        nix-shell --run 'export QUARTO_PYTHON=$(which python)'
         nix-shell --run 'quarto check'
-        nix-shell --run 'quarto render'
+        nix-shell --run 'poetry run quarto render --no-execute-daemon'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
-        nix-shell --run 'quarto publish gh-pages'
+        nix-shell --run 'poetry tun quarto publish gh-pages'
 
     # - uses: quarto-dev/quarto-actions/setup@v2
     #   with:

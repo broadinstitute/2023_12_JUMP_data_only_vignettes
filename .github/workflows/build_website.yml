@@ -27,4 +27,4 @@ jobs:
 
     - name: Build development environment and run code
       run: |
-        nix-shell --run "jupytext --sync pills/scripts/*.py && git config --global user.email quarto-github-actions-publish@example.com && git config --global user.name  Quarto_GHA_Runner && quarto publish gh-pages"
+        nix-shell --run "jupytext --sync pills/scripts/*.py && export QUARTO_PYTHON=$(which python) && git config --global user.email quarto-github-actions-publish@example.com && git config --global user.name  Quarto_GHA_Runner && quarto publish gh-pages"

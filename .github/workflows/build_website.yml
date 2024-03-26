@@ -38,10 +38,10 @@ jobs:
         nix-shell --run 'jupytext --sync pills/scripts/*.py'
         nix-shell --run ''
         nix-shell --run 'export QUARTO_PYTHON=$(which python) && quarto check'
-        nix-shell --run 'export QUARTO_PYTHON=$(which python) && poetry run quarto render'
+        nix-shell --run 'export QUARTO_PYTHON=$(which python) && quarto render'
         git config --global user.email "${{ inputs.GITHUB_EMAIL }}"
         git config --global user.name "${{ inputs.GITHUB_USERNAME }}"
-        nix-shell --run 'poetry tun quarto publish gh-pages'
+        nix-shell --run 'poetry quarto publish gh-pages'
 
     # - uses: quarto-dev/quarto-actions/setup@v2
     #   with:

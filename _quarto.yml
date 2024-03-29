@@ -1,8 +1,8 @@
 project:
   type: website
   output-dir: docs
-author: Alán F. Muñoz
-date: last-modified
+# author: Alán F. Muñoz
+# date: last-modified
 
 website:
   title: "JUMP documentation and examples"
@@ -10,16 +10,16 @@ website:
   repo-actions: [edit, issue]
   reader-mode: true
   sidebar:
-    style: "docked"
+    style: "floating"
     search: true
     contents:
       - section: Home
         contents:
          - index.md
-      - section: How-to Guides
-         - howto
+      - section: How-To Guides
+         - howto/*
       - section: Explanations
-         - explanations
+         - explanations/*
 
 format:
   html:

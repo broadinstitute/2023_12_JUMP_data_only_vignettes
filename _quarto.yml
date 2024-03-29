@@ -17,9 +17,9 @@ website:
         contents:
          - index.md
       - section: How-To Guides
-         - howto/*
+         - auto: "howto/*"
       - section: Explanations
-         - explanations/*
+         - auto: "explanations/*"
 
 format:
   html:

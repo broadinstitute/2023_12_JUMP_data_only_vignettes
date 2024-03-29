@@ -25,9 +25,11 @@ website:
 format:
   html:
     default-image-extension: svg
+    toc: true
     theme:
       light: flatly
       dark: darkly
     code-fold: true
   ipynb:
     default-image-extension: svg
+  gfm: default

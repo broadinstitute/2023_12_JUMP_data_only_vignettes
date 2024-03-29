@@ -1,5 +1,17 @@
 [
   {
+    "objectID": "documentation/Explanations/Resources.html",
+    "href": "documentation/Explanations/Resources.html",
+    "title": "Available resources",
+    "section": "",
+    "text": "Available resources\n\n\n\nAvailable resources\n\nHome [website](https://jump-cellpainting.broadinstitute.org/): Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets:\n\nExplore all images with an available morphological profile: CRISPR, ORF, Compounds.\nExplore the most similar matches for any given perturbation: CRISPR, ORF\nExplore the most distinctive features for any given gene: ORF\n\n\nPending interfaces are work in progress. More details can be found here.\n\nArdigen provides a website to explore a representation (requires creating a free account).",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Available resources"
+    ]
+  },
+  {
     "objectID": "documentation/tutorials/tutorial_basic.html",
     "href": "documentation/tutorials/tutorial_basic.html",
     "title": "Basic JUMP data access",

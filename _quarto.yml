@@ -17,9 +17,11 @@ website:
         contents:
           - index.md
       - section: How-To Guides
-        - auto: "howto/*"
+        contents:
+          - auto: "howto/*"
       - section: Explanations
-        - auto: "explanations/*"
+        contents:
+          - auto: "explanations/*"
 
 format:
   html:

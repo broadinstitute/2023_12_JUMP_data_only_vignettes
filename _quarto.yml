@@ -11,7 +11,8 @@ website:
     search: true
     contents:
       - section: Home
-        contents: readme.md
+        contents:
+         - readme.md
       - section: How-to Guides
          - howto
       - section: Explanations

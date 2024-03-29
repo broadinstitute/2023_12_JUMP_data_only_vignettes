@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "pills"
+name = "scripts"
 version = "0.0.0"
 description = "Examples that show how to interact with JUMP data"
 authors = ["Alan Munoz"]
-readme = "README.md"
+readme = "readme.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"

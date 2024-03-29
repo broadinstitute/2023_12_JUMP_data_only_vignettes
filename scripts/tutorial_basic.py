@@ -47,7 +47,6 @@ filepaths = dict(
 # %% [markdown]
 # We use a S3FileSystem to avoid the need of credentials.
 
-
 # %%
 def lazy_load(path: str) -> pl.DataFrame:
     fs = S3FileSystem(anon=True)

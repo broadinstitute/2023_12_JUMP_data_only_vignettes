@@ -15,11 +15,11 @@ website:
     contents:
       - section: Home
         contents:
-         - index.md
+          - index.md
       - section: How-To Guides
-         - auto: "howto/*"
+        - auto: "howto/*"
       - section: Explanations
-         - auto: "explanations/*"
+        - auto: "explanations/*"
 
 format:
   html:

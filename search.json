@@ -4,7 +4,7 @@
     "href": "documentation/Explanations/Resources.html",
     "title": "Available resources",
     "section": "",
-    "text": "Available resources\n\n\n\nAvailable resources\n\nHome [website](https://jump-cellpainting.broadinstitute.org/): Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets:\n\nExplore all images with an available morphological profile: CRISPR, ORF, Compounds.\nExplore the most similar matches for any given perturbation: CRISPR, ORF\nExplore the most distinctive features for any given gene: ORF\n\n\nPending interfaces are work in progress. More details can be found here.\n\nArdigen provides a website to explore a representation (requires creating a free account).",
+    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets:\n\nExplore all images with an available morphological profile: CRISPR, ORF, Compounds.\nExplore the most similar matches for any given perturbation: CRISPR, ORF\nExplore the most distinctive features for any given gene: ORF\n\n\nPending interfaces are work in progress. More details can be found here.\n\nArdigen provides a website to explore a representation (requires creating a free account).",
     "crumbs": [
       "Documentation",
       "Explanations",
@@ -21,6 +21,78 @@
       "Documentation",
       "Tutorials",
       "Basic JUMP data access"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html",
+    "href": "documentation/Explanations/FAQ.html",
+    "title": "Analyses",
+    "section": "",
+    "text": "Analyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nFrequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html#how-can-i-reproduce-an-environment-to-explore-jump-data",
+    "href": "documentation/Explanations/FAQ.html#how-can-i-reproduce-an-environment-to-explore-jump-data",
+    "title": "Analyses",
+    "section": "How can I reproduce an environment to explore JUMP data?",
+    "text": "How can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-pills",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html#where-are-the-datasets-specification",
+    "href": "documentation/Explanations/FAQ.html#where-are-the-datasets-specification",
+    "title": "Analyses",
+    "section": "Where are the datasets specification?",
+    "text": "Where are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html#why-are-some-images-with-corresponding-images-but-no-downstream-analysis",
+    "href": "documentation/Explanations/FAQ.html#why-are-some-images-with-corresponding-images-but-no-downstream-analysis",
+    "title": "Analyses",
+    "section": "Why are some images with corresponding images but no downstream analysis?",
+    "text": "Why are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html#why-do-some-perturbations-have-so-many-replicates",
+    "href": "documentation/Explanations/FAQ.html#why-do-some-perturbations-have-so-many-replicates",
+    "title": "Analyses",
+    "section": "Why do some perturbations have so many replicates",
+    "text": "Why do some perturbations have so many replicates\ntemp Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map1(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "documentation/Explanations/FAQ.html#footnotes",
+    "href": "documentation/Explanations/FAQ.html#footnotes",
+    "title": "Analyses",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nref↩︎",
+    "crumbs": [
+      "Documentation",
+      "Explanations",
+      "Analyses"
     ]
   }
 ]

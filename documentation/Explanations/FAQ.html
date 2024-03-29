@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -83,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../../documentation/Explanations/Resources.html">Available resources</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Analyses</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -146,13 +180,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/Explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="../../documentation/Explanations/FAQ.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Analyses</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../documentation/Explanations/Resources.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../documentation/Explanations/Resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available resources</span></a>
   </div>
 </li>
@@ -184,11 +218,11 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Resources.ipynb" download="Resources.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="FAQ.ipynb" download="FAQ.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../../documentation/Explanations/Resources.html">Available resources</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Documentation</li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../../documentation/Explanations/FAQ.html">Analyses</a></li></ol></nav>
 <div class="quarto-title">
 </div>
 
@@ -219,29 +253,57 @@ ul.task-list li input[type="checkbox"] {
 
 
 <ul>
-<li><a href="#Available%20resources">Available resources</a></li>
-</ul>
-<p><a id="Available%20resources"></a></p>
-<section id="available-resources" class="level1">
-<h1>Available resources</h1>
+<li><a href="#Analyses">Analyses</a>
 <ul>
-<li>Home <a href="https://jump-cellpainting.broadinstitute.org/">website</a>: Access news and related publications.</li>
-<li>We provide Open Source Web “JUMPer” interfaces for all three datasets:
+<li><a href="#How%20can%20I%20reproduce%20an%20environment%20to%20explore%20JUMP%20data%3F">How can I reproduce an environment to explore JUMP data?</a></li>
+</ul></li>
+<li><a href="#Data">Data</a>
 <ul>
-<li>Explore all images with an available morphological profile: <a href="https://broad.io/crispr_gallery">CRISPR</a>, <a href="https://broad.io/orf_gallery">ORF</a>, <a href="https://broad.io/compounds_gallery">Compounds</a>.</li>
-<li>Explore the most similar matches for any given perturbation: <a href="https://broad.io/crispr">CRISPR</a>, <a href="https://broad.io/orf">ORF</a></li>
-<li>Explore the most distinctive features for any given gene: <a href="https://broad.io/orf_feature">ORF</a></li>
+<li><a href="#Where%20are%20the%20datasets%20specification%3F">Where are the datasets specification?</a></li>
+<li><a href="#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F">Why are some images with corresponding images but no downstream analysis?</a></li>
+<li><a href="#Why%20do%20some%20perturbations%20have%20so%20many%20replicates">Why do some perturbations have so many replicates</a></li>
 </ul></li>
 </ul>
-<p>Pending interfaces are work in progress. More details can be found <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr">here</a>.</p>
-<ul>
-<li>Ardigen provides a <a href="https://phenaid.ardigen.com/jumpcpexplorer/">website</a> to explore a representation (requires creating a free account).</li>
-</ul>
+<p>Frequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.</p>
+<p><a id="Analyses"></a></p>
+<section id="analyses" class="level1">
+<h1>Analyses</h1>
+<p><a id="How%20can%20I%20reproduce%20an%20environment%20to%20explore%20JUMP%20data%3F"></a></p>
+<section id="how-can-i-reproduce-an-environment-to-explore-jump-data" class="level2">
+<h2 class="anchored" data-anchor-id="how-can-i-reproduce-an-environment-to-explore-jump-data">How can I reproduce an environment to explore JUMP data?</h2>
+<p>(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jump-pills</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a id="Data"></a></p>
+</section>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<p><a id="Where%20are%20the%20datasets%20specification%3F"></a></p>
+<section id="where-are-the-datasets-specification" class="level2">
+<h2 class="anchored" data-anchor-id="where-are-the-datasets-specification">Where are the datasets specification?</h2>
+<p>The main resource to understand the technicalities of the JUMP datasets collection and assembly is on this <a href="https://github.com/jump-cellpainting/datasets">repo</a>.</p>
+<p><a id="Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F"></a></p>
+</section>
+<section id="why-are-some-images-with-corresponding-images-but-no-downstream-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="why-are-some-images-with-corresponding-images-but-no-downstream-analysis">Why are some images with corresponding images but no downstream analysis?</h2>
+<p>Some plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.</p>
+<p><a id="Why%20do%20some%20perturbations%20have%20so%20many%20replicates"></a></p>
+</section>
+<section id="why-do-some-perturbations-have-so-many-replicates" class="level2">
+<h2 class="anchored" data-anchor-id="why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</h2>
+<p>temp Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).</p>
 
 
 </section>
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>ref<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -1,0 +1,3 @@
+#+title: JUMP information central
+
+Central elemnt for JUMP information and data analysis pipelines.

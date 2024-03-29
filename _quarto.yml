@@ -12,7 +12,7 @@ website:
     contents:
       - section: Home
         contents:
-         - readme.md
+         - index.md
       - section: How-to Guides
          - howto
       - section: Explanations

@@ -6,7 +6,7 @@
 
 # Available resources
 
--   Home [website](https://jump-cellpainting.broadinstitute.org/\): Access news and related publications.
+-   Home [website](https://jump-cellpainting.broadinstitute.org/): Access news and related publications.
 -   We provide Open Source Web &ldquo;JUMPer&rdquo; interfaces for all three datasets:
     -   Explore all images with an available morphological profile: [CRISPR](https://broad.io/crispr_gallery), [ORF](https://broad.io/orf_gallery), [Compounds](https://broad.io/compounds_gallery).
     -   Explore the most similar matches for any given perturbation: [CRISPR](https://broad.io/crispr), [ORF](https://broad.io/orf)

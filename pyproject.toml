@@ -22,5 +22,5 @@ pytest = "^7.4.1"
 # ruff = "<0.2.0"
 
 [tool.jupytext.formats]
-"documentation/tutorials/" = ".qmd"
+"howto/" = ".qmd"
 "scripts/" = "py:percent"

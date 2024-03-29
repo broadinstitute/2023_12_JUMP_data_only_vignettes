@@ -5,11 +5,17 @@ author: Alán F. Muñoz
 date: last-modified
 
 website:
-  title: "JUMP stories and tutorials"
+  title: "JUMP documentation and examples"
   sidebar:
     style: "docked"
     search: true
-    contents: auto
+    contents:
+      - section: Home
+        contents: readme.md
+      - section: How-to Guides
+         - howto
+      - section: Explanations
+         - explanations
     tools:
       - icon: github
         menu:

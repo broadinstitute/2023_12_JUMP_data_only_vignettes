@@ -32,4 +32,3 @@ format:
     code-fold: true
   ipynb:
     default-image-extension: svg
-  gfm: default

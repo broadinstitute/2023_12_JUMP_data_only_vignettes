@@ -214,6 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#where-are-the-datasets-specification" id="toc-where-are-the-datasets-specification" class="nav-link" data-scroll-target="#where-are-the-datasets-specification">Where are the datasets specification?</a></li>
   <li><a href="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis" id="toc-why-are-some-images-with-corresponding-images-but-no-downstream-analysis" class="nav-link" data-scroll-target="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis">Why are some images with corresponding images but no downstream analysis?</a></li>
   <li><a href="#why-do-some-perturbations-have-so-many-replicates" id="toc-why-do-some-perturbations-have-so-many-replicates" class="nav-link" data-scroll-target="#why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</a></li>
+  <li><a href="#how-were-the-profiles-created" id="toc-how-were-the-profiles-created" class="nav-link" data-scroll-target="#how-were-the-profiles-created">How were the profiles created?</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/FAQ.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="FAQ.ipynb" download="FAQ.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -235,6 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#Where%20are%20the%20datasets%20specification%3F">Where are the datasets specification?</a></li>
 <li><a href="#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F">Why are some images with corresponding images but no downstream analysis?</a></li>
 <li><a href="#Why%20do%20some%20perturbations%20have%20so%20many%20replicates">Why do some perturbations have so many replicates</a></li>
+<li><a href="#How%20were%20the%20profiles%20created%3F">How were the profiles created?</a></li>
 </ul></li>
 </ul>
 <p>Frequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.</p>
@@ -270,6 +272,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="why-do-some-perturbations-have-so-many-replicates" class="level2">
 <h2 class="anchored" data-anchor-id="why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</h2>
 <p>Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).</p>
+<p><a id="How%20were%20the%20profiles%20created%3F"></a></p>
+</section>
+<section id="how-were-the-profiles-created" class="level2">
+<h2 class="anchored" data-anchor-id="how-were-the-profiles-created">How were the profiles created?</h2>
+<p>We used snakemake and pycytominer to generate these. The details can be found in <a href="https://github.com/broadinstitute/jump-profiling-recipe">this</a> repo.</p>
 
 
 </section>

@@ -26,7 +26,7 @@
     "href": "explanations/FAQ.html",
     "title": "Analyses",
     "section": "",
-    "text": "Analyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nFrequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
+    "text": "Analyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nFrequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
     "crumbs": [
       "Explanations",
       "Analyses"
@@ -82,6 +82,17 @@
     "title": "Analyses",
     "section": "Why do some perturbations have so many replicates",
     "text": "Why do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map1(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).",
+    "crumbs": [
+      "Explanations",
+      "Analyses"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html#how-were-the-profiles-created",
+    "href": "explanations/FAQ.html#how-were-the-profiles-created",
+    "title": "Analyses",
+    "section": "How were the profiles created?",
+    "text": "How were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.",
     "crumbs": [
       "Explanations",
       "Analyses"

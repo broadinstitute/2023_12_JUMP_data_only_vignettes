@@ -31,24 +31,35 @@ from s3fs import S3FileSystem
 # a) orf: Overexpression genetic perturbations.
 # a) compounds: Chemical genetic perturbations.
 #
-# The aws paths of the dataframes are shown below:
+# Their explicit location is determined by the transformations that producet the datasets.
+# The aws paths of the dataframes are built from a prefix below:
 
 # %% Paths
-prefix = (
-    "s3://cellpainting-gallery/cpg0016-jump-integrated/source_all/workspace/profiles"
+_PREFIX = (
+    "s3://cellpainting-gallery/cpg0016-jump-assembled/source_all/workspace/profiles"
 )
-filepaths = dict(
-    crispr=f"{prefix}/chandrasekaran_2024_0000000/crispr/wellpos_cellcount_mad_outlier_nan_featselect_harmony.parquet",
-    orf=f"{prefix}/chandrasekaran_2024_0000000/orf/wellpos_cellcount_mad_outlier_nan_featselect_harmony.parquet",
-    compound=f"{prefix}/arevalo_2023_e834481/compound/mad_int_featselect_harmony.parquet/",
+_RECIPE = "jump-profiling-recipe_2024_a917fa7"
+
+transforms = (
+    (
+        "CRISPR",
+        "profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected",
+    ),
+    ("ORF", "profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony"),
+    ("COMPOUND", "profiles_var_mad_int_featselect_harmony"),
 )
 
+filepaths = {
+    data: f"{_PREFIX}/{_RECIPE}/{data}/{transform}/profiles.parquet"
+    for data, transform in transforms
+}
 
-# %% [markdown]
+# %% [markdown] Define functions
 # We use a S3FileSystem to avoid the need of credentials.
 
 # %%
-def lazy_load(path: str) -> pl.DataFrame:
+@cache
+def lazy_load(path: str) -> pl.LazyFrame:
     fs = S3FileSystem(anon=True)
     myds = dataset(path, filesystem=fs)
     df = pl.scan_pyarrow_dataset(myds)
@@ -78,7 +89,7 @@ pl.DataFrame(info)
 # Note that the collect() method enforces loading some data into memory.
 
 # %%
-data = lazy_load(filepaths["crispr"])
+data = lazy_load(filepaths["CRISPR"])
 data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
 
 # %% [markdown]

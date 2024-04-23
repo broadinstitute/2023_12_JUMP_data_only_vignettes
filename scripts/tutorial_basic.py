@@ -50,8 +50,8 @@ transforms = (
 )
 
 filepaths = {
-    data: f"{_PREFIX}/{_RECIPE}/{data}/{transform}/profiles.parquet"
-    for data, transform in transforms
+    dset: f"{_PREFIX}/{_RECIPE}/{data}/{transform}/profiles.parquet"
+    for dset, transform in transforms
 }
 
 # %% [markdown] Define functions

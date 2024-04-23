@@ -5,6 +5,7 @@
   - [Where are the datasets specification?](#Where%20are%20the%20datasets%20specification%3F)
   - [Why are some images with corresponding images but no downstream analysis?](#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F)
   - [Why do some perturbations have so many replicates](#Why%20do%20some%20perturbations%20have%20so%20many%20replicates)
+  - [How were the profiles created?](#How%20were%20the%20profiles%20created%3F)
 
 Frequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.
 
@@ -56,3 +57,10 @@ Some plates failed Quality Control (QC) but we kept them because they may be use
 ## Why do some perturbations have so many replicates
 
 Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map^[ref](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).
+
+
+<a id="How%20were%20the%20profiles%20created%3F"></a>
+
+## How were the profiles created?
+
+We used snakemake and pycytominer to generate these. The details can be found in [this](https://github.com/broadinstitute/jump-profiling-recipe) repo.

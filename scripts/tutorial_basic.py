@@ -58,7 +58,6 @@ filepaths = {
 # We use a S3FileSystem to avoid the need of credentials.
 
 # %%
-@cache
 def lazy_load(path: str) -> pl.LazyFrame:
     fs = S3FileSystem(anon=True)
     myds = dataset(path, filesystem=fs)

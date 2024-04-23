@@ -50,7 +50,7 @@ transforms = (
 )
 
 filepaths = {
-    dset: f"{_PREFIX}/{_RECIPE}/{data}/{transform}/profiles.parquet"
+    dset: f"{_PREFIX}/{_RECIPE}/{dset}/{transform}/profiles.parquet"
     for dset, transform in transforms
 }
 

@@ -15,8 +15,8 @@
 # ---
 
 # %% [markdown]
-# This is a tutorial on how to access JUMP-Cellpainting data.
-# We will use polars to fetch the data frame lazily, with the help of s3fs and pyarrow.
+# This is a tutorial on how to access profiles from the [JUMP Cell Painting datasets](https://github.com/jump-cellpainting/datasets).
+# We will use polars to fetch the data frames lazily, with the help of `s3fs` and `pyarrow`.
 # We prefer lazy loading because the data can be too big to be handled in memory.
 
 # %% Imports
@@ -27,11 +27,11 @@ from s3fs import S3FileSystem
 # %% [markdown]
 # The shapes of the available datasets are:
 #
-# a) crispr: Knock-out genetic perturbations.
-# a) orf: Overexpression genetic perturbations.
-# a) compounds: Chemical genetic perturbations.
+# a) `cpg0016-jump[crispr]`: CRISPR knockouts genetic perturbations.
+# a) `cpg0016-jump[orf]`: Overexpression genetic perturbations.
+# a) `cpg0016-jump[compound]`: Chemical perturbations.
 #
-# Their explicit location is determined by the transformations that producet the datasets.
+# Their explicit location is determined by the transformations that produce the datasets.
 # The aws paths of the dataframes are built from a prefix below:
 
 # %% Paths
@@ -83,7 +83,7 @@ for name, path in filepaths.items():
 pl.DataFrame(info)
 
 # %% [markdown]
-# Let us now focus on the crispr dataset and use a regex to select the metadata columns.
+# Let us now focus on the `crispr` dataset and use a regex to select the metadata columns.
 # We will then sample rows and display the overview.
 # Note that the collect() method enforces loading some data into memory.
 
@@ -99,7 +99,7 @@ data_only = data.select(pl.all().exclude("^Metadata.*$").sample(n=5, seed=1)).co
 data_only
 
 # %% [markdown]
-# Finally, we can convert this to pandas if we want to perform analyses with that tool.
+# Finally, we can convert this to `pandas` if we want to perform analyses with that tool.
 # Keep in mind that this loads the entire dataframe into memory.
 
 # %%

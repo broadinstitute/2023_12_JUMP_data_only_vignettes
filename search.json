@@ -15,7 +15,7 @@
     "href": "explanations/Resources.html",
     "title": "Available resources",
     "section": "",
-    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets:\n\nExplore all images with an available morphological profile: CRISPR, ORF, Compounds.\nExplore the most similar matches for any given perturbation: CRISPR, ORF\nExplore the most distinctive features for any given gene: ORF\n\n\nPending interfaces are work in progress. More details can be found here.\n\nArdigen provides a website to explore a representation (requires creating a free account).",
+    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets:\n\nExplore all images with an available morphological profile: CRISPR, ORF, Compounds.\nExplore the most similar matches for any given perturbation: CRISPR, ORF\nExplore the most distinctive features for any given gene: ORF\n\n\nPending interfaces are work in progress. More details can be found here.\n\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
     "crumbs": [
       "Explanations",
       "Available resources"
@@ -24,89 +24,45 @@
   {
     "objectID": "explanations/FAQ.html",
     "href": "explanations/FAQ.html",
-    "title": "Analyses",
+    "title": "Frequently Asqued Questions",
     "section": "",
-    "text": "Analyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nFrequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
+    "text": "Frequently Asqued Questions\n\nAnalyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nFrequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
     "crumbs": [
       "Explanations",
-      "Analyses"
+      "Frequently Asqued Questions"
     ]
   },
   {
-    "objectID": "explanations/FAQ.html#how-can-i-reproduce-an-environment-to-explore-jump-data",
-    "href": "explanations/FAQ.html#how-can-i-reproduce-an-environment-to-explore-jump-data",
-    "title": "Analyses",
-    "section": "How can I reproduce an environment to explore JUMP data?",
-    "text": "How can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-pills",
+    "objectID": "explanations/FAQ.html#analyses",
+    "href": "explanations/FAQ.html#analyses",
+    "title": "Frequently Asqued Questions",
+    "section": "Analyses",
+    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-pills",
     "crumbs": [
       "Explanations",
-      "Analyses"
+      "Frequently Asqued Questions"
     ]
   },
   {
-    "objectID": "explanations/FAQ.html#does-jump-contain-x-compoundgene",
-    "href": "explanations/FAQ.html#does-jump-contain-x-compoundgene",
-    "title": "Analyses",
-    "section": "Does JUMP contain X compound/gene?",
-    "text": "Does JUMP contain X compound/gene?\nWe have done our best to ensure that if you can find a your compound there is a here.",
+    "objectID": "explanations/FAQ.html#data",
+    "href": "explanations/FAQ.html#data",
+    "title": "Frequently Asqued Questions",
+    "section": "Data",
+    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nWe have done our best to ensure that if you can check if your compound is available here.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map1(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.",
     "crumbs": [
       "Explanations",
-      "Analyses"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#where-are-the-datasets-specification",
-    "href": "explanations/FAQ.html#where-are-the-datasets-specification",
-    "title": "Analyses",
-    "section": "Where are the datasets specification?",
-    "text": "Where are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.",
-    "crumbs": [
-      "Explanations",
-      "Analyses"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#why-are-some-images-with-corresponding-images-but-no-downstream-analysis",
-    "href": "explanations/FAQ.html#why-are-some-images-with-corresponding-images-but-no-downstream-analysis",
-    "title": "Analyses",
-    "section": "Why are some images with corresponding images but no downstream analysis?",
-    "text": "Why are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.",
-    "crumbs": [
-      "Explanations",
-      "Analyses"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#why-do-some-perturbations-have-so-many-replicates",
-    "href": "explanations/FAQ.html#why-do-some-perturbations-have-so-many-replicates",
-    "title": "Analyses",
-    "section": "Why do some perturbations have so many replicates",
-    "text": "Why do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map1(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).",
-    "crumbs": [
-      "Explanations",
-      "Analyses"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#how-were-the-profiles-created",
-    "href": "explanations/FAQ.html#how-were-the-profiles-created",
-    "title": "Analyses",
-    "section": "How were the profiles created?",
-    "text": "How were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.",
-    "crumbs": [
-      "Explanations",
-      "Analyses"
+      "Frequently Asqued Questions"
     ]
   },
   {
     "objectID": "explanations/FAQ.html#footnotes",
     "href": "explanations/FAQ.html#footnotes",
-    "title": "Analyses",
+    "title": "Frequently Asqued Questions",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nref↩︎",
+    "text": "Footnotes\n\n\nmany-replicates-issue↩︎",
     "crumbs": [
       "Explanations",
-      "Analyses"
+      "Frequently Asqued Questions"
     ]
   },
   {

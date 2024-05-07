@@ -1,4 +1,4 @@
-- [Frequently Asqued Questions](#Frequently%20Asqued%20Questions)
+- [Frequently Asked Questions](#Frequently%20Asked%20Questions)
   - [Analyses](#Analyses)
     - [How can I reproduce an environment to explore JUMP data?](#How%20can%20I%20reproduce%20an%20environment%20to%20explore%20JUMP%20data%3F)
   - [Data](#Data)
@@ -8,12 +8,12 @@
     - [Why do some perturbations have so many replicates](#Why%20do%20some%20perturbations%20have%20so%20many%20replicates)
     - [How were the profiles created?](#How%20were%20the%20profiles%20created%3F)
 
-Frequently Asqued Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.
+Frequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.
 
 
-<a id="Frequently%20Asqued%20Questions"></a>
+<a id="Frequently%20Asked%20Questions"></a>
 
-# Frequently Asqued Questions
+# Frequently Asked Questions
 
 
 <a id="Analyses"></a>

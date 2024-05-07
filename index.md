@@ -10,7 +10,7 @@ This is work in progress. The purpose of this resource is to concentrate all the
 
 # I am a developer interested in using and writing programatic tools for JUMP
 
-Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Python libraries that may help you.
+Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Python libraries that may help you access JUMP data in a high-throughput manner.
 
 
 # Why yet another resource?

@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Frequently Asqued Questions</span></a>
+ <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -228,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a tutorial on how to access profiles from the <a href="https://github.com/jump-cellpainting/datasets">JUMP Cell Painting datasets</a>. We will use polars to fetch the data frames lazily, with the help of <code>s3fs</code> and <code>pyarrow</code>. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="e04d7e9b" class="cell" title="Imports" data-execution_count="1">
+<div id="1e513126" class="cell" title="Imports" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>cpg0016-jump[compound]</code>: Chemical perturbations.</li>
 </ol>
 <p>Their explicit location is determined by the transformations that produce the datasets. The aws paths of the dataframes are built from a prefix below:</p>
-<div id="37cc1941" class="cell" title="Paths" data-execution_count="2">
+<div id="7239a40a" class="cell" title="Paths" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>_PREFIX <span class="op">=</span> (</span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We use a S3FileSystem to avoid the need of credentials.</p>
-<div id="e612df6e" class="cell" data-execution_count="3">
+<div id="65304657" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lazy_load(path: <span class="bu">str</span>) <span class="op">-&gt;</span> pl.LazyFrame:</span>
@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We will lazy-load the dataframes and print the number of rows and columns</p>
-<div id="c668237d" class="cell" data-execution_count="4">
+<div id="412fc6c7" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let us now focus on the <code>crispr</code> dataset and use a regex to select the metadata columns. We will then sample rows and display the overview. Note that the collect() method enforces loading some data into memory.</p>
-<div id="48f53b2e" class="cell" data-execution_count="5">
+<div id="cb12d034" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> lazy_load(filepaths[<span class="st">"CRISPR"</span>])</span>
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The following line excludes the metadata columns:</p>
-<div id="6678192c" class="cell" data-execution_count="6">
+<div id="36f487ca" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
@@ -985,7 +985,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we can convert this to <code>pandas</code> if we want to perform analyses with that tool. Keep in mind that this loads the entire dataframe into memory.</p>
-<div id="14a87df1" class="cell" data-execution_count="7">
+<div id="7e279c45" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

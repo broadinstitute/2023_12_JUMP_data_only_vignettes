@@ -41,7 +41,7 @@ pip install jump-pills
 
 ### Does JUMP contain X compound/gene?
 
-We have done our best to ensure that if you can check if your compound is available [here](https://github.com/jump-cellpainting/datasets/issues).
+The easiest way to find out is querying your dataset using [this](broad.io/babel) web tool. Alternatively, you can explore the [metadata tables](https://github.com/jump-cellpainting/datasets/tree/main/metadata) on the datasets repository.
 
 
 <a id="Where%20are%20the%20datasets%20specification%3F"></a>

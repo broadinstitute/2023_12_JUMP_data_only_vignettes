@@ -41,7 +41,7 @@ pip install jump-pills
 
 ### Does JUMP contain X compound/gene?
 
-The easiest way to find out is querying your dataset using [this](broad.io/babel) web tool. Alternatively, you can explore the [metadata tables](https://github.com/jump-cellpainting/datasets/tree/main/metadata) on the datasets repository.
+The easiest way to find out is querying your dataset using [this](https://broad.io/babel) web tool. Alternatively, you can explore the [metadata tables](https://github.com/jump-cellpainting/datasets/tree/main/metadata) on the datasets repository.
 
 
 <a id="Where%20are%20the%20datasets%20specification%3F"></a>
@@ -62,7 +62,7 @@ Some plates failed Quality Control (QC) but we kept them because they may be use
 
 ### Why do some perturbations have so many replicates
 
-Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map^[many-replicates-issue](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).
+Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map ([issue](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031)).
 
 
 <a id="How%20were%20the%20profiles%20created%3F"></a>

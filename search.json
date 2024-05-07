@@ -48,18 +48,7 @@
     "href": "explanations/FAQ.html#data",
     "title": "Frequently Asked Questions",
     "section": "Data",
-    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map1(https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#footnotes",
-    "href": "explanations/FAQ.html#footnotes",
-    "title": "Frequently Asked Questions",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nmany-replicates-issue↩︎",
+    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.",
     "crumbs": [
       "Explanations",
       "Frequently Asked Questions"

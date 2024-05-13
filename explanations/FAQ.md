@@ -7,7 +7,7 @@
     - [Why are some images with corresponding images but no downstream analysis?](#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F)
     - [Why do some perturbations have so many replicates](#Why%20do%20some%20perturbations%20have%20so%20many%20replicates)
     - [How were the profiles created?](#How%20were%20the%20profiles%20created%3F)
-    - [What is the source of the replicability metric?](#What%20is%20the%20source%20of%20the%20replicability%20metric%3F)
+    - [Web interfaces](#Web%20interfaces)
 
 Frequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.
 
@@ -73,8 +73,19 @@ Most plates contain 16 negative control wells, while some have as many as 28 wel
 We used snakemake and pycytominer to generate these. The details can be found in [this](https://github.com/broadinstitute/jump-profiling-recipe) repo.
 
 
-<a id="What%20is%20the%20source%20of%20the%20replicability%20metric%3F"></a>
+<a id="Web%20interfaces"></a>
 
-### What is the source of the replicability metric?
+### Web interfaces
 
-These two files ([ORF](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz) and [CRISPR](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz)) contain the mAP and corrected p values for replicate retrieval. They won&rsquo;t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.
+1.  What is the source of the replicability metric?
+
+    These two files ([ORF](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz) and [CRISPR](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz)) contain the mAP and corrected p values for replicate retrieval. They won&rsquo;t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.
+
+2.  X\_Feature: For each row, is the `Feature` value an average for all the cells in the `Metadata_image` using the listed `Mask`? Or is it associated with a single cell in that image?
+
+    Any `Feature` is the average of all cells and all replicates (typically four in total) for the specific mask and feature.
+
+3.  How are `Statistic` and `Median` calculated for each row? Are they calculated in relation to the average of the &ldquo;Feature&rdquo; values for the negative controls in the same plate?
+
+    -   `Statistic` is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).
+    -   `Median` is the median feature across all (~4) replicates. Each of these replicates&rsquo; value was in turn the mean of all the sites and cells in a given well.

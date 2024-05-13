@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis" id="toc-why-are-some-images-with-corresponding-images-but-no-downstream-analysis" class="nav-link" data-scroll-target="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis">Why are some images with corresponding images but no downstream analysis?</a></li>
   <li><a href="#why-do-some-perturbations-have-so-many-replicates" id="toc-why-do-some-perturbations-have-so-many-replicates" class="nav-link" data-scroll-target="#why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</a></li>
   <li><a href="#how-were-the-profiles-created" id="toc-how-were-the-profiles-created" class="nav-link" data-scroll-target="#how-were-the-profiles-created">How were the profiles created?</a></li>
-  <li><a href="#what-is-the-source-of-the-replicability-metric" id="toc-what-is-the-source-of-the-replicability-metric" class="nav-link" data-scroll-target="#what-is-the-source-of-the-replicability-metric">What is the source of the replicability metric?</a></li>
+  <li><a href="#web-interfaces" id="toc-web-interfaces" class="nav-link" data-scroll-target="#web-interfaces">Web interfaces</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F">Why are some images with corresponding images but no downstream analysis?</a></li>
 <li><a href="#Why%20do%20some%20perturbations%20have%20so%20many%20replicates">Why do some perturbations have so many replicates</a></li>
 <li><a href="#How%20were%20the%20profiles%20created%3F">How were the profiles created?</a></li>
-<li><a href="#What%20is%20the%20source%20of%20the%20replicability%20metric%3F">What is the source of the replicability metric?</a></li>
+<li><a href="#Web%20interfaces">Web interfaces</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -288,11 +288,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-were-the-profiles-created" class="level3">
 <h3 class="anchored" data-anchor-id="how-were-the-profiles-created">How were the profiles created?</h3>
 <p>We used snakemake and pycytominer to generate these. The details can be found in <a href="https://github.com/broadinstitute/jump-profiling-recipe">this</a> repo.</p>
-<p><a id="What%20is%20the%20source%20of%20the%20replicability%20metric%3F"></a></p>
+<p><a id="Web%20interfaces"></a></p>
 </section>
-<section id="what-is-the-source-of-the-replicability-metric" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-the-source-of-the-replicability-metric">What is the source of the replicability metric?</h3>
-<p>These two files (<a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz">ORF</a> and <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz">CRISPR</a>) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.</p>
+<section id="web-interfaces" class="level3">
+<h3 class="anchored" data-anchor-id="web-interfaces">Web interfaces</h3>
+<ol type="1">
+<li><p>What is the source of the replicability metric?</p>
+<p>These two files (<a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz">ORF</a> and <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz">CRISPR</a>) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.</p></li>
+<li><p>X_Feature: For each row, is the <code>Feature</code> value an average for all the cells in the <code>Metadata_image</code> using the listed <code>Mask</code>? Or is it associated with a single cell in that image?</p>
+<p>Any <code>Feature</code> is the average of all cells and all replicates (typically four in total) for the specific mask and feature.</p></li>
+<li><p>How are <code>Statistic</code> and <code>Median</code> calculated for each row? Are they calculated in relation to the average of the “Feature” values for the negative controls in the same plate?</p>
+<ul>
+<li><code>Statistic</code> is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).</li>
+<li><code>Median</code> is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.</li>
+</ul></li>
+</ol>
 
 
 </section>

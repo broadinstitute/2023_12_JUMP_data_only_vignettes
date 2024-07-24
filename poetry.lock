@@ -505,18 +505,19 @@ crt = ["awscrt (==0.19.19)"]
 
 [[package]]
 name = "broad-babel"
-version = "0.1.22"
+version = "0.1.23"
 description = "A translator of Broad and JUMP ids to more conventional names."
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "broad_babel-0.1.22-py3-none-any.whl", hash = "sha256:dcdd632ed373751ed218fa3242976e93dc83a044d5f9849f920de404d7d77862"},
-    {file = "broad_babel-0.1.22.tar.gz", hash = "sha256:cc46c90887826c4662415108a8659f7d70b502d9da5c126b6b6e54e29fda0c2f"},
+    {file = "broad_babel-0.1.23-py3-none-any.whl", hash = "sha256:e8c1ec14af7cf9ed8ebd245c2b2d7a877efb4faece871789666b70bb69464d12"},
+    {file = "broad_babel-0.1.23.tar.gz", hash = "sha256:aba0ea8d88efd64cb6d89bca988d3772f219cfc02904d01d58eba38a6fa61691"},
 ]
 
 [package.dependencies]
 adbc-driver-sqlite = ">=0.8.0,<0.9.0"
-polars = ">=0.19.19,<0.20.0"
+numpy = "<2.0"
+polars = ">=1.2.1,<2.0.0"
 pooch = ">=1.7.0,<2.0.0"
 pyarrow = ">=16.1.0,<17.0.0"
 
@@ -2551,37 +2552,41 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "polars"
-version = "0.19.19"
+version = "1.2.1"
 description = "Blazingly fast DataFrame library"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "polars-0.19.19-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:812dbb0cc7027fd41ce6b3eaf100b94828fc082fab026409d48792e3e7014095"},
-    {file = "polars-0.19.19-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:21a334e18c83a259211ca6ec182498f3a89297fde9b8f75021c6881ff4411201"},
-    {file = "polars-0.19.19-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d383fac392b08a6d5830c99f6e735a48e390c1535c8f1e67707fcaab6863ade5"},
-    {file = "polars-0.19.19-cp38-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:eec0e72dce84b85c427bbf395d2e181f33e60677695b95ee2e87fed51043bdea"},
-    {file = "polars-0.19.19-cp38-abi3-win_amd64.whl", hash = "sha256:6c9e597efac74f00ef9cdfd9ba8a9128ed24276916bd3d60adc6e604530e4b37"},
-    {file = "polars-0.19.19.tar.gz", hash = "sha256:3e904d197aabf36e37fda263470eaf51ec92fb865cdea4f93947713480199303"},
+    {file = "polars-1.2.1-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:baa5d1f032d7b82075cf926d40a4c6d74dd897cae9fa529f6bc1f68608db53e0"},
+    {file = "polars-1.2.1-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:a113fe7e378044c621be329bedfaa19cb0d7fff4bb05642dc91bb9413e662b8f"},
+    {file = "polars-1.2.1-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2094877da694bb59bfb7f5af50471955012b950068dc6f3ef5ecc41653a3b04f"},
+    {file = "polars-1.2.1-cp38-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:d71f87f7ef9f4f4a1d52127399b1dae4a2622d528eea90f94912d92e0e9e3998"},
+    {file = "polars-1.2.1-cp38-abi3-win_amd64.whl", hash = "sha256:764c2701b8ca8a27dcd7f23c94ba9031aec4d392061dfa7d1c2fdcbfd132d6ba"},
+    {file = "polars-1.2.1.tar.gz", hash = "sha256:a46aba51acce7ecf85151f72d25ef2a3eeb5735d55f4b7cc69ec4a596e9fbefd"},
 ]
 
 [package.extras]
-adbc = ["adbc_driver_sqlite"]
-all = ["polars[adbc,cloudpickle,connectorx,deltalake,fsspec,gevent,matplotlib,numpy,pandas,pyarrow,pydantic,pyiceberg,sqlalchemy,timezone,xlsx2csv,xlsxwriter]"]
+adbc = ["adbc-driver-manager[dbapi]", "adbc-driver-sqlite[dbapi]"]
+all = ["polars[async,cloudpickle,database,deltalake,excel,fsspec,graph,iceberg,numpy,pandas,plot,pyarrow,pydantic,style,timezone]"]
+async = ["gevent"]
+calamine = ["fastexcel (>=0.9)"]
 cloudpickle = ["cloudpickle"]
 connectorx = ["connectorx (>=0.3.2)"]
-deltalake = ["deltalake (>=0.13.0)"]
+database = ["nest-asyncio", "polars[adbc,connectorx,sqlalchemy]"]
+deltalake = ["deltalake (>=0.15.0)"]
+excel = ["polars[calamine,openpyxl,xlsx2csv,xlsxwriter]"]
 fsspec = ["fsspec"]
-gevent = ["gevent"]
-matplotlib = ["matplotlib"]
+graph = ["matplotlib"]
+iceberg = ["pyiceberg (>=0.5.0)"]
 numpy = ["numpy (>=1.16.0)"]
 openpyxl = ["openpyxl (>=3.0.0)"]
-pandas = ["pandas", "pyarrow (>=7.0.0)"]
+pandas = ["pandas", "polars[pyarrow]"]
+plot = ["hvplot (>=0.9.1)", "polars[pandas]"]
 pyarrow = ["pyarrow (>=7.0.0)"]
 pydantic = ["pydantic"]
-pyiceberg = ["pyiceberg (>=0.5.0)"]
-pyxlsb = ["pyxlsb (>=1.0)"]
-sqlalchemy = ["pandas", "sqlalchemy"]
-timezone = ["backports.zoneinfo", "tzdata"]
+sqlalchemy = ["polars[pandas]", "sqlalchemy"]
+style = ["great-tables (>=0.8.0)"]
+timezone = ["backports-zoneinfo", "tzdata"]
 xlsx2csv = ["xlsx2csv (>=0.8.0)"]
 xlsxwriter = ["xlsxwriter"]
 
@@ -3842,4 +3847,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "e64ba638a399da9ed1feee9ff33ddbd0aaa3547d594c9b7c6328e09c91be8d80"
+content-hash = "bcd0e4eda556f05a1491f30e01ec8549302c8adad82e9bfb7ef19cf8a1684337"

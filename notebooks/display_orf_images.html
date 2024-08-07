@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>faq – JUMP documentation and examples</title>
+<title>Pull images for JUMP ORFs – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explanations/FAQ.html">Frequently Asked Questions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      JUMP documentation and examples
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -182,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link active">
+  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
@@ -200,114 +202,357 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#frequently-asked-questions" id="toc-frequently-asked-questions" class="nav-link active" data-scroll-target="#frequently-asked-questions">Frequently Asked Questions</a>
-  <ul class="collapse">
-  <li><a href="#analyses" id="toc-analyses" class="nav-link" data-scroll-target="#analyses">Analyses</a>
-  <ul class="collapse">
-  <li><a href="#how-can-i-reproduce-an-environment-to-explore-jump-data" id="toc-how-can-i-reproduce-an-environment-to-explore-jump-data" class="nav-link" data-scroll-target="#how-can-i-reproduce-an-environment-to-explore-jump-data">How can I reproduce an environment to explore JUMP data?</a></li>
-  </ul></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
-  <ul class="collapse">
-  <li><a href="#does-jump-contain-x-compoundgene" id="toc-does-jump-contain-x-compoundgene" class="nav-link" data-scroll-target="#does-jump-contain-x-compoundgene">Does JUMP contain X compound/gene?</a></li>
-  <li><a href="#where-are-the-datasets-specification" id="toc-where-are-the-datasets-specification" class="nav-link" data-scroll-target="#where-are-the-datasets-specification">Where are the datasets specification?</a></li>
-  <li><a href="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis" id="toc-why-are-some-images-with-corresponding-images-but-no-downstream-analysis" class="nav-link" data-scroll-target="#why-are-some-images-with-corresponding-images-but-no-downstream-analysis">Why are some images with corresponding images but no downstream analysis?</a></li>
-  <li><a href="#why-do-some-perturbations-have-so-many-replicates" id="toc-why-do-some-perturbations-have-so-many-replicates" class="nav-link" data-scroll-target="#why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</a></li>
-  <li><a href="#how-were-the-profiles-created" id="toc-how-were-the-profiles-created" class="nav-link" data-scroll-target="#how-were-the-profiles-created">How were the profiles created?</a></li>
-  <li><a href="#web-interfaces" id="toc-web-interfaces" class="nav-link" data-scroll-target="#web-interfaces">Web interfaces</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/FAQ.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="FAQ.ipynb" download="FAQ.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="display_orf_images.out.ipynb" download="display_orf_images.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Pull images for JUMP ORFs</h1>
+</div>
 
 
 
-<ul>
-<li><a href="#Frequently%20Asked%20Questions">Frequently Asked Questions</a>
-<ul>
-<li><a href="#Analyses">Analyses</a>
-<ul>
-<li><a href="#How%20can%20I%20reproduce%20an%20environment%20to%20explore%20JUMP%20data%3F">How can I reproduce an environment to explore JUMP data?</a></li>
-</ul></li>
-<li><a href="#Data">Data</a>
-<ul>
-<li><a href="#Does%20JUMP%20contain%20X%20compound%2Fgene%3F">Does JUMP contain X compound/gene?</a></li>
-<li><a href="#Where%20are%20the%20datasets%20specification%3F">Where are the datasets specification?</a></li>
-<li><a href="#Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F">Why are some images with corresponding images but no downstream analysis?</a></li>
-<li><a href="#Why%20do%20some%20perturbations%20have%20so%20many%20replicates">Why do some perturbations have so many replicates</a></li>
-<li><a href="#How%20were%20the%20profiles%20created%3F">How were the profiles created?</a></li>
-<li><a href="#Web%20interfaces">Web interfaces</a></li>
-</ul></li>
-</ul></li>
-</ul>
-<p>Frequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.</p>
-<p><a id="Frequently%20Asked%20Questions"></a></p>
-<section id="frequently-asked-questions" class="level1">
-<h1>Frequently Asked Questions</h1>
-<p><a id="Analyses"></a></p>
-<section id="analyses" class="level2">
-<h2 class="anchored" data-anchor-id="analyses">Analyses</h2>
-<p><a id="How%20can%20I%20reproduce%20an%20environment%20to%20explore%20JUMP%20data%3F"></a></p>
-<section id="how-can-i-reproduce-an-environment-to-explore-jump-data" class="level3">
-<h3 class="anchored" data-anchor-id="how-can-i-reproduce-an-environment-to-explore-jump-data">How can I reproduce an environment to explore JUMP data?</h3>
-<p>(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jump-pills</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a id="Data"></a></p>
-</section>
-</section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<p><a id="Does%20JUMP%20contain%20X%20compound%2Fgene%3F"></a></p>
-<section id="does-jump-contain-x-compoundgene" class="level3">
-<h3 class="anchored" data-anchor-id="does-jump-contain-x-compoundgene">Does JUMP contain X compound/gene?</h3>
-<p>The easiest way to find out is querying your dataset using <a href="https://broad.io/babel">this</a> web tool. Alternatively, you can explore the <a href="https://github.com/jump-cellpainting/datasets/tree/main/metadata">metadata tables</a> on the datasets repository.</p>
-<p><a id="Where%20are%20the%20datasets%20specification%3F"></a></p>
-</section>
-<section id="where-are-the-datasets-specification" class="level3">
-<h3 class="anchored" data-anchor-id="where-are-the-datasets-specification">Where are the datasets specification?</h3>
-<p>The main resource to understand the technicalities of the JUMP datasets collection and assembly is on this <a href="https://github.com/jump-cellpainting/datasets">repo</a>.</p>
-<p><a id="Why%20are%20some%20images%20with%20corresponding%20images%20but%20no%20downstream%20analysis%3F"></a></p>
-</section>
-<section id="why-are-some-images-with-corresponding-images-but-no-downstream-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="why-are-some-images-with-corresponding-images-but-no-downstream-analysis">Why are some images with corresponding images but no downstream analysis?</h3>
-<p>Some plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.</p>
-<p><a id="Why%20do%20some%20perturbations%20have%20so%20many%20replicates"></a></p>
-</section>
-<section id="why-do-some-perturbations-have-so-many-replicates" class="level3">
-<h3 class="anchored" data-anchor-id="why-do-some-perturbations-have-so-many-replicates">Why do some perturbations have so many replicates</h3>
-<p>Most plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (<a href="https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031">issue</a>).</p>
-<p><a id="How%20were%20the%20profiles%20created%3F"></a></p>
-</section>
-<section id="how-were-the-profiles-created" class="level3">
-<h3 class="anchored" data-anchor-id="how-were-the-profiles-created">How were the profiles created?</h3>
-<p>We used snakemake and pycytominer to generate these. The details can be found in <a href="https://github.com/broadinstitute/jump-profiling-recipe">this</a> repo.</p>
-<p><a id="Web%20interfaces"></a></p>
-</section>
-<section id="web-interfaces" class="level3">
-<h3 class="anchored" data-anchor-id="web-interfaces">Web interfaces</h3>
-<ol type="1">
-<li><p>What is the source of the replicability metric?</p>
-<p>These two files (<a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz">ORF</a> and <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz">CRISPR</a>) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.</p></li>
-<li><p>X_Feature: For each row, is the <code>Feature</code> value an average for all the cells in the <code>Metadata_image</code> using the listed <code>Mask</code>? Or is it associated with a single cell in that image?</p>
-<p>Any <code>Feature</code> is the average of all cells and all replicates (typically four in total) for the specific mask and feature.</p></li>
-<li><p>How are <code>Statistic</code> and <code>Median</code> calculated for each row? Are they calculated in relation to the average of the “Feature” values for the negative controls in the same plate?</p>
-<ul>
-<li><code>Statistic</code> is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).</li>
-<li><code>Median</code> is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.</li>
-</ul></li>
-</ol>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-</section>
-</section>
-</section>
+</header>
+
+
+<p>This notebook demonstrates how to retrieve images using jump_portrait. It also has a function for plotting one site from each channel.</p>
+<div id="cell-2" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jump_portrait.fetch <span class="im">import</span> get_item_location_info, get_jump_image</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-3" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_gene(gene: <span class="bu">str</span>, img_ind: <span class="bu">int</span>, int_percentile: <span class="bu">float</span>, img_type: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    gene : String</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Which gene to retrieve an image for.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    img_ind : int</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">        There are many images corresponding to each gene. Index of the image to be plotted.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    img_type: String</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Do you want to display images for "gene" or for a control on the same plate?</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">        Possible values are "perturbation" and "control".</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    channels <span class="op">=</span> [<span class="st">"DNA"</span>, <span class="st">"ER"</span>, <span class="st">"Mito"</span>, <span class="st">"AGP"</span>, <span class="st">"RNA"</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> img_type <span class="op">==</span> <span class="st">"control"</span>:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> (</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            get_item_location_info(gene)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            .<span class="bu">filter</span>((pl.col(<span class="st">"standard_key"</span>) <span class="op">==</span> <span class="st">"control"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            .row(img_ind)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="st">"Negcon on "</span> <span class="op">+</span> gene <span class="op">+</span> <span class="st">" plate"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> img_type <span class="op">==</span> <span class="st">"perturbation"</span>:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> (</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            get_item_location_info(gene)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            .<span class="bu">filter</span>((pl.col(<span class="st">"standard_key"</span>) <span class="op">!=</span> <span class="st">"control"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            .row(img_ind)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> gene</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="dv">6</span> <span class="op">*</span> n_cols, <span class="dv">6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> channel <span class="kw">in</span> channels:</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> channel <span class="op">==</span> <span class="st">"ER"</span>:</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#65fe08"</span>])</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"DNA"</span>:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#0000FF"</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"Mito"</span>:</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FF0000"</span>])</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"AGP"</span>:</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFFF00"</span>])</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"RNA"</span>:</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFA500"</span>])</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">"gray"</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[counter]</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[counter]</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        label,</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-4" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plot_gene(gene<span class="op">=</span><span class="st">"RAB30"</span>, img_ind<span class="op">=</span><span class="dv">100</span>, int_percentile<span class="op">=</span><span class="fl">99.25</span>, img_type<span class="op">=</span><span class="st">"perturbation"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/1 [00:00&lt;?, ?it/s]
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.71it/s]
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.60it/s]
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.48it/s]
+100%|██████████| 1/1 [00:00&lt;00:00,  2.43it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.57it/s]
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.43it/s]
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.26it/s]
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.13it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.09it/s]
+
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  1.59it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="display_orf_images_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_gene(gene<span class="op">=</span><span class="st">"RAB30"</span>, img_ind<span class="op">=</span><span class="dv">100</span>, int_percentile<span class="op">=</span><span class="fl">99.25</span>, img_type<span class="op">=</span><span class="st">"control"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/1 [00:00&lt;?, ?it/s]
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  3.13it/s]
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.82it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.80it/s]
+100%|██████████| 1/1 [00:00&lt;00:00,  2.66it/s]
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  3.15it/s]
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.75it/s]
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.68it/s]
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.27it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.52it/s]
+
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.75it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="display_orf_images_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -879,4 +1124,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/FAQ.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.dev/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/notebooks/display_orf_images.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

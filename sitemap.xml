@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/FAQ.html</loc>
-    <lastmod>2024-08-07T16:13:07.814Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/tutorial_basic.html</loc>
-    <lastmod>2024-08-07T16:19:20.591Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/index.html</loc>
-    <lastmod>2024-08-07T16:13:07.814Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/notebooks/display_orf_images.html</loc>
-    <lastmod>2024-08-07T16:13:07.834Z</lastmod>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/readme.html</loc>
+    <lastmod>2024-08-13T15:58:04.822Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/Resources.html</loc>
-    <lastmod>2024-08-07T16:13:07.814Z</lastmod>
+    <lastmod>2024-08-13T15:58:04.798Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/notebooks/display_orf_images.html</loc>
+    <lastmod>2024-08-13T15:58:04.818Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/index.html</loc>
+    <lastmod>2024-08-13T15:58:04.798Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/tutorial_basic.html</loc>
+    <lastmod>2024-08-13T16:03:05.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/FAQ.html</loc>
+    <lastmod>2024-08-13T15:58:04.798Z</lastmod>
   </url>
 </urlset>

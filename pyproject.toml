@@ -1,9 +1,13 @@
+[project.urls]
+Homepage = "https://github.com/broadinstitute/"
+
 [tool.poetry]
-name = "scripts"
-version = "0.0.0"
-description = "Examples that show how to interact with JUMP data"
+name = "jump_deps"
+version = "0.0.1"
+description = "Convenience package to add dependencies for JUMP exploratory analysis"
 authors = ["Alan Munoz"]
-readme = "readme.md"
+README = "readme.md"
+packages = [{include = "jump_deps"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"

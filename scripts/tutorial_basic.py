@@ -35,46 +35,28 @@ from s3fs import S3FileSystem
 # The aws paths of the dataframes are built from a prefix below:
 
 # %% Paths
-_PREFIX = (
-    "s3://cellpainting-gallery/cpg0016-jump-assembled/source_all/workspace/profiles"
-)
-_RECIPE = "jump-profiling-recipe_2024_a917fa7"
-
-transforms = (
-    (
-        "CRISPR",
-        "profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected",
-    ),
-    ("ORF", "profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony"),
-    ("COMPOUND", "profiles_var_mad_int_featselect_harmony"),
-)
-
-filepaths = {
-    dset: f"{_PREFIX}/{_RECIPE}/{dset}/{transform}/profiles.parquet"
-    for dset, transform in transforms
-}
-
-# %% [markdown] Define functions
-# We use a S3FileSystem to avoid the need of credentials.
-
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"
+# %% [markdown] Versioning
+# We use a version-controlled csv to release the latest corrected profiles
 # %%
-def lazy_load(path: str) -> pl.LazyFrame:
-    fs = S3FileSystem(anon=True)
-    myds = dataset(path, filesystem=fs)
-    df = pl.scan_pyarrow_dataset(myds)
-    return df
-
-
+profile_index = pl.read_csv(INDEX_FILE)
+profile_index.head()
+# %% [markdown] Versioning
+# We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
+# %%
+selected_profiles = profile_index.filter(
+    pl.col("subset").is_in(("crispr", "orf", "compound"))
+).select(pl.exclude("etag"))
+filepaths = dict(selected_profiles.iter_rows())
+print(filepaths)
 # %% [markdown]
 # We will lazy-load the dataframes and print the number of rows and columns
-
 # %%
 info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}
 for name, path in filepaths.items():
-    data = lazy_load(path)
-    n_rows = data.select(pl.count()).collect().item()
-    metadata_cols = data.select(pl.col("^Metadata.*$")).columns
-    n_cols = data.width
+    data = pl.scan_parquet(path)
+    n_rows = data.select(pl.len()).collect().item()
+    n_cols = data.collect_schema().len()
     n_meta_cols = len(metadata_cols)
     estimated_size = int(round(4.03 * n_rows * n_cols / 1e6, 0))  # B -> MB
     for k, v in zip(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):
@@ -88,7 +70,7 @@ pl.DataFrame(info)
 # Note that the collect() method enforces loading some data into memory.
 
 # %%
-data = lazy_load(filepaths["CRISPR"])
+data = pl.scan_parquet(filepaths["crispr"])
 data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
 
 # %% [markdown]

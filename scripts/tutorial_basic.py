@@ -56,7 +56,9 @@ info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB
 for name, path in filepaths.items():
     data = pl.scan_parquet(path)
     n_rows = data.select(pl.len()).collect().item()
-    n_cols = data.collect_schema().len()
+    schema = data.collect_schema()
+    metadata_cols = [col for col in schema.keys() if col.startswith("Metadata")]
+    n_cols = schema.len()
     n_meta_cols = len(metadata_cols)
     estimated_size = int(round(4.03 * n_rows * n_cols / 1e6, 0))  # B -> MB
     for k, v in zip(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):

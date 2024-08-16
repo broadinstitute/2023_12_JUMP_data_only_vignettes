@@ -3,10 +3,10 @@ Homepage = "https://github.com/broadinstitute/"
 
 [tool.poetry]
 name = "jump_deps"
-version = "0.0.1"
+version = "0.0.2"
 description = "Convenience package to add dependencies for JUMP exploratory analysis"
 authors = ["Alan Munoz"]
-README = "readme.md"
+readme = "readme.md"
 packages = [{include = "jump_deps"}]
 
 [tool.poetry.dependencies]
@@ -15,10 +15,11 @@ boto3 = ">=1.33.1"
 matplotlib = "^3.8.2"
 polars = ">=0.19.19"
 pyarrow = ">=15.0.0"
-s3fs = "^2023.12.1"
+s3fs = ">=2023.12.1"
 seaborn = "^0.13.2"
 biopython = "^1.84"
-broad-babel = "^0.1.23"
+broad-babel = "^0.1.24"
+ipdb = "^0.13.13"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"

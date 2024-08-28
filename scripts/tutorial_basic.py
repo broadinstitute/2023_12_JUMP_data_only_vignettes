@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.16.1
+#       jupytext_version: 1.16.4
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -36,21 +36,27 @@ from s3fs import S3FileSystem
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"
-# %% [markdown] Versioning
+
+# %% [markdown]
 # We use a version-controlled csv to release the latest corrected profiles
+
 # %%
 profile_index = pl.read_csv(INDEX_FILE)
 profile_index.head()
-# %% [markdown] Versioning
+
+# %% [markdown]
 # We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
+
 # %%
 selected_profiles = profile_index.filter(
     pl.col("subset").is_in(("crispr", "orf", "compound"))
 ).select(pl.exclude("etag"))
 filepaths = dict(selected_profiles.iter_rows())
 print(filepaths)
+
 # %% [markdown]
 # We will lazy-load the dataframes and print the number of rows and columns
+
 # %%
 info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}
 for name, path in filepaths.items():

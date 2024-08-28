@@ -49,13 +49,6 @@
     "text": "Additional uses\n\nFocal point for JUMP information and data analysis pipelines.\n\n\nAdditional uses\nThis repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data."
   },
   {
-    "objectID": "howto/tmp.html",
-    "href": "howto/tmp.html",
-    "title": "Basic JUMP data access",
-    "section": "",
-    "text": "This is a tutorial on how to access profiles from the JUMP Cell Painting datasets. We will use polars to fetch the data frames lazily, with the help of s3fs and pyarrow. We prefer lazy loading because the data can be too big to be handled in memory.\n\n\nCode\nfrom collections import Counter\n\nimport polars as pl\nfrom pyarrow.dataset import dataset\nfrom s3fs import S3FileSystem\n\nINDEX_FILE = \"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv\"\nprofile_index = pl.read_csv(INDEX_FILE)\nurl = profile_index.filter(pl.col(\"subset\") == \"crispr_interpretable\").get_column(\n    \"url\"\n)[0]\ncols = tuple(pl.scan_parquet(url).collect_schema())\nno_objects = list(\n    set(tuple(x.split(\"_\")[1:]) for x in cols if not x.startswith(\"Metadata\"))\n)\ncounters = dict(Counter(x[0] for x in no_objects))\ntotal = sum([v for v in counters.values()])\n{k: v / total for k, v in counters.items() if v &gt; 1}\n\"\"\"\n{'Texture': 0.6055900621118012,\n 'RadialDistribution': 0.13043478260869565,\n 'Granularity': 0.062111801242236024,\n 'Neighbors': 0.016304347826086956,\n 'Correlation': 0.062111801242236024,\n 'AreaShape': 0.04192546583850932,\n 'Location': 0.017080745341614908,\n 'ObjectSkeleton': 0.003105590062111801,\n 'Intensity': 0.05822981366459627}\n\"\"\"\n\n\n\"\\n{'Texture': 0.6055900621118012,\\n 'RadialDistribution': 0.13043478260869565,\\n 'Granularity': 0.062111801242236024,\\n 'Neighbors': 0.016304347826086956,\\n 'Correlation': 0.062111801242236024,\\n 'AreaShape': 0.04192546583850932,\\n 'Location': 0.017080745341614908,\\n 'ObjectSkeleton': 0.003105590062111801,\\n 'Intensity': 0.05822981366459627}\\n\""
-  },
-  {
     "objectID": "howto/tutorial_basic.html",
     "href": "howto/tutorial_basic.html",
     "title": "Basic JUMP data access",

@@ -26,4 +26,4 @@ jobs:
 
             - name: Build development environment and run code
               run: |
-                  nix develop --impure --command bash -c "jupytext --sync scripts/*.py && export QUARTO_PYTHON=$(which python) && git config --global user.email quarto-github-actions-publish@example.com && git config --global user.name  Quarto_GHA_Runner && quarto publish gh-pages"
+                  nix develop . --accept-flake-config --impure --command bash -c "jupytext --sync scripts/*.py && export QUARTO_PYTHON=$(which python) && git config --global user.email quarto-github-actions-publish@example.com && git config --global user.name  Quarto_GHA_Runner && quarto publish gh-pages"

@@ -50,6 +50,8 @@
                   packages = with pkgs; [
                     poetry
                     python311
+                    quarto
+                    which
                   ];
                   enterShell = ''
                     export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH

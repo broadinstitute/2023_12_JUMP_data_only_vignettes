@@ -1,1 +1,1 @@
-Sitemap: https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/sitemap.xml
+Sitemap: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/sitemap.xml

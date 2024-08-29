@@ -1,4 +1,5 @@
 # ---
+# title: Plot all channels for one site
 # jupyter:
 #   jupytext:
 #     text_representation:
@@ -13,9 +14,8 @@
 # ---
 
 # %% [markdown]
-# # Plot all channels for one site
-#
 # This notebook demonstrates how to retrieve and plot all channels for one site using jump_portrait.
+#
 
 # %%
 import matplotlib.colors as mpl  # noqa: CPY001
@@ -79,7 +79,7 @@ def display_site(source: str, batch: str, plate: str, well: str, site: str, labe
     n_cols = 3
 
     # Make images
-    axes = plt.subplots(n_rows, n_cols, figsize=(2 * n_cols, 2 * n_rows))[1]
+    axes = plt.subplots(n_rows, n_cols, figsize=(2.6 * n_cols, 2.6 * n_rows))[1]
     axes = axes.ravel()
     counter = 0
 

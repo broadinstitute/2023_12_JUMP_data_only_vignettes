@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>JUMP documentation and examples - Plot all channels for one site</title>
+<title>JUMP documentation and examples - Pull images for JUMP ORFs</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,6 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <body class="nav-sidebar floating">
 
+
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
@@ -108,7 +109,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/display_perturbation_images.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/display_perturbation_images.html">Plot all channels for one site</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      JUMP documentation and examples
+      </li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -158,8 +161,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/display_perturbation_images.html" class="sidebar-item-text sidebar-link active">
+  <a href="../howto/display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Plot all channels for one site</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howto/interpretable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interpretable</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howto/moa_target_distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">a) Load Table</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../howto/tmp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic JUMP data access</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -182,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Frequently Asked Questions</span></a>
+ <span class="menu-text">Table of Contents</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -200,13 +221,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="display_perturbation_images.ipynb" download="display_perturbation_images.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="display_orf_images.out.ipynb" download="display_orf_images.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Plot all channels for one site</h1>
+<h1 class="title">Pull images for JUMP ORFs</h1>
 </div>
 
 
@@ -221,8 +242,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>This notebook demonstrates how to retrieve and plot all channels for one site using jump_portrait.</p>
-<div class="cell" data-execution_count="1">
+<p>This notebook demonstrates how to retrieve images using jump_portrait. It also has a function for plotting one site from each channel.</p>
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
@@ -232,162 +253,310 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this.</p>
-<p>Here we retrieve image locations for the “RAB30” gene:</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gene_info.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>(90, 28)</code></pre>
-</div>
-</div>
-<p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF).</p>
-<p>We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
-<div class="cell" data-execution_count="3">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cmpd_info_byjcp <span class="op">=</span> get_item_location_info(<span class="st">"JCP2022_011844"</span>, input_column<span class="op">=</span><span class="st">"JCP2022"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byinchi.shape)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byjcp.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(34, 28)
-(34, 28)</code></pre>
-</div>
-</div>
-<p>There are 34 sites corresponding to this compound.</p>
-<p>We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
-<div class="cell" data-execution_count="4">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(source: <span class="bu">str</span>, batch: <span class="bu">str</span>, plate: <span class="bu">str</span>, well: <span class="bu">str</span>, site: <span class="bu">str</span>, label: <span class="bu">str</span>, int_percentile: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    source : String</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Source ID for image of interest.</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">    batch : String</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">        Batch ID for image of interest.</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    plate : String</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Plate ID for image of interest.</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    well : String</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Well ID for image of interest.</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">    site : String</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Site ID for image of interest.</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">    label : String</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Label to display in lower left corner.</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    channels <span class="op">=</span> [<span class="st">"DNA"</span>, <span class="st">"ER"</span>, <span class="st">"Mito"</span>, <span class="st">"AGP"</span>, <span class="st">"RNA"</span>]</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.6</span> <span class="op">*</span> n_cols, <span class="fl">2.6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> channel <span class="kw">in</span> channels:</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> channel <span class="op">==</span> <span class="st">"ER"</span>:</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#65fe08"</span>])</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"DNA"</span>:</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#0000FF"</span>])</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"Mito"</span>:</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FF0000"</span>])</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"AGP"</span>:</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFFF00"</span>])</span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"RNA"</span>:</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFA500"</span>])</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">"gray"</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[counter]</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add channel name label in the top left corner</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        ax.text(</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.05</span>, <span class="fl">0.95</span>, channel,</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>            horizontalalignment<span class="op">=</span><span class="st">'left'</span>,</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>            verticalalignment<span class="op">=</span><span class="st">'top'</span>,</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">18</span>,</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">'black'</span>,</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'white'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, boxstyle<span class="op">=</span><span class="st">'round,pad=0.3'</span>),</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>            transform<span class="op">=</span>ax.transAxes</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>        counter <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[counter]</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>        label,</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_gene(gene: <span class="bu">str</span>, img_ind: <span class="bu">int</span>, int_percentile: <span class="bu">float</span>, img_type: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    gene : String</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">        Which gene to retrieve an image for.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    img_ind : int</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">        There are many images corresponding to each gene. Index of the image to be plotted.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">    img_type: String</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">        Do you want to display images for "gene" or for a control on the same plate?</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">        Possible values are "perturbation" and "control".</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    channels <span class="op">=</span> [<span class="st">"DNA"</span>, <span class="st">"ER"</span>, <span class="st">"Mito"</span>, <span class="st">"AGP"</span>, <span class="st">"RNA"</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> img_type <span class="op">==</span> <span class="st">"control"</span>:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> (</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            get_item_location_info(gene)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            .<span class="bu">filter</span>((pl.col(<span class="st">"standard_key"</span>) <span class="op">==</span> <span class="st">"control"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            .row(img_ind)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="st">"Negcon on "</span> <span class="op">+</span> gene <span class="op">+</span> <span class="st">" plate"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> img_type <span class="op">==</span> <span class="st">"perturbation"</span>:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> (</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            get_item_location_info(gene)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            .<span class="bu">filter</span>((pl.col(<span class="st">"standard_key"</span>) <span class="op">!=</span> <span class="st">"control"</span>) <span class="op">&amp;</span> (pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            .row(img_ind)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> gene</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="dv">6</span> <span class="op">*</span> n_cols, <span class="dv">6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> channel <span class="kw">in</span> channels:</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> channel <span class="op">==</span> <span class="st">"ER"</span>:</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#65fe08"</span>])</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"DNA"</span>:</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#0000FF"</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"Mito"</span>:</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FF0000"</span>])</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"AGP"</span>:</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFFF00"</span>])</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> channel <span class="op">==</span> <span class="st">"RNA"</span>:</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(<span class="st">"green_cmap"</span>, [<span class="st">"#000"</span>, <span class="st">"#FFA500"</span>])</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">"gray"</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[counter]</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[counter]</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        label,</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
-<div class="cell" data-execution_count="5">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> cmpd_info_byjcp.row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Next, we define the label and make the plot:</p>
-<div class="cell" data-execution_count="6">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="ss">f"JCP2022_011844</span><span class="ch">\n\n</span><span class="ss">plate: </span><span class="sc">{</span>plate<span class="sc">}</span><span class="ch">\n</span><span class="ss">well: </span><span class="sc">{</span>well<span class="sc">}</span><span class="ch">\n</span><span class="ss">site: </span><span class="sc">{</span>site<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>display_site(source, batch, plate, well, site, label, <span class="fl">99.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<p><img src="display_perturbation_images_files/figure-html/cell-7-output-1.png" width="739" height="461"></p>
-</div>
-</div>
-<p>Here, we plot one of the RAB30 ORF images:</p>
-<div class="cell" data-execution_count="7">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>).row(<span class="dv">0</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="ss">f"RAB30 (ORF)</span><span class="ch">\n\n</span><span class="ss">plate: </span><span class="sc">{</span>plate<span class="sc">}</span><span class="ch">\n</span><span class="ss">well: </span><span class="sc">{</span>well<span class="sc">}</span><span class="ch">\n</span><span class="ss">site: </span><span class="sc">{</span>site<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>display_site(source, batch, plate, well, site, label, <span class="fl">99.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<p><img src="display_perturbation_images_files/figure-html/cell-8-output-1.png" width="731" height="469"></p>
-</div>
-</div>
-<p>And for CRISPR:</p>
 <div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span>).row(<span class="dv">0</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="ss">f"RAB30 (CRISPR)</span><span class="ch">\n\n</span><span class="ss">plate: </span><span class="sc">{</span>plate<span class="sc">}</span><span class="ch">\n</span><span class="ss">well: </span><span class="sc">{</span>well<span class="sc">}</span><span class="ch">\n</span><span class="ss">site: </span><span class="sc">{</span>site<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display_site(source, batch, plate, well, site, label, <span class="fl">99.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plot_gene(gene<span class="op">=</span><span class="st">"RAB30"</span>, img_ind<span class="op">=</span><span class="dv">100</span>, int_percentile<span class="op">=</span><span class="fl">99.25</span>, img_type<span class="op">=</span><span class="st">"perturbation"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/1 [00:00&lt;?, ?it/s]
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.71it/s]
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.60it/s]
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.48it/s]
+100%|██████████| 1/1 [00:00&lt;00:00,  2.43it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.57it/s]
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.43it/s]
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.26it/s]
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.13it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.09it/s]
+
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  1.59it/s]</code></pre>
+</div>
 <div class="cell-output cell-output-display">
-<p><img src="display_perturbation_images_files/figure-html/cell-9-output-1.png" width="735" height="448"></p>
+<p><img src="display_orf_images_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_gene(gene<span class="op">=</span><span class="st">"RAB30"</span>, img_ind<span class="op">=</span><span class="dv">100</span>, int_percentile<span class="op">=</span><span class="fl">99.25</span>, img_type<span class="op">=</span><span class="st">"control"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>  0%|          | 0/1 [00:00&lt;?, ?it/s]
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+
+
+
+
+
+  0%|          | 0/1 [00:00&lt;?, ?it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  3.13it/s]
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.82it/s]
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.80it/s]
+100%|██████████| 1/1 [00:00&lt;00:00,  2.66it/s]
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  3.15it/s]
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.75it/s]
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.68it/s]
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.27it/s]
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.52it/s]
+
+
+
+
+
+
+
+
+
+100%|██████████| 1/1 [00:00&lt;00:00,  2.75it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="display_orf_images_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -746,4 +915,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/display_perturbation_images.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/notebooks/display_orf_images.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>

@@ -35,12 +35,13 @@ print(profiles.collect_schema().names()[:6])
 # %% Subset data
 jcp_ids = profiles.select(pl.col("Metadata_JCP2022")).unique().collect().to_series()
 subsample = jcp_ids.sample(10, seed=42)
+# Add a well-known control
+subsample = (*subsample, "JCP2022_800002")
 subsample
 # %% [markdown]
 # We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)
 # %% Pull mapper
-# Add a well-known control
-pert_mapper = get_mapper((*subsample, "JCP2022_800002"), input_column="JCP2022", output_columns="JCP2022,pert_type")
+pert_mapper = get_mapper(subsample, input_column="JCP2022", output_columns="JCP2022,pert_type")
 pert_mapper
 # %% [markdown]
 # A couple of important notes about broad_babel's get mapper and other functions:
@@ -52,10 +53,10 @@ pert_mapper
 name_mapper = get_mapper((*subsample, "JCP2022_800002"), input_column="JCP2022", output_columns="JCP2022,standard_key")
 name_mapper
 # %% [markdown] Fetch profiles and merge
-# To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata
+# To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.
 # %% Filter profiles and merge metadata
 subsample_profiles = profiles.filter(pl.col("Metadata_JCP2022").is_in(subsample)).collect()
 profiles_with_meta = subsample_profiles.with_columns(pl.col("Metadata_JCP2022").replace(pert_mapper).alias("pert_type"),
                                 pl.col("Metadata_JCP2022").replace(name_mapper).alias("name"))
-profiles_with_meta
+profiles_with_meta.select(pl.col(("name","pert_type", "^Metadata.*$", "^X_[0-3]$"))).sort(by="pert_type")
 

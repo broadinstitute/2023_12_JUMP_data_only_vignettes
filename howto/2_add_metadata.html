@@ -267,82 +267,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> jcp_ids.sample(<span class="dv">10</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a well-known control</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (10,)</small>
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Metadata_JCP2022</th>
-</tr>
-<tr class="odd">
-<th>str</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"JCP2022_807731"</td>
-</tr>
-<tr class="even">
-<td>"JCP2022_801339"</td>
-</tr>
-<tr class="odd">
-<td>"JCP2022_804743"</td>
-</tr>
-<tr class="even">
-<td>"JCP2022_803630"</td>
-</tr>
-<tr class="odd">
-<td>"JCP2022_806430"</td>
-</tr>
-<tr class="even">
-<td>"JCP2022_800860"</td>
-</tr>
-<tr class="odd">
-<td>"JCP2022_802850"</td>
-</tr>
-<tr class="even">
-<td>"JCP2022_801910"</td>
-</tr>
-<tr class="odd">
-<td>"JCP2022_804805"</td>
-</tr>
-<tr class="even">
-<td>"JCP2022_805204"</td>
-</tr>
-</tbody>
-</table>
-</div>
+<pre><code>('JCP2022_802764',
+ 'JCP2022_803909',
+ 'JCP2022_806285',
+ 'JCP2022_801638',
+ 'JCP2022_801385',
+ 'JCP2022_803862',
+ 'JCP2022_802246',
+ 'JCP2022_801833',
+ 'JCP2022_805047',
+ 'JCP2022_800185',
+ 'JCP2022_800002')</code></pre>
 </div>
 </div>
 <p>We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)</p>
 <div class="cell" title="Pull mapper" data-execution_count="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a well-known control</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>{'JCP2022_802850': 'trt',
- 'JCP2022_805204': 'trt',
- 'JCP2022_807731': 'trt',
- 'JCP2022_801910': 'trt',
- 'JCP2022_800860': 'trt',
+<pre><code>{'JCP2022_803909': 'trt',
+ 'JCP2022_806285': 'trt',
+ 'JCP2022_801833': 'trt',
+ 'JCP2022_802764': 'trt',
+ 'JCP2022_800185': 'trt',
+ 'JCP2022_803862': 'trt',
  'JCP2022_800002': 'negcon',
- 'JCP2022_804805': 'trt',
- 'JCP2022_803630': 'trt',
- 'JCP2022_801339': 'trt',
- 'JCP2022_806430': 'trt',
- 'JCP2022_804743': 'trt'}</code></pre>
+ 'JCP2022_802246': 'trt',
+ 'JCP2022_805047': 'trt',
+ 'JCP2022_801638': 'trt',
+ 'JCP2022_801385': 'trt'}</code></pre>
 </div>
 </div>
 <p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
@@ -350,31 +311,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" title="Fetch standard name" data-execution_count="6">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>{'JCP2022_801339': 'CHST8',
- 'JCP2022_802850': 'GPR37',
- 'JCP2022_805204': 'PKIA',
+<pre><code>{'JCP2022_801638': 'CYP2C9',
+ 'JCP2022_802764': 'GNAI2',
+ 'JCP2022_802246': 'FABP2',
+ 'JCP2022_800185': 'ADAMDEC1',
+ 'JCP2022_801385': 'CLIC1',
+ 'JCP2022_806285': 'SERTAD1',
  'JCP2022_800002': 'non-targeting',
- 'JCP2022_806430': 'SLC22A9',
- 'JCP2022_807731': 'YBX3',
- 'JCP2022_801910': 'DPYSL5',
- 'JCP2022_804805': 'OPRD1',
- 'JCP2022_804743': 'NUDT13',
- 'JCP2022_800860': 'BDKRB1',
- 'JCP2022_803630': 'KCNS1'}</code></pre>
+ 'JCP2022_801833': 'DLST',
+ 'JCP2022_803862': 'LMO7',
+ 'JCP2022_803909': 'LRRC52',
+ 'JCP2022_805047': 'PEX1'}</code></pre>
 </div>
 </div>
-<p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata</p>
+<p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
 <div class="cell" title="Filter profiles and merge metadata" data-execution_count="7">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)).collect()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>profiles_with_meta <span class="op">=</span> subsample_profiles.with_columns(pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(pert_mapper).alias(<span class="st">"pert_type"</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(name_mapper).alias(<span class="st">"name"</span>))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>profiles_with_meta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)).collect()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>profiles_with_meta <span class="op">=</span> subsample_profiles.with_columns(pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(pert_mapper).alias(<span class="st">"pert_type"</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(name_mapper).alias(<span class="st">"name"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>profiles_with_meta.select(pl.col((<span class="st">"name"</span>,<span class="st">"pert_type"</span>, <span class="st">"^Metadata.*$"</span>, <span class="st">"^X_[0-3]$"</span>))).sort(by<span class="op">=</span><span class="st">"pert_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div><style>
@@ -384,10 +345,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   white-space: pre-wrap;
 }
 </style>
-<small>shape: (58, 265)</small>
+<small>shape: (2_804, 9)</small>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pert_type</th>
 <th data-quarto-table-cell-role="th">Metadata_Source</th>
 <th data-quarto-table-cell-role="th">Metadata_Plate</th>
 <th data-quarto-table-cell-role="th">Metadata_Well</th>
@@ -395,538 +358,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">X_1</th>
 <th data-quarto-table-cell-role="th">X_2</th>
 <th data-quarto-table-cell-role="th">X_3</th>
-<th data-quarto-table-cell-role="th">X_4</th>
-<th data-quarto-table-cell-role="th">X_5</th>
-<th data-quarto-table-cell-role="th">X_6</th>
-<th data-quarto-table-cell-role="th">X_7</th>
-<th data-quarto-table-cell-role="th">X_8</th>
-<th data-quarto-table-cell-role="th">X_9</th>
-<th data-quarto-table-cell-role="th">X_10</th>
-<th data-quarto-table-cell-role="th">X_11</th>
-<th data-quarto-table-cell-role="th">X_12</th>
-<th data-quarto-table-cell-role="th">X_13</th>
-<th data-quarto-table-cell-role="th">X_14</th>
-<th data-quarto-table-cell-role="th">X_15</th>
-<th data-quarto-table-cell-role="th">X_16</th>
-<th data-quarto-table-cell-role="th">X_17</th>
-<th data-quarto-table-cell-role="th">X_18</th>
-<th data-quarto-table-cell-role="th">X_19</th>
-<th data-quarto-table-cell-role="th">X_20</th>
-<th data-quarto-table-cell-role="th">X_21</th>
-<th data-quarto-table-cell-role="th">X_22</th>
-<th data-quarto-table-cell-role="th">X_23</th>
-<th data-quarto-table-cell-role="th">X_24</th>
-<th data-quarto-table-cell-role="th">X_25</th>
-<th data-quarto-table-cell-role="th">X_26</th>
-<th data-quarto-table-cell-role="th">X_27</th>
-<th data-quarto-table-cell-role="th">X_28</th>
-<th data-quarto-table-cell-role="th">X_29</th>
-<th data-quarto-table-cell-role="th">X_30</th>
-<th data-quarto-table-cell-role="th">X_31</th>
-<th data-quarto-table-cell-role="th">X_32</th>
-<th data-quarto-table-cell-role="th">X_33</th>
-<th data-quarto-table-cell-role="th">…</th>
-<th data-quarto-table-cell-role="th">X_225</th>
-<th data-quarto-table-cell-role="th">X_226</th>
-<th data-quarto-table-cell-role="th">X_227</th>
-<th data-quarto-table-cell-role="th">X_228</th>
-<th data-quarto-table-cell-role="th">X_229</th>
-<th data-quarto-table-cell-role="th">X_230</th>
-<th data-quarto-table-cell-role="th">X_231</th>
-<th data-quarto-table-cell-role="th">X_232</th>
-<th data-quarto-table-cell-role="th">X_233</th>
-<th data-quarto-table-cell-role="th">X_234</th>
-<th data-quarto-table-cell-role="th">X_235</th>
-<th data-quarto-table-cell-role="th">X_236</th>
-<th data-quarto-table-cell-role="th">X_237</th>
-<th data-quarto-table-cell-role="th">X_238</th>
-<th data-quarto-table-cell-role="th">X_239</th>
-<th data-quarto-table-cell-role="th">X_240</th>
-<th data-quarto-table-cell-role="th">X_241</th>
-<th data-quarto-table-cell-role="th">X_242</th>
-<th data-quarto-table-cell-role="th">X_243</th>
-<th data-quarto-table-cell-role="th">X_244</th>
-<th data-quarto-table-cell-role="th">X_245</th>
-<th data-quarto-table-cell-role="th">X_246</th>
-<th data-quarto-table-cell-role="th">X_247</th>
-<th data-quarto-table-cell-role="th">X_248</th>
-<th data-quarto-table-cell-role="th">X_249</th>
-<th data-quarto-table-cell-role="th">X_250</th>
-<th data-quarto-table-cell-role="th">X_251</th>
-<th data-quarto-table-cell-role="th">X_252</th>
-<th data-quarto-table-cell-role="th">X_253</th>
-<th data-quarto-table-cell-role="th">X_254</th>
-<th data-quarto-table-cell-role="th">X_255</th>
-<th data-quarto-table-cell-role="th">X_256</th>
-<th data-quarto-table-cell-role="th">X_257</th>
-<th data-quarto-table-cell-role="th">X_258</th>
-<th data-quarto-table-cell-role="th">X_259</th>
-<th data-quarto-table-cell-role="th">pert_type</th>
-<th data-quarto-table-cell-role="th">name</th>
 </tr>
 <tr class="odd">
 <th>str</th>
 <th>str</th>
 <th>str</th>
 <th>str</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>…</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
 <th>str</th>
 <th>str</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R1-02"</td>
-<td>"F03"</td>
-<td>"JCP2022_804743"</td>
-<td>0.020137</td>
-<td>0.005428</td>
-<td>-0.041979</td>
-<td>-0.038097</td>
-<td>-0.901745</td>
-<td>-1.002693</td>
-<td>1.65461</td>
-<td>3.760381</td>
-<td>1.893219</td>
-<td>-2.231129</td>
-<td>1.691733</td>
-<td>-0.26354</td>
-<td>-0.301802</td>
-<td>-0.164242</td>
-<td>1.816797</td>
-<td>0.276079</td>
-<td>-0.773082</td>
-<td>-0.181977</td>
-<td>0.599754</td>
-<td>0.360361</td>
-<td>-0.333211</td>
-<td>1.112391</td>
-<td>-0.342838</td>
-<td>0.052106</td>
-<td>-1.031898</td>
-<td>1.66555</td>
-<td>0.517783</td>
-<td>0.636177</td>
-<td>-0.277448</td>
-<td>0.508029</td>
-<td>-0.437767</td>
-<td>-0.566333</td>
-<td>-0.215168</td>
-<td>…</td>
-<td>-0.067454</td>
-<td>-0.012716</td>
-<td>-0.125136</td>
-<td>-0.080531</td>
-<td>0.106872</td>
-<td>-0.037594</td>
-<td>0.110107</td>
-<td>0.171376</td>
-<td>-0.006605</td>
-<td>-0.1281</td>
-<td>0.04475</td>
-<td>-0.103983</td>
-<td>0.047686</td>
-<td>0.163703</td>
-<td>0.201792</td>
-<td>-0.092777</td>
-<td>0.042234</td>
-<td>-0.135317</td>
-<td>-0.08629</td>
-<td>0.121023</td>
-<td>-0.085748</td>
-<td>-0.065003</td>
-<td>0.104965</td>
-<td>0.295511</td>
-<td>-0.022204</td>
-<td>0.004861</td>
-<td>0.182595</td>
-<td>-0.227887</td>
-<td>-0.089389</td>
-<td>-0.062888</td>
-<td>0.056393</td>
-<td>-0.004311</td>
-<td>-0.173013</td>
-<td>-0.013412</td>
-<td>0.096795</td>
-<td>"trt"</td>
-<td>"NUDT13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"A02"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.223417</td>
+<td>-0.049487</td>
+<td>-0.826231</td>
 </tr>
 <tr class="even">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R1-06"</td>
-<td>"H07"</td>
-<td>"JCP2022_801910"</td>
-<td>-0.302653</td>
-<td>-0.048713</td>
-<td>-0.600824</td>
-<td>0.770082</td>
-<td>0.002167</td>
-<td>1.28905</td>
-<td>0.014118</td>
-<td>-0.098554</td>
-<td>0.760243</td>
-<td>-0.505178</td>
-<td>-0.309285</td>
-<td>-0.063313</td>
-<td>-0.177715</td>
-<td>-0.174145</td>
-<td>-0.541462</td>
-<td>0.432624</td>
-<td>-0.265969</td>
-<td>0.03517</td>
-<td>-0.109653</td>
-<td>-0.640677</td>
-<td>0.391639</td>
-<td>-0.448446</td>
-<td>0.933928</td>
-<td>-0.692183</td>
-<td>-0.499364</td>
-<td>-0.257469</td>
-<td>0.282945</td>
-<td>-0.367754</td>
-<td>0.079058</td>
-<td>-0.480948</td>
-<td>0.416053</td>
-<td>-0.110946</td>
-<td>0.304815</td>
-<td>…</td>
-<td>0.154952</td>
-<td>0.053506</td>
-<td>-0.05163</td>
-<td>-0.128404</td>
-<td>-0.02292</td>
-<td>0.05173</td>
-<td>0.001633</td>
-<td>0.120795</td>
-<td>0.040963</td>
-<td>-0.071437</td>
-<td>0.122103</td>
-<td>0.068721</td>
-<td>-0.060612</td>
-<td>-0.097259</td>
-<td>-0.007312</td>
-<td>-0.095478</td>
-<td>-0.057457</td>
-<td>-0.166115</td>
-<td>0.026641</td>
-<td>0.067492</td>
-<td>0.017658</td>
-<td>-0.02861</td>
-<td>0.18778</td>
-<td>-0.142353</td>
-<td>0.330511</td>
-<td>0.1761</td>
-<td>0.011012</td>
-<td>-0.169907</td>
-<td>0.082669</td>
-<td>0.208193</td>
-<td>0.112688</td>
-<td>0.08943</td>
-<td>-0.110459</td>
-<td>-0.227227</td>
-<td>-0.090967</td>
-<td>"trt"</td>
-<td>"DPYSL5"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"L23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.079349</td>
+<td>-0.016958</td>
+<td>-0.277558</td>
 </tr>
 <tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R1-12"</td>
-<td>"A08"</td>
-<td>"JCP2022_801339"</td>
-<td>-0.522523</td>
-<td>-0.088727</td>
-<td>2.717912</td>
-<td>1.132123</td>
-<td>-0.924783</td>
-<td>0.807101</td>
-<td>-1.602292</td>
-<td>0.206142</td>
-<td>0.479079</td>
-<td>-0.106197</td>
-<td>-1.206903</td>
-<td>-0.815884</td>
-<td>-0.85467</td>
-<td>0.808466</td>
-<td>1.804629</td>
-<td>0.535405</td>
-<td>-1.455157</td>
-<td>-0.682916</td>
-<td>0.702698</td>
-<td>-1.154032</td>
-<td>-0.287022</td>
-<td>1.501519</td>
-<td>-1.371031</td>
-<td>0.668095</td>
-<td>-0.151572</td>
-<td>1.540475</td>
-<td>-0.082094</td>
-<td>0.447265</td>
-<td>0.175518</td>
-<td>-0.329506</td>
-<td>-0.027832</td>
-<td>-0.094382</td>
-<td>-0.946783</td>
-<td>…</td>
-<td>0.02251</td>
-<td>-0.028409</td>
-<td>-0.089067</td>
-<td>-0.099969</td>
-<td>-0.174762</td>
-<td>-0.209081</td>
-<td>0.170329</td>
-<td>0.32256</td>
-<td>0.031729</td>
-<td>-0.131708</td>
-<td>0.104863</td>
-<td>-0.392519</td>
-<td>-0.050487</td>
-<td>-0.105391</td>
-<td>0.071</td>
-<td>-0.229839</td>
-<td>0.042293</td>
-<td>-0.216303</td>
-<td>0.224734</td>
-<td>-0.072868</td>
-<td>-0.118437</td>
-<td>0.05392</td>
-<td>0.319823</td>
-<td>0.345833</td>
-<td>0.056757</td>
-<td>-0.100236</td>
-<td>-0.00023</td>
-<td>-0.130857</td>
-<td>-0.126599</td>
-<td>0.243468</td>
-<td>-0.021753</td>
-<td>0.090427</td>
-<td>0.121644</td>
-<td>-0.033912</td>
-<td>-0.044014</td>
-<td>"trt"</td>
-<td>"CHST8"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"I23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.023832</td>
+<td>-0.00537</td>
+<td>-0.29832</td>
 </tr>
 <tr class="even">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R1-12"</td>
-<td>"B03"</td>
-<td>"JCP2022_806430"</td>
-<td>0.055227</td>
-<td>0.053656</td>
-<td>-0.449293</td>
-<td>1.07733</td>
-<td>-0.239579</td>
-<td>0.092706</td>
-<td>0.320187</td>
-<td>0.543931</td>
-<td>-0.039477</td>
-<td>1.336263</td>
-<td>-0.482829</td>
-<td>-0.238136</td>
-<td>-0.5667</td>
-<td>1.933544</td>
-<td>-1.751976</td>
-<td>0.61013</td>
-<td>-0.302264</td>
-<td>1.193049</td>
-<td>0.141515</td>
-<td>-0.666601</td>
-<td>-0.535712</td>
-<td>-0.037612</td>
-<td>-1.115927</td>
-<td>-0.021747</td>
-<td>-1.288977</td>
-<td>0.793098</td>
-<td>0.871735</td>
-<td>0.321655</td>
-<td>-1.018247</td>
-<td>-0.559982</td>
-<td>0.073211</td>
-<td>-0.454611</td>
-<td>1.555457</td>
-<td>…</td>
-<td>0.22132</td>
-<td>0.024058</td>
-<td>0.077022</td>
-<td>0.003811</td>
-<td>-0.165586</td>
-<td>0.118336</td>
-<td>-0.08951</td>
-<td>-0.11561</td>
-<td>0.007417</td>
-<td>0.221816</td>
-<td>0.299265</td>
-<td>0.116906</td>
-<td>-0.069011</td>
-<td>-0.012082</td>
-<td>0.121918</td>
-<td>-0.033274</td>
-<td>0.098965</td>
-<td>0.215308</td>
-<td>-0.011924</td>
-<td>-0.172712</td>
-<td>-0.067353</td>
-<td>0.023953</td>
-<td>-0.034955</td>
-<td>-0.161256</td>
-<td>0.03694</td>
-<td>-0.039829</td>
-<td>-0.076074</td>
-<td>-0.007147</td>
-<td>0.056179</td>
-<td>0.215201</td>
-<td>0.008161</td>
-<td>-0.254587</td>
-<td>0.059918</td>
-<td>-0.035559</td>
-<td>-0.282353</td>
-<td>"trt"</td>
-<td>"SLC22A9"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"J02"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.169491</td>
+<td>-0.023422</td>
+<td>-0.088187</td>
 </tr>
 <tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R1-14"</td>
-<td>"P16"</td>
-<td>"JCP2022_805204"</td>
-<td>-0.106914</td>
-<td>-0.087268</td>
-<td>-0.058685</td>
-<td>0.729308</td>
-<td>-0.330628</td>
-<td>-0.045129</td>
-<td>0.570314</td>
-<td>-1.059454</td>
-<td>0.009832</td>
-<td>-0.106471</td>
-<td>-0.319126</td>
-<td>-0.001354</td>
-<td>0.12309</td>
-<td>0.038482</td>
-<td>1.09421</td>
-<td>-0.475709</td>
-<td>0.355278</td>
-<td>-0.897963</td>
-<td>0.313784</td>
-<td>0.535984</td>
-<td>-0.656534</td>
-<td>0.318876</td>
-<td>0.248308</td>
-<td>-0.657045</td>
-<td>0.514237</td>
-<td>0.027458</td>
-<td>0.591854</td>
-<td>-0.062147</td>
-<td>0.686699</td>
-<td>-0.353336</td>
-<td>-0.763024</td>
-<td>-0.78751</td>
-<td>0.046725</td>
-<td>…</td>
-<td>0.044286</td>
-<td>-0.066663</td>
-<td>0.206264</td>
-<td>-0.210205</td>
-<td>0.005355</td>
-<td>0.028655</td>
-<td>-0.109056</td>
-<td>0.117382</td>
-<td>0.223133</td>
-<td>-0.106527</td>
-<td>-0.024143</td>
-<td>0.046037</td>
-<td>-0.044945</td>
-<td>0.104757</td>
-<td>0.0376</td>
-<td>0.046983</td>
-<td>0.116042</td>
-<td>-0.156829</td>
-<td>0.192637</td>
-<td>0.063242</td>
-<td>-0.157627</td>
-<td>-0.062149</td>
-<td>-0.050041</td>
-<td>-0.080552</td>
-<td>0.268096</td>
-<td>0.049386</td>
-<td>-0.178345</td>
-<td>0.04279</td>
-<td>0.053436</td>
-<td>-0.135097</td>
-<td>-0.051632</td>
-<td>0.058057</td>
-<td>0.193853</td>
-<td>0.03321</td>
-<td>-0.139559</td>
-<td>"trt"</td>
-<td>"PKIA"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"O23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.295112</td>
+<td>-0.124241</td>
+<td>1.055193</td>
 </tr>
 <tr class="even">
 <td>…</td>
@@ -938,457 +437,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>…</td>
 <td>…</td>
 <td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
 </tr>
 <tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R6-02"</td>
-<td>"B19"</td>
-<td>"JCP2022_806430"</td>
-<td>0.009422</td>
-<td>-0.035218</td>
-<td>-0.118979</td>
-<td>-0.254658</td>
-<td>1.339019</td>
-<td>0.161771</td>
-<td>0.122007</td>
-<td>0.270027</td>
-<td>-0.869703</td>
-<td>-0.420156</td>
-<td>-1.021432</td>
-<td>0.192179</td>
-<td>2.00762</td>
-<td>0.036859</td>
-<td>-1.494569</td>
-<td>1.093727</td>
-<td>-0.020493</td>
-<td>0.066775</td>
-<td>0.08624</td>
-<td>-0.922583</td>
-<td>-0.086947</td>
-<td>-0.352703</td>
-<td>-0.02269</td>
-<td>0.540408</td>
-<td>0.449899</td>
-<td>0.400335</td>
-<td>-0.086983</td>
-<td>0.039038</td>
-<td>0.153227</td>
-<td>0.928074</td>
-<td>-0.787119</td>
-<td>0.22855</td>
-<td>-1.167862</td>
-<td>…</td>
-<td>-0.012807</td>
-<td>-0.059399</td>
-<td>0.097261</td>
-<td>-0.080863</td>
-<td>-0.054064</td>
-<td>0.13915</td>
-<td>-0.072814</td>
-<td>0.16588</td>
-<td>-0.063586</td>
-<td>-0.031827</td>
-<td>-0.270029</td>
-<td>-0.056631</td>
-<td>-0.145394</td>
-<td>-0.097483</td>
-<td>-0.054975</td>
-<td>-0.300563</td>
-<td>-0.137075</td>
-<td>0.203029</td>
-<td>0.093787</td>
-<td>0.146284</td>
-<td>-0.010692</td>
-<td>0.311723</td>
-<td>-0.071318</td>
-<td>-0.124014</td>
-<td>0.113338</td>
-<td>0.084478</td>
-<td>-0.03449</td>
-<td>0.182681</td>
-<td>-0.11316</td>
-<td>-0.005094</td>
-<td>0.079925</td>
-<td>0.199458</td>
-<td>-0.098896</td>
-<td>0.009372</td>
-<td>0.162577</td>
+<td>"CLIC1"</td>
 <td>"trt"</td>
-<td>"SLC22A9"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-17"</td>
+<td>"P03"</td>
+<td>"JCP2022_801385"</td>
+<td>0.06499</td>
+<td>-0.018264</td>
+<td>0.540223</td>
 </tr>
 <tr class="even">
-<td>"source_13"</td>
-<td>"CP-CC9-R6-19"</td>
-<td>"O12"</td>
-<td>"JCP2022_801910"</td>
-<td>-0.005611</td>
-<td>-0.051129</td>
-<td>-0.758846</td>
-<td>-1.295174</td>
-<td>0.079675</td>
-<td>-1.076215</td>
-<td>-0.332484</td>
-<td>0.472442</td>
-<td>-0.423159</td>
-<td>0.72217</td>
-<td>-0.610091</td>
-<td>-0.429097</td>
-<td>-0.690849</td>
-<td>-0.172538</td>
-<td>-1.019762</td>
-<td>0.942127</td>
-<td>-0.504752</td>
-<td>0.285577</td>
-<td>0.058417</td>
-<td>-0.105076</td>
-<td>-0.35731</td>
-<td>-0.192838</td>
-<td>0.228817</td>
-<td>0.799204</td>
-<td>0.032854</td>
-<td>0.542921</td>
-<td>0.617923</td>
-<td>0.314966</td>
-<td>-1.167174</td>
-<td>-0.252247</td>
-<td>0.590634</td>
-<td>-0.549194</td>
-<td>-0.560419</td>
-<td>…</td>
-<td>0.212021</td>
-<td>0.308309</td>
-<td>0.000381</td>
-<td>-0.010769</td>
-<td>-0.18631</td>
-<td>-0.189026</td>
-<td>-0.209689</td>
-<td>-0.130654</td>
-<td>0.012645</td>
-<td>0.060393</td>
-<td>-0.000725</td>
-<td>-0.288063</td>
-<td>-0.049572</td>
-<td>0.060431</td>
-<td>0.073893</td>
-<td>0.017204</td>
-<td>-0.069141</td>
-<td>0.377919</td>
-<td>0.0696</td>
-<td>0.12139</td>
-<td>0.030632</td>
-<td>-0.056079</td>
-<td>0.213012</td>
-<td>0.005262</td>
-<td>0.069029</td>
-<td>0.072464</td>
-<td>-0.031112</td>
-<td>0.071363</td>
-<td>0.075335</td>
-<td>0.046375</td>
-<td>-0.010601</td>
-<td>0.267442</td>
-<td>0.089583</td>
-<td>0.019234</td>
-<td>0.009848</td>
+<td>"ADAMDEC1"</td>
 <td>"trt"</td>
-<td>"DPYSL5"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-18"</td>
+<td>"L08"</td>
+<td>"JCP2022_800185"</td>
+<td>0.018195</td>
+<td>0.044067</td>
+<td>0.48575</td>
 </tr>
 <tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R7-02"</td>
-<td>"F03"</td>
-<td>"JCP2022_804743"</td>
-<td>-0.026652</td>
-<td>-0.066384</td>
-<td>-0.392546</td>
-<td>-0.148892</td>
-<td>-0.571259</td>
-<td>0.855628</td>
-<td>1.401964</td>
-<td>0.030038</td>
-<td>-0.901345</td>
-<td>-0.459033</td>
-<td>-1.035425</td>
-<td>-0.535907</td>
-<td>-0.27498</td>
-<td>-0.493246</td>
-<td>-0.136255</td>
-<td>1.371391</td>
-<td>-0.257917</td>
-<td>-0.044169</td>
-<td>-0.063687</td>
-<td>-0.082363</td>
-<td>0.013729</td>
-<td>-0.039192</td>
-<td>0.533115</td>
-<td>0.748982</td>
-<td>0.327815</td>
-<td>-0.152412</td>
-<td>0.253297</td>
-<td>0.514172</td>
-<td>0.65362</td>
-<td>0.011231</td>
-<td>0.442114</td>
-<td>0.205968</td>
-<td>0.143765</td>
-<td>…</td>
-<td>0.043016</td>
-<td>-0.145105</td>
-<td>0.048632</td>
-<td>-0.111964</td>
-<td>0.15235</td>
-<td>0.076694</td>
-<td>0.022718</td>
-<td>-0.153644</td>
-<td>0.297799</td>
-<td>0.075197</td>
-<td>-0.089989</td>
-<td>0.033655</td>
-<td>-0.079251</td>
-<td>-0.005019</td>
-<td>-0.119835</td>
-<td>-0.110972</td>
-<td>0.047846</td>
-<td>-0.202908</td>
-<td>0.027618</td>
-<td>0.041753</td>
-<td>-0.097631</td>
-<td>-0.082046</td>
-<td>0.032985</td>
-<td>-0.477284</td>
-<td>-0.014123</td>
-<td>0.019092</td>
-<td>-0.063385</td>
-<td>-0.073686</td>
-<td>0.032551</td>
-<td>0.08232</td>
-<td>0.029733</td>
-<td>0.126842</td>
-<td>0.231322</td>
-<td>-0.013752</td>
-<td>-0.079454</td>
+<td>"LRRC52"</td>
 <td>"trt"</td>
-<td>"NUDT13"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-18"</td>
+<td>"M21"</td>
+<td>"JCP2022_803909"</td>
+<td>-0.280752</td>
+<td>0.019606</td>
+<td>0.603544</td>
 </tr>
 <tr class="even">
-<td>"source_13"</td>
-<td>"CP-CC9-R7-19"</td>
-<td>"O12"</td>
-<td>"JCP2022_801910"</td>
-<td>0.009938</td>
-<td>0.066033</td>
-<td>-0.638812</td>
-<td>0.305233</td>
-<td>6.122815</td>
-<td>-1.569145</td>
-<td>0.228341</td>
-<td>1.724437</td>
-<td>-4.204319</td>
-<td>0.514149</td>
-<td>1.19777</td>
-<td>-1.182688</td>
-<td>-5.08029</td>
-<td>0.135349</td>
-<td>2.427795</td>
-<td>-0.61633</td>
-<td>2.912335</td>
-<td>-0.899151</td>
-<td>-0.002749</td>
-<td>-2.160207</td>
-<td>-1.939826</td>
-<td>-2.287996</td>
-<td>0.014946</td>
-<td>0.292985</td>
-<td>-0.522229</td>
-<td>0.240453</td>
-<td>-0.161732</td>
-<td>0.519735</td>
-<td>0.113774</td>
-<td>-0.714542</td>
-<td>-0.470613</td>
-<td>-0.523624</td>
-<td>0.065856</td>
-<td>…</td>
-<td>0.152817</td>
-<td>0.003466</td>
-<td>0.05546</td>
-<td>-0.130632</td>
-<td>-0.292941</td>
-<td>-0.147511</td>
-<td>-0.181681</td>
-<td>0.093424</td>
-<td>0.041623</td>
-<td>-0.019268</td>
-<td>-0.042094</td>
-<td>0.007688</td>
-<td>0.039393</td>
-<td>0.151521</td>
-<td>-0.183049</td>
-<td>0.023238</td>
-<td>-0.102327</td>
-<td>-0.162039</td>
-<td>0.217855</td>
-<td>-0.127403</td>
-<td>0.144532</td>
-<td>-0.027633</td>
-<td>-0.149444</td>
-<td>0.273623</td>
-<td>0.094763</td>
-<td>-0.120157</td>
-<td>-0.058673</td>
-<td>0.086237</td>
-<td>-0.032197</td>
-<td>-0.173433</td>
-<td>-0.168837</td>
-<td>0.114444</td>
-<td>0.047447</td>
-<td>-0.05815</td>
-<td>0.177958</td>
+<td>"SERTAD1"</td>
 <td>"trt"</td>
-<td>"DPYSL5"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-21"</td>
+<td>"P22"</td>
+<td>"JCP2022_806285"</td>
+<td>-0.518272</td>
+<td>-0.223089</td>
+<td>0.396902</td>
 </tr>
 <tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R8-02"</td>
-<td>"F03"</td>
-<td>"JCP2022_804743"</td>
-<td>0.116262</td>
-<td>0.026998</td>
-<td>1.000896</td>
-<td>-0.708893</td>
-<td>-0.336206</td>
-<td>1.755597</td>
-<td>2.358263</td>
-<td>-1.134477</td>
-<td>0.603199</td>
-<td>-0.358161</td>
-<td>-0.172277</td>
-<td>-0.586178</td>
-<td>-0.496326</td>
-<td>-0.136607</td>
-<td>1.043328</td>
-<td>0.757724</td>
-<td>-0.736754</td>
-<td>-0.884538</td>
-<td>-0.099095</td>
-<td>0.054331</td>
-<td>0.805819</td>
-<td>0.160888</td>
-<td>0.248932</td>
-<td>0.9526</td>
-<td>0.639245</td>
-<td>-0.924286</td>
-<td>0.055921</td>
-<td>0.101678</td>
-<td>0.377624</td>
-<td>0.420775</td>
-<td>-0.113779</td>
-<td>-0.265201</td>
-<td>-0.538827</td>
-<td>…</td>
-<td>-0.077548</td>
-<td>0.124905</td>
-<td>0.175754</td>
-<td>-0.051428</td>
-<td>0.151593</td>
-<td>0.197018</td>
-<td>-0.222387</td>
-<td>-0.137436</td>
-<td>-0.145407</td>
-<td>0.111097</td>
-<td>-0.107439</td>
-<td>0.129766</td>
-<td>-0.019002</td>
-<td>0.212674</td>
-<td>-0.223738</td>
-<td>0.072609</td>
-<td>-0.037715</td>
-<td>-0.137096</td>
-<td>-0.114571</td>
-<td>-0.086518</td>
-<td>0.037001</td>
-<td>0.021685</td>
-<td>-0.024384</td>
-<td>-0.118833</td>
-<td>-0.083345</td>
-<td>-0.08496</td>
-<td>0.028903</td>
-<td>-0.086342</td>
-<td>0.077923</td>
-<td>0.125419</td>
-<td>-0.048619</td>
-<td>-0.047728</td>
-<td>0.046998</td>
-<td>-0.182251</td>
-<td>-0.336734</td>
+<td>"LMO7"</td>
 <td>"trt"</td>
-<td>"NUDT13"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-25"</td>
+<td>"P08"</td>
+<td>"JCP2022_803862"</td>
+<td>0.14465</td>
+<td>0.123404</td>
+<td>0.383272</td>
 </tr>
 </tbody>
 </table>

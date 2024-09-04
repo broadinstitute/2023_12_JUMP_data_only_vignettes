@@ -22,7 +22,7 @@ import polars as pl
 from broad_babel.query import get_mapper
 from pyarrow.dataset import dataset
 from s3fs import S3FileSystem
-# %% [Markdown] Fetch profiles
+# %% [markdown] Fetch profiles
 # We will be using the CRISPR dataset specificed in our index csv.
 # %% Fetch the CRISPR dataset
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"

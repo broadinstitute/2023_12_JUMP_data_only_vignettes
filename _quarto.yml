@@ -30,5 +30,8 @@ format:
       light: flatly
       dark: darkly
     code-fold: true
+    code-links:
+      - binder: true
+      
   ipynb:
     default-image-extension: svg

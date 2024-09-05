@@ -20,6 +20,7 @@ seaborn = "^0.13.2"
 biopython = "^1.84"
 broad-babel = ">=0.1.26"
 ipdb = "^0.13.13"
+copairs = {git = "https://github.com/cytomining/copairs.git"}
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"

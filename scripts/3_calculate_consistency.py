@@ -40,7 +40,8 @@ unique_plates = profiles_subset.filter(pl.col("Metadata_JCP2022")!=subsample[-1]
 perts_controls = profiles_subset.filter(pl.col("Metadata_Plate").is_in(unique_plates))
 with pl.Config() as cfg:
     cfg.set_tbl_cols(7) # Limit the number of columns printed
-    print(perts_controls)
+    print(f"Shape: {pert_controls.shape}")
+    perts_controls.head()
 # %% [markdown]
 # Now we create a mapper to label treatments and controls. See the previous tutorial for details on fetching metadata.
 # %%

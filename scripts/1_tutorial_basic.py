@@ -21,8 +21,6 @@
 
 # %% Imports
 import polars as pl
-from pyarrow.dataset import dataset
-from s3fs import S3FileSystem
 
 # %% [markdown]
 # The shapes of the available datasets are:

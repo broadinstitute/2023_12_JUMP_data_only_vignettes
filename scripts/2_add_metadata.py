@@ -20,8 +20,6 @@
 # %% Imports
 import polars as pl
 from broad_babel.query import get_mapper
-from pyarrow.dataset import dataset
-from s3fs import S3FileSystem
 # %% [markdown] Fetch profiles
 # We will be using the CRISPR dataset specificed in our index csv.
 # %% Fetch the CRISPR dataset
@@ -33,7 +31,7 @@ print(profiles.collect_schema().names()[:6])
 # 
 # For simplicity the contents of our processed profiles are minimal: "The profile origin" (source, plate and well) and the unique JUMP identifier for that perturbation. We will use broad-babel to further expand on this metadata, but for simplicity's sake let us sample subset of data.
 # %% Subset data
-jcp_ids = profiles.select(pl.col("Metadata_JCP2022")).unique().collect().to_series()
+jcp_ids = profiles.select(pl.col("Metadata_JCP2022")).unique().collect().to_series().sort()
 subsample = jcp_ids.sample(10, seed=42)
 # Add a well-known control
 subsample = (*subsample, "JCP2022_800002")

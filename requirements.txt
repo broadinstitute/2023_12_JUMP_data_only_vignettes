@@ -54,7 +54,6 @@ json5==0.9.25
 jsonpointer==3.0.0
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
--e git+ssh://git@github.com/broadinstitute/2023_12_JUMP_data_only_vignettes.git@06a169e28676045a832128bcf03e4e78918989db#egg=jump_deps
 jump_portrait==0.0.22
 jupyter==1.0.0
 jupyter-console==6.6.3

@@ -15,4 +15,4 @@ Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Pytho
 
 # Why yet another resource?
 
-Its secondary (yet highly important purpose) is to minimise friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges in challenge, hampering collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.
+Its secondary (yet highly important purpose) is to minimise friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges we face, as it hampers collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.

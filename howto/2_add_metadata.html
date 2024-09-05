@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A very common task when processing morphological profiles is knowing which ones are treatments and which ones are controls. Here we will explore how we can use broad-babel to accomplish this task.</p>
-<div id="5d369d68" class="cell" title="Imports" data-execution_count="1">
+<div id="208ade74" class="cell" title="Imports" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We will be using the CRISPR dataset specificed in our index csv.</p>
-<div id="d45f92cc" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
+<div id="564bccc4" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>For simplicity the contents of our processed profiles are minimal: “The profile origin” (source, plate and well) and the unique JUMP identifier for that perturbation. We will use broad-babel to further expand on this metadata, but for simplicity’s sake let us sample subset of data.</p>
-<div id="96515803" class="cell" title="Subset data" data-execution_count="3">
+<div id="3d028f0c" class="cell" title="Subset data" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series().sort()</span>
@@ -291,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)</p>
-<div id="8c64f228" class="cell" title="Pull mapper" data-execution_count="4">
+<div id="c5ab03eb" class="cell" title="Pull mapper" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span>)</span>
@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
 <p>We will now repeat the process to get their ‘standard’ name</p>
-<div id="706dfb9e" class="cell" title="Fetch standard name" data-execution_count="5">
+<div id="725d8e1c" class="cell" title="Fetch standard name" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>)</span>
@@ -334,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
-<div id="6a5618a4" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
+<div id="570a8245" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)).collect()</span>

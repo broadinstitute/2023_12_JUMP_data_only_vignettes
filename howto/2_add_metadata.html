@@ -173,6 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../howto/3_calculate_consistency.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate phenotypic consistency</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../howto/display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Plot all channels for one site</span></a>
   </div>
@@ -235,22 +241,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyarrow.dataset <span class="im">import</span> dataset</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> s3fs <span class="im">import</span> S3FileSystem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Downloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.</code></pre>
-</div>
 </div>
 <p>We will be using the CRISPR dataset specificed in our index csv.</p>
 <div class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CRISPR_URL <span class="op">=</span> pl.read_csv(INDEX_FILE).<span class="bu">filter</span>(pl.col(<span class="st">"subset"</span>)<span class="op">==</span><span class="st">"crispr"</span>).item(<span class="dv">0</span>,<span class="st">"url"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> pl.scan_parquet(CRISPR_URL)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profiles.collect_schema().names()[:<span class="dv">6</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CRISPR_URL <span class="op">=</span> pl.read_csv(INDEX_FILE).<span class="bu">filter</span>(pl.col(<span class="st">"subset"</span>)<span class="op">==</span><span class="st">"crispr"</span>).item(<span class="dv">0</span>,<span class="st">"url"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> pl.scan_parquet(CRISPR_URL)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profiles.collect_schema().names()[:<span class="dv">6</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>['Metadata_Source', 'Metadata_Plate', 'Metadata_Well', 'Metadata_JCP2022', 'X_1', 'X_2']</code></pre>
@@ -260,23 +261,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" title="Subset data" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> jcp_ids.sample(<span class="dv">10</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a well-known control</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series().sort()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> jcp_ids.sample(<span class="dv">10</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a well-known control</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>('JCP2022_804978',
- 'JCP2022_805912',
- 'JCP2022_800546',
- 'JCP2022_804691',
- 'JCP2022_803758',
- 'JCP2022_806961',
- 'JCP2022_800991',
- 'JCP2022_803960',
- 'JCP2022_804326',
- 'JCP2022_802020',
+<pre><code>('JCP2022_801270',
+ 'JCP2022_802425',
+ 'JCP2022_802356',
+ 'JCP2022_805808',
+ 'JCP2022_804300',
+ 'JCP2022_801205',
+ 'JCP2022_802539',
+ 'JCP2022_803663',
+ 'JCP2022_800116',
+ 'JCP2022_801847',
  'JCP2022_800002')</code></pre>
 </div>
 </div>
@@ -284,21 +285,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" title="Pull mapper" data-execution_count="4">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>{'JCP2022_800546': 'trt',
- 'JCP2022_803960': 'trt',
- 'JCP2022_804326': 'trt',
- 'JCP2022_800991': 'trt',
- 'JCP2022_804978': 'trt',
- 'JCP2022_802020': 'trt',
+<pre><code>{'JCP2022_800116': 'trt',
+ 'JCP2022_805808': 'trt',
+ 'JCP2022_802425': 'trt',
+ 'JCP2022_803663': 'trt',
+ 'JCP2022_802539': 'trt',
+ 'JCP2022_801847': 'trt',
  'JCP2022_800002': 'negcon',
- 'JCP2022_805912': 'trt',
- 'JCP2022_803758': 'trt',
- 'JCP2022_804691': 'trt',
- 'JCP2022_806961': 'trt'}</code></pre>
+ 'JCP2022_804300': 'trt',
+ 'JCP2022_802356': 'trt',
+ 'JCP2022_801270': 'trt',
+ 'JCP2022_801205': 'trt'}</code></pre>
 </div>
 </div>
 <p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
@@ -306,31 +307,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" title="Fetch standard name" data-execution_count="5">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper((<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>), input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>{'JCP2022_805912': 'RFC4',
- 'JCP2022_802020': 'EFNA5',
- 'JCP2022_800991': 'CACNA1F',
- 'JCP2022_800546': 'AQP8',
- 'JCP2022_804326': 'MTNR1B',
- 'JCP2022_803960': 'MAML1',
+<pre><code>{'JCP2022_803663': 'KIF16B',
+ 'JCP2022_804300': 'MSX1',
  'JCP2022_800002': 'non-targeting',
- 'JCP2022_804978': 'PDCD2',
- 'JCP2022_804691': 'NR2F6',
- 'JCP2022_803758': 'KSR1',
- 'JCP2022_806961': 'TAX1BP3'}</code></pre>
+ 'JCP2022_805808': 'RAD51B',
+ 'JCP2022_801847': 'DMRT2',
+ 'JCP2022_802425': 'FLNC',
+ 'JCP2022_802539': 'G6PC',
+ 'JCP2022_801205': 'CDK20',
+ 'JCP2022_800116': 'ACOT11',
+ 'JCP2022_801270': 'CFB',
+ 'JCP2022_802356': 'FDX1'}</code></pre>
 </div>
 </div>
 <p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
 <div class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)).collect()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>profiles_with_meta <span class="op">=</span> subsample_profiles.with_columns(pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(pert_mapper).alias(<span class="st">"pert_type"</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(name_mapper).alias(<span class="st">"name"</span>))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>profiles_with_meta.select(pl.col((<span class="st">"name"</span>,<span class="st">"pert_type"</span>, <span class="st">"^Metadata.*$"</span>, <span class="st">"^X_[0-3]$"</span>))).sort(by<span class="op">=</span><span class="st">"pert_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)).collect()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>profiles_with_meta <span class="op">=</span> subsample_profiles.with_columns(pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(pert_mapper).alias(<span class="st">"pert_type"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(name_mapper).alias(<span class="st">"name"</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>profiles_with_meta.select(pl.col((<span class="st">"name"</span>,<span class="st">"pert_type"</span>, <span class="st">"^Metadata.*$"</span>, <span class="st">"^X_[0-3]$"</span>))).sort(by<span class="op">=</span><span class="st">"pert_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div><style>
@@ -340,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   white-space: pre-wrap;
 }
 </style>
-<small>shape: (2_809, 9)</small>
+<small>shape: (2_806, 9)</small>
 <table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
@@ -434,59 +435,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>…</td>
 </tr>
 <tr class="odd">
-<td>"AQP8"</td>
+<td>"CFB"</td>
 <td>"trt"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R5-17"</td>
-<td>"O06"</td>
-<td>"JCP2022_800546"</td>
-<td>0.141411</td>
-<td>0.019632</td>
-<td>-0.517092</td>
+<td>"CP-CC9-R5-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.023277</td>
+<td>0.021747</td>
+<td>-0.914867</td>
 </tr>
 <tr class="even">
-<td>"CACNA1F"</td>
-<td>"trt"</td>
-<td>"source_13"</td>
-<td>"CP-CC9-R5-17"</td>
-<td>"G10"</td>
-<td>"JCP2022_800991"</td>
-<td>0.18572</td>
-<td>0.072457</td>
-<td>-0.536573</td>
-</tr>
-<tr class="odd">
-<td>"MAML1"</td>
+<td>"DMRT2"</td>
 <td>"trt"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R5-21"</td>
-<td>"L03"</td>
-<td>"JCP2022_803960"</td>
-<td>0.306733</td>
-<td>-0.04039</td>
-<td>-0.444773</td>
-</tr>
-<tr class="even">
-<td>"TAX1BP3"</td>
-<td>"trt"</td>
-<td>"source_13"</td>
-<td>"CP-CC9-R5-23"</td>
-<td>"I05"</td>
-<td>"JCP2022_806961"</td>
-<td>-0.094874</td>
-<td>0.02157</td>
-<td>2.014525</td>
+<td>"C10"</td>
+<td>"JCP2022_801847"</td>
+<td>-0.208865</td>
+<td>-0.046884</td>
+<td>0.845933</td>
 </tr>
 <tr class="odd">
-<td>"NR2F6"</td>
+<td>"MSX1"</td>
 <td>"trt"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R5-26"</td>
-<td>"J17"</td>
-<td>"JCP2022_804691"</td>
-<td>-0.349665</td>
-<td>-0.113304</td>
-<td>0.701794</td>
+<td>"CP-CC9-R5-24"</td>
+<td>"C03"</td>
+<td>"JCP2022_804300"</td>
+<td>-0.003333</td>
+<td>0.053181</td>
+<td>0.078227</td>
+</tr>
+<tr class="even">
+<td>"CFB"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R6-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.18701</td>
+<td>0.072405</td>
+<td>0.381239</td>
+</tr>
+<tr class="odd">
+<td>"CFB"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R7-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.051818</td>
+<td>-0.129935</td>
+<td>-0.481606</td>
 </tr>
 </tbody>
 </table>

@@ -3,7 +3,7 @@ Homepage = "https://github.com/broadinstitute/"
 
 [tool.poetry]
 name = "jump_deps"
-version = "0.0.6"
+version = "0.0.7"
 description = "Convenience package to add dependencies for JUMP exploratory analysis"
 authors = ["Alan Munoz"]
 readme = "readme.md"
@@ -20,7 +20,7 @@ seaborn = "^0.13.2"
 biopython = "^1.84"
 broad-babel = ">=0.1.26"
 ipdb = "^0.13.13"
-copairs = {git = "https://github.com/cytomining/copairs.git"}
+copairs = "^0.4.1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"

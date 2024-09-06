@@ -30,9 +30,5 @@ format:
       light: flatly
       dark: darkly
     code-fold: true
-    code-links:
-      - text: Binder notebooks
-        icon: file-code
-        href: https://mybinder.org/v2/gh/broadinstitute/2023_12_JUMP_data_only_vignettes/HEAD
   ipynb:
     default-image-extension: svg

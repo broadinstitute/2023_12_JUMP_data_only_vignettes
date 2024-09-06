@@ -10,9 +10,21 @@ This is work in progress. The purpose of this resource is to concentrate all the
 
 # I am a developer interested in using and writing programatic tools for JUMP
 
-Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Python libraries that provide programmatic access to JUMP data.
+Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Python libraries that may help you access JUMP data in a high-throughput manner.
+
+
+# How can I explore the How-To guides in an interactive environment?
+
+This table provides direct link to run the guides on your browser.
+
+| Google Collab                                                                                                                                                         |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Retrieve JUMP profiles](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/1_tutorial_basic.ipynb)            |
+| [Add metadata to profiles](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/2_add_metadata.ipynb)            |
+| [Calculate phenotypic activity](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/3_calculate_activity.ipynb) |
+| [Display images](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/display_perturbation_images.ipynb)         |
 
 
 # Why yet another resource?
 
-Its secondary (yet highly important purpose) is to minimise friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges we face, as it hampers collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.
+Its secondary (yet highly important purpose) is to minimise friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges in challenge, hampering collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.

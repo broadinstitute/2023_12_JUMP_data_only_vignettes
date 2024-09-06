@@ -37,7 +37,7 @@
     "href": "explanations/FAQ.html#analyses",
     "title": "Frequently Asked Questions",
     "section": "Analyses",
-    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-pills",
+    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-deps",
     "crumbs": [
       "Explanations",
       "Frequently Asked Questions"

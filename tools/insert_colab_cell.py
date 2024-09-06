@@ -30,7 +30,8 @@ def insert_deps_cell(filepath: Path, out_dir: Path):
 
     _, nb2 = normalize(nb, version=nb["nbformat"], version_minor=nb["nbformat_minor"])
     # Save the modified notebook back to a file
-    with open(f"{out_dir}/{name}", "w") as f:
+    with open(out_dir / name, "w") as f:
+        print(f"Writing {name}")
         nbformat.write(nb2, f, version=4)
 
 

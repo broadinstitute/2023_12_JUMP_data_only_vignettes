@@ -8,8 +8,6 @@ export QUARTO_PYTHON=$(which python) &&
 quarto publish gh-pages &&
 echo "Generating collab files" &&
 git status &&
-git restore --source gh-pages -- "howto/*.ipynb" &&
-ls howto &&
 python tools/insert_colab_cell.py &&
 ls colab &&
 git add colab/* && git commit -m 'add colab files' && git push --force origin main:colab

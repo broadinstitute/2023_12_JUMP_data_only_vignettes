@@ -5,7 +5,7 @@ from nbformat.notebooknode import from_dict
 from nbformat.validator import normalize
 
 
-def insert_deps_cell(filepath: Path, out_dir: str):
+def insert_deps_cell(filepath: Path, out_dir: Path):
     """
     Insert a cell to install dependencies in filepath and save a copy of
     the resultant notebook in out_dir.
@@ -40,5 +40,5 @@ if __name__ == "__main__":
     colab_dir = Path("colab")
     colab_dir.mkdir(exist_ok=True, parents=True)
 
-    for fpath in input_path.glob("howto/*.ipynb"):
-        insert_deps_cell(fpath, str(colab_dir))
+    for fpath in input_path.glob("*.ipynb"):
+        insert_deps_cell(fpath, colab_dir)

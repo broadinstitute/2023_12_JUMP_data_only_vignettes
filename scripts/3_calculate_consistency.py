@@ -30,7 +30,7 @@ INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2
 CRISPR_URL = pl.read_csv(INDEX_FILE).filter(pl.col("subset")=="crispr").item(0,"url")
 profiles = pl.scan_parquet(CRISPR_URL)
 # %% [markdown]
-# Sample perturbations and 
+# Sample perturbations and add known negative control.
 # %%
 jcp_ids = profiles.select(pl.col("Metadata_JCP2022")).unique().collect().to_series().sort()
 subsample = jcp_ids.sample(10, seed=42)

@@ -31,7 +31,7 @@ Frequently Asked Questions and links to their answers. They are grouped based on
 (WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:
 
 ```bash
-pip install jump-pills
+pip install jump-deps
 ```
 
 

@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This notebook demonstrates how to retrieve and plot all channels for one site using jump_portrait.</p>
-<div id="de5ab796" class="cell" data-execution_count="1">
+<div id="d8191085" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this.</p>
 <p>Here we retrieve image locations for the “RAB30” gene:</p>
-<div id="5d6e006c" class="cell" data-execution_count="2">
+<div id="a200eb3a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
@@ -271,7 +271,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 <p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF).</p>
 <p>We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
-<div id="cf7a68d0" class="cell" data-execution_count="3">
+<div id="56abbc79" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
@@ -287,7 +287,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 <p>There are 34 sites corresponding to this compound.</p>
 <p>We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
-<div id="3203951a" class="cell" data-execution_count="4">
+<div id="4af6be3c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(source: <span class="bu">str</span>, batch: <span class="bu">str</span>, plate: <span class="bu">str</span>, well: <span class="bu">str</span>, site: <span class="bu">str</span>, label: <span class="bu">str</span>, int_percentile: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
@@ -374,14 +374,14 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </details>
 </div>
 <p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
-<div id="54b561ff" class="cell" data-execution_count="5">
+<div id="1b8d1392" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> cmpd_info_byjcp.row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Next, we define the label and make the plot:</p>
-<div id="8180072c" class="cell" data-execution_count="6">
+<div id="25f07666" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="ss">f"JCP2022_011844</span><span class="ch">\n\n</span><span class="ss">plate: </span><span class="sc">{</span>plate<span class="sc">}</span><span class="ch">\n</span><span class="ss">well: </span><span class="sc">{</span>well<span class="sc">}</span><span class="ch">\n</span><span class="ss">site: </span><span class="sc">{</span>site<span class="sc">}</span><span class="ss">"</span></span>
@@ -390,13 +390,13 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="display_perturbation_images_files/figure-html/cell-7-output-1.png" width="723" height="477" class="figure-img"></p>
+<p><img src="display_perturbation_images_files/figure-html/cell-7-output-1.png" width="730" height="469" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here, we plot one of the RAB30 ORF images:</p>
-<div id="f49f9d7d" class="cell" data-execution_count="7">
+<div id="3782ccf2" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>).row(<span class="dv">0</span>)</span>
@@ -412,7 +412,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 </div>
 <p>And for CRISPR:</p>
-<div id="66bc6f4f" class="cell" data-execution_count="8">
+<div id="721a6c78" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span>).row(<span class="dv">0</span>)</span>

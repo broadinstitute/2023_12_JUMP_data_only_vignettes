@@ -75,3 +75,4 @@ to_plot = result.filter(pl.col("pert_type")=="trt").with_columns(pl.col("Metadat
 sns.stripplot(data=to_plot.to_pandas(), x="average_precision", y="Perturbed gene")
 # %% [markdown]
 # We can see that only some perturbations can be easily retrieved when compared to negative controls, in this case KIF16B and CDK20.
+# For a deeper dive into how mean Average Precision (mAP) works, you can explore [this](https://github.com/alxndrkalinin/copairs/blob/v0.4.2/examples/demo.ipynb) notebook.

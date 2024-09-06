@@ -1,6 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
-# title: Basic JUMP data access
+# title: Access JUMP profiles
 # jupyter:
 #   jupytext:
 #     text_representation:

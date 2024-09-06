@@ -1,6 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
-# title: Calculate phenotypic consistency
+# title: Calculate phenotypic activity
 # jupyter:
 #   jupytext:
 #     text_representation:
@@ -15,7 +15,7 @@
 # ---
 
 # %% [markdown]
-# A common first analysis for morphological datasets is the consistency of the cells' phenotypes. We will use the [copairs](https://github.com/cytomining/copairs) package, which makes use of [mean average precision](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11014546/) to obtain a metric of replicability for any set of morphological profiles. In other words, it indicates how similar a given set of compounds are, relative to their negative controls, which is usually cells that have experienced no perturbation.
+# A common first analysis for morphological datasets is the activity of the cells' phenotypes. We will use the [copairs](https://github.com/cytomining/copairs) package, which makes use of [mean average precision](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11014546/) to obtain a metric of replicability for any set of morphological profiles. In other words, it indicates how similar a given set of compounds are, relative to their negative controls, which is usually cells that have experienced no perturbation.
 
 # %% Imports
 import polars as pl

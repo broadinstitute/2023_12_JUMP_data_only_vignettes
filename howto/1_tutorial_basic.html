@@ -246,7 +246,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This is a tutorial on how to access profiles from the <a href="https://github.com/jump-cellpainting/datasets">JUMP Cell Painting datasets</a>. We will use polars to fetch the data frames lazily, with the help of <code>s3fs</code> and <code>pyarrow</code>. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="f0756ac5" class="cell" title="Imports" data-execution_count="1">
+<div id="b15b346e" class="cell" title="Imports" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -259,14 +259,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>cpg0016-jump[compound]</code>: Chemical perturbations.</li>
 </ol>
 <p>Their explicit location is determined by the transformations that produce the datasets. The aws paths of the dataframes are built from a prefix below:</p>
-<div id="b4693f16" class="cell" title="Paths" data-execution_count="2">
+<div id="59bb19f9" class="cell" title="Paths" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>We use a version-controlled csv to release the latest corrected profiles</p>
-<div id="a7cb545e" class="cell" data-execution_count="3">
+<div id="c6d50cfa" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>profile_index <span class="op">=</span> pl.read_csv(INDEX_FILE)</span>
@@ -328,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We do not need the ‘etag’ (used to check file integrity) column nor the ‘interpretable’ (i.e., before major modifications)</p>
-<div id="9299cf25" class="cell" data-execution_count="4">
+<div id="efe7a576" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>selected_profiles <span class="op">=</span> profile_index.<span class="bu">filter</span>(</span>
@@ -342,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We will lazy-load the dataframes and print the number of rows and columns</p>
-<div id="671ef6bb" class="cell" data-execution_count="5">
+<div id="15e44d2b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let us now focus on the <code>crispr</code> dataset and use a regex to select the metadata columns. We will then sample rows and display the overview. Note that the collect() method enforces loading some data into memory.</p>
-<div id="4e2f94c8" class="cell" data-execution_count="6">
+<div id="b0db9c0f" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.scan_parquet(filepaths[<span class="st">"crispr"</span>])</span>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The following line excludes the metadata columns:</p>
-<div id="fa414606" class="cell" data-execution_count="7">
+<div id="60374f70" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
@@ -1050,7 +1050,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we can convert this to <code>pandas</code> if we want to perform analyses with that tool. Keep in mind that this loads the entire dataframe into memory.</p>
-<div id="07bf4eab" class="cell" data-execution_count="8">
+<div id="5229cbf3" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

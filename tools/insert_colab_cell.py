@@ -40,5 +40,5 @@ if __name__ == "__main__":
     colab_dir = Path("colab")
     colab_dir.mkdir(exist_ok=True, parents=True)
 
-    for fpath in input_path.glob("*.ipynb"):
+    for fpath in input_path.glob("howto/*.ipynb"):
         insert_deps_cell(fpath, str(colab_dir))

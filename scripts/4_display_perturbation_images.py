@@ -47,12 +47,21 @@ print(cmpd_info_byjcp.shape)
 
 
 # %% [markdown]
-# There are 34 sites corresponding to this compound. 
+# There are 34 sites corresponding to this compound.
 #
 # We've written a function to display all channels for a specific image. Note that this is just one possible way to display images - we've included the function here so that you can modify it to suit your own needs.
 
+
 # %%
-def display_site(source: str, batch: str, plate: str, well: str, site: str, label: str, int_percentile: float) -> None:
+def display_site(
+    source: str,
+    batch: str,
+    plate: str,
+    well: str,
+    site: str,
+    label: str,
+    int_percentile: float,
+) -> None:
     """Plot all channels from one image.
 
     Parameters
@@ -85,15 +94,25 @@ def display_site(source: str, batch: str, plate: str, well: str, site: str, labe
 
     for channel in channels:
         if channel == "ER":
-            cmap = mpl.LinearSegmentedColormap.from_list("green_cmap", ["#000", "#65fe08"])
+            cmap = mpl.LinearSegmentedColormap.from_list(
+                "green_cmap", ["#000", "#65fe08"]
+            )
         elif channel == "DNA":
-            cmap = mpl.LinearSegmentedColormap.from_list("green_cmap", ["#000", "#0000FF"])
+            cmap = mpl.LinearSegmentedColormap.from_list(
+                "green_cmap", ["#000", "#0000FF"]
+            )
         elif channel == "Mito":
-            cmap = mpl.LinearSegmentedColormap.from_list("green_cmap", ["#000", "#FF0000"])
+            cmap = mpl.LinearSegmentedColormap.from_list(
+                "green_cmap", ["#000", "#FF0000"]
+            )
         elif channel == "AGP":
-            cmap = mpl.LinearSegmentedColormap.from_list("green_cmap", ["#000", "#FFFF00"])
+            cmap = mpl.LinearSegmentedColormap.from_list(
+                "green_cmap", ["#000", "#FFFF00"]
+            )
         elif channel == "RNA":
-            cmap = mpl.LinearSegmentedColormap.from_list("green_cmap", ["#000", "#FFA500"])
+            cmap = mpl.LinearSegmentedColormap.from_list(
+                "green_cmap", ["#000", "#FFA500"]
+            )
         else:
             cmap = "gray"
 
@@ -105,15 +124,19 @@ def display_site(source: str, batch: str, plate: str, well: str, site: str, labe
 
         # Add channel name label in the top left corner
         ax.text(
-            0.05, 0.95, channel,
-            horizontalalignment='left',
-            verticalalignment='top',
+            0.05,
+            0.95,
+            channel,
+            horizontalalignment="left",
+            verticalalignment="top",
             fontsize=18,
-            color='black',
-            bbox=dict(facecolor='white', alpha=0.8, edgecolor='none', boxstyle='round,pad=0.3'),
-            transform=ax.transAxes
+            color="black",
+            bbox=dict(
+                facecolor="white", alpha=0.8, edgecolor="none", boxstyle="round,pad=0.3"
+            ),
+            transform=ax.transAxes,
         )
-        
+
         counter += 1
 
     # put label in last subplot
@@ -152,7 +175,9 @@ display_site(source, batch, plate, well, site, label, 99.5)
 # Here, we plot one of the RAB30 ORF images:
 
 # %%
-source, batch, plate, well, site, *rest = gene_info.filter(pl.col("Metadata_PlateType") == "ORF").row(0)
+source, batch, plate, well, site, *rest = gene_info.filter(
+    pl.col("Metadata_PlateType") == "ORF"
+).row(0)
 label = f"RAB30 (ORF)\n\nplate: {plate}\nwell: {well}\nsite: {site}"
 display_site(source, batch, plate, well, site, label, 99.5)
 
@@ -160,6 +185,8 @@ display_site(source, batch, plate, well, site, label, 99.5)
 # And for CRISPR:
 
 # %%
-source, batch, plate, well, site, *rest = gene_info.filter(pl.col("Metadata_PlateType") == "CRISPR").row(0)
+source, batch, plate, well, site, *rest = gene_info.filter(
+    pl.col("Metadata_PlateType") == "CRISPR"
+).row(0)
 label = f"RAB30 (CRISPR)\n\nplate: {plate}\nwell: {well}\nsite: {site}"
 display_site(source, batch, plate, well, site, label, 99.5)

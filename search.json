@@ -22,44 +22,26 @@
     ]
   },
   {
-    "objectID": "explanations/FAQ.html",
-    "href": "explanations/FAQ.html",
-    "title": "Frequently Asked Questions",
+    "objectID": "howto/5_explore_distance_clusters.html",
+    "href": "howto/5_explore_distance_clusters.html",
+    "title": "Query external resources",
     "section": "",
-    "text": "Frequently Asked Questions\n\nAnalyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nDo we we expect one JCP to have multiple targets?\nDo JCPs within either the CRISPR or ORF share the same gene?\nWeb interfaces\nFrequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
+    "text": "A common question we aim to ask is “What other perturbations look like mine?” The easiest way to get the answer for this question is using our browsable datasets. In this case we would like to use the ‘Matches’ databases, which provide cosines similarities between perturbations within a dataset, obtained from all-vs-all calculations.\nThe limitation of this approach is that the size of JUMP results in two challenges: - Calculating the distances across all pairs of perturbations is intractable for most computers without a GPU (Graphics Processing Unit). - The resultant similarity matrix is too big for web browser-based exploration, so we limit the browsable similarity dataset to tthe op 100 most correlated/anticorrelated pairs of perturbations.\nDespite the aforementioned problems, we provide the full matrix of perturbation distances in case it is of use to data analysts. You can find this and other datasets on Zenodo. The data files of interest for this exercise are “{org,crispr}_cosinesim_full.parquet”.\nThe following analysis focuses on showcasing how to query one of these distance matrices to find all the distances between any given perturbation and all others. One use-case of this is testing how similar perturbation A and B are relative to perturbation C’s similarity to A.\n\n\n\nCode\nfrom random import choices, seed\n\nimport matplotlib.pyplot as plt\nimport polars as pl\nimport seaborn as sns\n\n\nWe select the CRISPR dataset for this example. As with previous examples, this is a lazy-loaded data frame. This enables us to download very big datasets without worrying about whether or not they will fill into memory. In these datasets, the values range between 0 and 2, where 0 means that two profiles are the same, 1 means that they are orthogonal (completely uncorrelated) and 2 means that they are completely anticorrelated.\n\n\nCode\ndistances = pl.scan_parquet(\n    \"https://zenodo.org/api/records/13259495/files/crispr_cosinesim_full.parquet/content\"\n)\nprint(distances.head())\n\n\nnaive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)\n\nSLICE[offset: 0, len: 5]\n  Parquet SCAN [https://zenodo.org/api/records/13259495/files/crispr_cosinesim_full.parquet/content]\n  PROJECT */7977 COLUMNS\n\n\nNote that the only metadata information in this matrix are the column names as JUMP IDs (JCP2022_X), meaning that we will need to use a mapper from these JUMP ids to conventional names; feel free to look at the previous how-to that demonstrates that. We will now select three features at random and look at their correlation matrix\n\n\nCode\nseed(42)\ncols = distances.collect_schema().names()\nncols = len(cols)\nsampled_col_idx = sorted(choices(range(ncols), k=3))\nsampled_cols = [cols[ix] for ix in sampled_col_idx]\n\nsampled_distances = (\n    distances.with_row_index()\n    .filter(pl.col(\"index\").is_in(sampled_col_idx))\n    .select(pl.col(sampled_cols))\n    .collect()\n)\n\n\nFinally, we plot them in a heatmap for easier visualisation\n\n\nCode\npandas_correlation = sampled_distances.to_pandas()\npandas_correlation.index = pandas_correlation.columns\nsns.heatmap(\n    pandas_correlation,\n    annot=True,\n    fmt=\".3f\",\n    vmin=0,\n    vmax=2,\n    cmap=sns.color_palette(\"vlag\", as_cmap=True),\n)\nplt.yticks(rotation=30)\nplt.tight_layout()\nplt.savefig(\"tmp2.png\")\nplt.close()\n\n\nWhilst in this case it is not a terribly interesting result, this shows that we see no correlation between three randomly selected perturbation.",
     "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
+      "How-To Guides",
+      "Query external resources"
     ]
   },
   {
-    "objectID": "explanations/FAQ.html#analyses",
-    "href": "explanations/FAQ.html#analyses",
-    "title": "Frequently Asked Questions",
-    "section": "Analyses",
-    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-deps",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#data",
-    "href": "explanations/FAQ.html#data",
-    "title": "Frequently Asked Questions",
-    "section": "Data",
-    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.\n\n\n\nDo we we expect one JCP to have multiple targets?\nYes, there will be many with multiple targets. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4.\nTwo were considered to be two different compounds because they had different names and broad_sample names. But after all the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nDo JCPs within either the CRISPR or ORF share the same gene?\nIn CRISPR each JCP ID corresponds to a different gene. But in ORF there are sometimes multiple reagents targeting the same gene. In this case, we compute consensus profiles at the gene level (more info here).\n\n\n\nWeb interfaces\n\nWhat is the source of the replicability metric?\nThese two files (ORF and CRISPR) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.\nX_Feature: For each row, is the Feature value an average for all the cells in the Metadata_image using the listed Mask? Or is it associated with a single cell in that image?\nAny Feature is the average of all cells and all replicates (typically four in total) for the specific mask and feature.\nHow are Statistic and Median calculated for each row? Are they calculated in relation to the average of the “Feature” values for the negative controls in the same plate?\n\nStatistic is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).\nMedian is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "readme.html",
-    "href": "readme.html",
-    "title": "Additional uses",
+    "objectID": "explanations/Resources.html",
+    "href": "explanations/Resources.html",
+    "title": "Available resources",
     "section": "",
-    "text": "Additional uses\n\nFocal point for JUMP information and data analysis pipelines.\n\n\nAdditional uses\nThis repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data."
+    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
   },
   {
     "objectID": "index.html",
@@ -102,14 +84,43 @@
     ]
   },
   {
-    "objectID": "explanations/Resources.html",
-    "href": "explanations/Resources.html",
-    "title": "Available resources",
+    "objectID": "readme.html",
+    "href": "readme.html",
+    "title": "Additional uses",
     "section": "",
-    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "text": "Additional uses\n\nFocal point for JUMP information and data analysis pipelines.\n\n\nAdditional uses\nThis repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data."
+  },
+  {
+    "objectID": "explanations/FAQ.html",
+    "href": "explanations/FAQ.html",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "Frequently Asked Questions\n\nAnalyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nDo we we expect one JCP to have multiple targets?\nDo JCPs within either the CRISPR or ORF share the same gene?\nWeb interfaces\nFrequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
     "crumbs": [
       "Explanations",
-      "Available resources"
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html#analyses",
+    "href": "explanations/FAQ.html#analyses",
+    "title": "Frequently Asked Questions",
+    "section": "Analyses",
+    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-deps",
+    "crumbs": [
+      "Explanations",
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html#data",
+    "href": "explanations/FAQ.html#data",
+    "title": "Frequently Asked Questions",
+    "section": "Data",
+    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.\n\n\n\nDo we we expect one JCP to have multiple targets?\nYes, there will be many with multiple targets. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4.\nTwo were considered to be two different compounds because they had different names and broad_sample names. But after all the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nDo JCPs within either the CRISPR or ORF share the same gene?\nIn CRISPR each JCP ID corresponds to a different gene. But in ORF there are sometimes multiple reagents targeting the same gene. In this case, we compute consensus profiles at the gene level (more info here).\n\n\n\nWeb interfaces\n\nWhat is the source of the replicability metric?\nThese two files (ORF and CRISPR) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.\nX_Feature: For each row, is the Feature value an average for all the cells in the Metadata_image using the listed Mask? Or is it associated with a single cell in that image?\nAny Feature is the average of all cells and all replicates (typically four in total) for the specific mask and feature.\nHow are Statistic and Median calculated for each row? Are they calculated in relation to the average of the “Feature” values for the negative controls in the same plate?\n\nStatistic is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).\nMedian is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.",
+    "crumbs": [
+      "Explanations",
+      "Frequently Asked Questions"
     ]
   },
   {

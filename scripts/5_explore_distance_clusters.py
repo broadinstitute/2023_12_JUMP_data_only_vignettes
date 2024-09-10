@@ -55,6 +55,7 @@ sampled_distances = (
     .select(pl.col(sampled_cols))
     .collect()
 )
+sampled_distances
 
 # %% [markdown]
 # Finally, we plot them in a heatmap for easier visualisation

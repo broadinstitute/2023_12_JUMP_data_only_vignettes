@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This how-to focuses on linking gene names outside. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use <a href="https://biopython.org/">Biopython</a>, this only explores a subset of the options, the full Entrez <a href="https://www.ncbi.nlm.nih.gov/books/NBK25501/">documentation</a>, which contains all the options, is a useful reference to keep in hand..</p>
-<div id="cdf89863" class="cell" title="Imports" data-execution_count="1">
+<div id="dadb9b2b" class="cell" title="Imports" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We define</p>
-<div id="4bdbe9c5" class="cell" data-execution_count="2">
+<div id="70d43d34" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Entrez.email <span class="op">=</span> <span class="st">"example@email.com"</span></span>
@@ -280,14 +280,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We will use a set of genes that we found in a JUMP cluster as an example.</p>
-<div id="7d7c1364" class="cell" data-execution_count="3">
+<div id="e111f8f8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> (<span class="st">"CHRM4"</span>, <span class="st">"SCAPER"</span>, <span class="st">"GPR176"</span>, <span class="st">"LY6K"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Get the</p>
-<div id="0c656fa5" class="cell" data-execution_count="4">
+<div id="71b807bc" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a dictionary that maps Gene symbols to Entrez IDs</span></span>
@@ -308,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cc76bcfd" class="cell" title="Show the columns in a nice way" data-execution_count="5">
+<div id="8944c8ab" class="cell" title="Show the columns in a nice way" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(entries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

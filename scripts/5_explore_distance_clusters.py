@@ -39,7 +39,7 @@ import seaborn as sns
 distances = pl.scan_parquet(
     "https://zenodo.org/api/records/13259495/files/crispr_cosinesim_full.parquet/content"
 )
-print(distances.head())
+distances.head().collect()
 # %% [markdown]
 # Note that the only metadata information in this matrix are the column names as JUMP IDs (JCP2022_X), meaning that we will need to use a mapper from these JUMP ids to conventional names; feel free to look at the previous how-to that demonstrates that. We will now select three features at random and look at their correlation matrix
 # %%

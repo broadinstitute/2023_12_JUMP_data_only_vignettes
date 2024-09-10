@@ -72,7 +72,5 @@ sns.heatmap(
 )
 plt.yticks(rotation=30)
 plt.tight_layout()
-plt.savefig("tmp2.png")
-plt.close()
 # %% [markdown]
 # Whilst in this case it is not a terribly interesting result, this shows that we see no correlation between three randomly selected perturbation.

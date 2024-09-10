@@ -66,11 +66,15 @@
     ]
   },
   {
-    "objectID": "readme.html",
-    "href": "readme.html",
-    "title": "Additional uses",
+    "objectID": "explanations/Resources.html",
+    "href": "explanations/Resources.html",
+    "title": "Available resources",
     "section": "",
-    "text": "Additional uses\n\nFocal point for JUMP information and data analysis pipelines.\n\n\nAdditional uses\nThis repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data."
+    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
   },
   {
     "objectID": "index.html",
@@ -123,14 +127,32 @@
     ]
   },
   {
-    "objectID": "explanations/Resources.html",
-    "href": "explanations/Resources.html",
-    "title": "Available resources",
+    "objectID": "readme.html",
+    "href": "readme.html",
+    "title": "Additional uses",
     "section": "",
-    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "text": "Additional uses\n\nFocal point for JUMP information and data analysis pipelines.\n\n\nAdditional uses\nThis repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data."
+  },
+  {
+    "objectID": "explanations/glossary.html",
+    "href": "explanations/glossary.html",
+    "title": "Definitions",
+    "section": "",
+    "text": "Definitions\n\nCytomining\n\nAcronyms\nReference for terms and their definition.",
     "crumbs": [
       "Explanations",
-      "Available resources"
+      "Definitions"
+    ]
+  },
+  {
+    "objectID": "explanations/glossary.html#cytomining",
+    "href": "explanations/glossary.html#cytomining",
+    "title": "Definitions",
+    "section": "Cytomining",
+    "text": "Cytomining\nThese definitions are related to cytomining libraries and may not be relevant to the more recent tools. They are kept for future reference.\nexternal_metadata: Additional information for compounds, the essential metadata are (Plate_Map_Name, well_position and broad_sample). poscon_diverse: Other positive controls, this is experiment-specific. poscon_cp: Standard positive control used for compound studies(cp stands for compound probes). q-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results. Replicate profile: Aggregation of single-cell profiles (e.g., across all cells in a single well), usually the median of all cells in a field of view.",
+    "crumbs": [
+      "Explanations",
+      "Definitions"
     ]
   },
   {

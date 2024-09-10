@@ -149,8 +149,17 @@ source, batch, plate, well, site, *rest = cmpd_info_byjcp.row(0)
 # Next, we define the label and make the plot:
 
 # %%
-label = f"JCP2022_011844\n\nplate: {plate}\nwell: {well}\nsite: {site}"
-display_site(source, batch, plate, well, site, label, 99.5)
+label = "{}\n\nplate:\n{}\nwell: {}\nsite: {}"
+
+display_site(
+    source,
+    batch,
+    plate,
+    well,
+    site,
+    label.format("JCP2022_011844", plate, well, site),
+    99.5,
+)
 
 # %% [markdown]
 # Here, we plot one of the RAB30 ORF images:
@@ -159,8 +168,15 @@ display_site(source, batch, plate, well, site, label, 99.5)
 source, batch, plate, well, site, *rest = gene_info.filter(
     pl.col("Metadata_PlateType") == "ORF"
 ).row(0)
-label = f"RAB30 (ORF)\n\nplate: {plate}\nwell: {well}\nsite: {site}"
-display_site(source, batch, plate, well, site, label, 99.5)
+display_site(
+    source,
+    batch,
+    plate,
+    well,
+    site,
+    label.format("RAB30 (ORF)", plate, well, site),
+    99.5,
+)
 
 # %% [markdown]
 # And for CRISPR:
@@ -169,5 +185,12 @@ display_site(source, batch, plate, well, site, label, 99.5)
 source, batch, plate, well, site, *rest = gene_info.filter(
     pl.col("Metadata_PlateType") == "CRISPR"
 ).row(0)
-label = f"RAB30 (CRISPR)\n\nplate: {plate}\nwell: {well}\nsite: {site}"
-display_site(source, batch, plate, well, site, label, 99.5)
+display_site(
+    source,
+    batch,
+    plate,
+    well,
+    site,
+    label.format("RAB30 (CRISPR)", plate, well, site),
+    99.5,
+)

@@ -82,8 +82,6 @@ def display_site(
         Rescale the image from 0 - this percentile of intensity values.
 
     """
-    channels = ["DNA", "ER", "Mito", "AGP", "RNA"]
-
     n_rows = 2
     n_cols = 3
 
@@ -92,33 +90,19 @@ def display_site(
     axes = axes.ravel()
     counter = 0
 
-    for channel in channels:
-        if channel == "ER":
-            cmap = mpl.LinearSegmentedColormap.from_list(
-                "green_cmap", ["#000", "#65fe08"]
-            )
-        elif channel == "DNA":
-            cmap = mpl.LinearSegmentedColormap.from_list(
-                "green_cmap", ["#000", "#0000FF"]
-            )
-        elif channel == "Mito":
-            cmap = mpl.LinearSegmentedColormap.from_list(
-                "green_cmap", ["#000", "#FF0000"]
-            )
-        elif channel == "AGP":
-            cmap = mpl.LinearSegmentedColormap.from_list(
-                "green_cmap", ["#000", "#FFFF00"]
-            )
-        elif channel == "RNA":
-            cmap = mpl.LinearSegmentedColormap.from_list(
-                "green_cmap", ["#000", "#FFA500"]
-            )
-        else:
-            cmap = "gray"
+    channel_rgb = {
+        "DNA": "#FF0000",  # Blue
+        "ER": "#65fe08",  # Green
+        "Mito": "#FFFF00",  # Red
+        "AGP": "#FFFF00",  # Yellow
+        "RNA": "#FFA500",  # Orange
+    }
+
+    for ax, (channel, rgb) in zip(axes, channel_rgb.items()):
+        cmap = mpl.LinearSegmentedColormap.from_list(channel, ("#000", rgb))
 
         img = get_jump_image(source, batch, plate, well, channel, site, None)
 
-        ax = axes[counter]
         ax.imshow(img, vmin=0, vmax=np.percentile(img, int_percentile), cmap=cmap)
         ax.axis("off")
 
@@ -137,10 +121,8 @@ def display_site(
             transform=ax.transAxes,
         )
 
-        counter += 1
-
     # put label in last subplot
-    ax = axes[counter]
+    ax = axes[-1]
     ax.text(
         0.5,
         0.5,
@@ -155,7 +137,6 @@ def display_site(
 
     # show plot
     plt.tight_layout()
-    plt.show()
 
 
 # %% [markdown]

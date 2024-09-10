@@ -1,6 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
-# title: Query external resources
+# title: Explore perturbation clusters
 # jupyter:
 #   jupytext:
 #     text_representation:

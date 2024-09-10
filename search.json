@@ -136,23 +136,23 @@
   {
     "objectID": "explanations/glossary.html",
     "href": "explanations/glossary.html",
-    "title": "Definitions",
+    "title": "Glossary and Acronyms",
     "section": "",
-    "text": "Definitions\n\nCytomining\n\nAcronyms\nReference for terms and their definition.",
+    "text": "Glossary and Acronyms\n\nAcronyms\n\nOther definitions\nReference for terms and their definition.",
     "crumbs": [
       "Explanations",
-      "Definitions"
+      "Glossary and Acronyms"
     ]
   },
   {
-    "objectID": "explanations/glossary.html#cytomining",
-    "href": "explanations/glossary.html#cytomining",
-    "title": "Definitions",
-    "section": "Cytomining",
-    "text": "Cytomining\nThese definitions are related to cytomining libraries and may not be relevant to the more recent tools. They are kept for future reference.\nexternal_metadata: Additional information for compounds, the essential metadata are (Plate_Map_Name, well_position and broad_sample). poscon_diverse: Other positive controls, this is experiment-specific. poscon_cp: Standard positive control used for compound studies(cp stands for compound probes). q-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results. Replicate profile: Aggregation of single-cell profiles (e.g., across all cells in a single well), usually the median of all cells in a field of view.",
+    "objectID": "explanations/glossary.html#acronyms",
+    "href": "explanations/glossary.html#acronyms",
+    "title": "Glossary and Acronyms",
+    "section": "Acronyms",
+    "text": "Acronyms\n\nJUMP: Joint Undertaking for Morphological Profiling\nmAP: mean Average Precision\nCRISPR: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, whence genes were knocked-out.\nORF: Open Reading Frame. The ORF dataframe is comprised of overexpressed genes.",
     "crumbs": [
       "Explanations",
-      "Definitions"
+      "Glossary and Acronyms"
     ]
   },
   {

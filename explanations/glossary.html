@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explanations/glossary.html">Definitions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explanations/FAQ.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explanations/glossary.html">Glossary and Acronyms</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -185,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../explanations/glossary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Definitions</span></a>
+ <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -206,11 +206,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link active" data-scroll-target="#definitions">Definitions</a>
+  <li><a href="#glossary-and-acronyms" id="toc-glossary-and-acronyms" class="nav-link active" data-scroll-target="#glossary-and-acronyms">Glossary and Acronyms</a>
   <ul class="collapse">
-  <li><a href="#cytomining" id="toc-cytomining" class="nav-link" data-scroll-target="#cytomining">Cytomining</a></li>
-  </ul></li>
   <li><a href="#acronyms" id="toc-acronyms" class="nav-link" data-scroll-target="#acronyms">Acronyms</a></li>
+  </ul></li>
+  <li><a href="#other-definitions" id="toc-other-definitions" class="nav-link" data-scroll-target="#other-definitions">Other definitions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/glossary.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="glossary.ipynb" download="glossary.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -221,41 +221,41 @@ ul.task-list li input[type="checkbox"] {
 
 
 <ul>
-<li><a href="#Definitions">Definitions</a>
+<li><a href="#Glossary-and-Acronyms">Glossary and Acronyms</a>
 <ul>
-<li><a href="#Cytomining">Cytomining</a></li>
-</ul></li>
 <li><a href="#Acronyms">Acronyms</a></li>
+</ul></li>
+<li><a href="#Other-definitions">Other definitions</a></li>
 </ul>
 <p>Reference for terms and their definition.</p>
-<p><a id="Definitions"></a></p>
-<section id="definitions" class="level1">
-<h1>Definitions</h1>
+<p><a id="Glossary-and-Acronyms"></a></p>
+<section id="glossary-and-acronyms" class="level1">
+<h1>Glossary and Acronyms</h1>
 <ul>
 <li>Morphological profiling: Method to study cell phenotypes by quantifying their shape, size and intensity features.</li>
-<li>Phenotypic activity: Metric that indicates how well can we distinguish a perturbation from its negative controls.</li>
-<li>Phenotypic consistency: Metric that indicates how well does a perturbation match an annotated resource (e.g., gene-target known interactions) (TODO add ref).</li>
-<li>Phenotypic distinctiveness: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment (TODO add ref).</li>
+<li>Phenotypic activity: Metric that indicates how well can we distinguish a perturbation from its negative controls (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11014546/">ref</a>).</li>
+<li>Phenotypic consistency: Metric that indicates how well does a perturbation match an annotated resource (e.g., gene-target known interactions).</li>
+<li>Phenotypic distinctiveness: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment.</li>
 <li>Cosine similarity: Metric correlated to how close two vectors are. It assumes all the elements in them (usually features) have the same weight.</li>
 <li>Retrievability: Umbrella term for the methods that assess the quality of a set of samples in a profiling experiment: phenotypic activity, consistency and distinctiveness.</li>
 <li>Consensus profile: Aggregated profiles across all biological replicates (e.g., across all wells) of a given perturbation, generally it is the median of every feature.</li>
 </ul>
-<p><a id="Cytomining"></a></p>
-<section id="cytomining" class="level2">
-<h2 class="anchored" data-anchor-id="cytomining">Cytomining</h2>
-<p>These definitions are related to <a href="https://github.com/cytomining">cytomining</a> libraries and may not be relevant to the more recent tools. They are kept for future reference.</p>
-<p>external_metadata: Additional information for compounds, the essential metadata are (Plate_Map_Name, well_position and broad_sample). poscon_diverse: Other positive controls, this is experiment-specific. poscon_cp: Standard positive control used for compound studies(cp stands for compound probes). q-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results. Replicate profile: Aggregation of single-cell profiles (e.g., across all cells in a single well), usually the median of all cells in a field of view.</p>
 <p><a id="Acronyms"></a></p>
-</section>
-</section>
-<section id="acronyms" class="level1">
-<h1>Acronyms</h1>
+<section id="acronyms" class="level2">
+<h2 class="anchored" data-anchor-id="acronyms">Acronyms</h2>
 <ul>
 <li>JUMP: Joint Undertaking for Morphological Profiling</li>
 <li>mAP: mean Average Precision</li>
 <li>CRISPR: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, whence genes were knocked-out.</li>
 <li>ORF: Open Reading Frame. The ORF dataframe is comprised of overexpressed genes.</li>
 </ul>
+<p><a id="Other-definitions"></a></p>
+</section>
+</section>
+<section id="other-definitions" class="level1">
+<h1>Other definitions</h1>
+<p>These definitions are related to <a href="https://github.com/cytomining">cytomining</a> libraries and may not be relevant to the more recent tools. They are kept here in case you encounter them in papers/metadata.</p>
+<p>poscon_diverse: Other positive controls, this is experiment-specific. poscon_cp: Standard positive control used for compound studies(cp stands for compound probes). q-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results.</p>
 
 
 </section>

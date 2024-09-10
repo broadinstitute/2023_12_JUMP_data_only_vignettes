@@ -1,6 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
-# title: Access JUMP profiles
+# title: Retrieve JUMP profiles
 # jupyter:
 #   jupytext:
 #     text_representation:

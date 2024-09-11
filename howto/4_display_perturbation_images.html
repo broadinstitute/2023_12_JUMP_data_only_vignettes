@@ -76,18 +76,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -118,9 +117,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/1_retrieve_profiles.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/4_display_perturbation_images.html">Plot all channels for one site</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
     </div>
   </nav>
 </header>
@@ -141,11 +137,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -261,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This notebook demonstrates how to retrieve and plot all channels for one site using jump_portrait.</p>
-<div id="ca34b9fb" class="cell" data-execution_count="1">
+<div id="99af5668" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
@@ -276,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this.</p>
 <p>Here we retrieve image locations for the “RAB30” gene:</p>
-<div id="f7c536d2" class="cell" data-execution_count="2">
+<div id="789abb41" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
@@ -292,7 +283,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 <p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF).</p>
 <p>We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
-<div id="e0e135ec" class="cell" data-execution_count="3">
+<div id="8c520dce" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
@@ -308,7 +299,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 <p>There are 34 sites corresponding to this compound.</p>
 <p>We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
-<div id="5f0f0ba2" class="cell" data-execution_count="4">
+<div id="6233acd2" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(</span>
@@ -398,14 +389,14 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </details>
 </div>
 <p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
-<div id="bf295e15" class="cell" data-execution_count="5">
+<div id="0d864406" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> cmpd_info_byjcp.row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Next, we define the label and make the plot:</p>
-<div id="8293220e" class="cell" data-execution_count="6">
+<div id="87f725f7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="ch">\n\n</span><span class="st">plate:</span><span class="ch">\n</span><span class="sc">{}</span><span class="ch">\n</span><span class="st">well: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">site: </span><span class="sc">{}</span><span class="st">"</span></span>
@@ -423,13 +414,13 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="4_display_perturbation_images_files/figure-html/cell-7-output-1.png" width="735" height="464" class="figure-img"></p>
+<p><img src="4_display_perturbation_images_files/figure-html/cell-7-output-1.png" width="723" height="476" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here, we plot one of the RAB30 ORF images:</p>
-<div id="9a6aa1f6" class="cell" data-execution_count="7">
+<div id="ae98f221" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>
@@ -454,7 +445,7 @@ Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2
 </div>
 </div>
 <p>And for CRISPR:</p>
-<div id="69ecef00" class="cell" data-execution_count="8">
+<div id="c85d07b2" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site, <span class="op">*</span>rest <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>

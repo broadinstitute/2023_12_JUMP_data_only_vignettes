@@ -10,12 +10,11 @@ language:
 website:
     title: "JUMP documentation and examples"
     repo-url: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes
-    repo-actions: [edit, issue]
+    repo-actions: [edit, source, issue]
     reader-mode: true
     search:
         location: sidebar
         type: overlay
-        keyboard-shortcut: ["?", "H"]
     sidebar:
         style: "floating"
         contents:
@@ -27,6 +26,9 @@ website:
             - section: Explanations
               contents:
                   - auto: "explanations/*"
+        tools:
+            - icon: github
+              href: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes
 
 format:
     html:

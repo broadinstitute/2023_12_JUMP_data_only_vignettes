@@ -37,9 +37,8 @@ fields = (
 # %%
 genes = ("CHRM4", "SCAPER", "GPR176", "LY6K")
 # %% [markdown]
-# Get the
-# %%
 # Get a dictionary that maps Gene symbols to Entrez IDs
+# %%
 ids = get_mapper(
     query=genes,
     input_column="standard_key",
@@ -56,6 +55,8 @@ for id_ in ids.values():
         {k: record["DocumentSummarySet"]["DocumentSummary"][0][k] for k in fields}
     )
 
-# %% Show the columns in a nice way
+# %%
+# Show the resultant information in a human-readable format
+# %%
 with pl.Config(fmt_str_lengths=1000):
     print(pl.DataFrame(entries))

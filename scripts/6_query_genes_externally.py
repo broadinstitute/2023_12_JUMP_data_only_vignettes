@@ -57,4 +57,5 @@ for id_ in ids.values():
     )
 
 # %% Show the columns in a nice way
-pl.DataFrame(entries)
+with pl.Config(fmt_str_lengths=1000):
+    print(pl.DataFrame(entries))

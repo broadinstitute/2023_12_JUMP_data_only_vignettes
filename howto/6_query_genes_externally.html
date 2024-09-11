@@ -76,16 +76,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
+  "panel-placement": "start",
   "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    "?",
+    "H"
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -95,7 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
+    "search-text-placeholder": "Search",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -120,6 +119,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/1_retrieve_profiles.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/6_query_genes_externally.html">Query information of genes</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav>
 </header>
@@ -130,13 +132,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">JUMP documentation and examples</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
 </div>
     </div>
       </div>
@@ -255,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This how-to focuses on linking gene names outside. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use <a href="https://biopython.org/">Biopython</a>, this only explores a subset of the options, the full Entrez <a href="https://www.ncbi.nlm.nih.gov/books/NBK25501/">documentation</a>, which contains all the options, is a useful reference to keep in hand..</p>
-<div id="60b2161f" class="cell" title="Imports" data-execution_count="1">
+<div id="2507f9bf" class="cell" title="Imports" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -264,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We define</p>
-<div id="d21c05f8" class="cell" data-execution_count="2">
+<div id="d22da1ba" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Entrez.email <span class="op">=</span> <span class="st">"example@email.com"</span></span>
@@ -277,14 +280,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>We will use a set of genes that we found in a JUMP cluster as an example.</p>
-<div id="d3bb8154" class="cell" data-execution_count="3">
+<div id="ed80dcb6" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> (<span class="st">"CHRM4"</span>, <span class="st">"SCAPER"</span>, <span class="st">"GPR176"</span>, <span class="st">"LY6K"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Get the</p>
-<div id="47884b9b" class="cell" data-execution_count="4">
+<div id="c35d82d7" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get a dictionary that maps Gene symbols to Entrez IDs</span></span>
@@ -305,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="173cd3a9" class="cell" title="Show the columns in a nice way" data-execution_count="5">
+<div id="8f11fb24" class="cell" title="Show the columns in a nice way" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(entries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

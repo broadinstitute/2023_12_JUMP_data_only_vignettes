@@ -5,7 +5,7 @@ This is work in progress. The purpose of this resource is to concentrate all the
 
 ## I just want to access the web tools
 
-[Here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr) you can find the up-to-date web tools to explore JUMP from your browser.
+[Here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#Quick data access) you can find the up-to-date web tools to explore JUMP from your browser.
 
 
 ## I am a developer interested in using and writing programatic tools for JUMP

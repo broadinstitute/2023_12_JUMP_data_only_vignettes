@@ -15,14 +15,16 @@
 # ---
 
 # %% [markdown]
-# This how-to focuses on linking gene names outside. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use [Biopython](https://biopython.org/), this only explores a subset of the options, the full Entrez [documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/), which contains all the options, is a useful reference to keep in hand..
+# ## Overview
+# This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use [Biopython](https://biopython.org/), this only explores a subset of the options, the full Entrez [documentation](https://www.ncbi.nlm.nih.gov/books/NBK25501/), which contains all the options, is a useful reference to bookmark.
+# ## Procedure
 # %% Imports
 import polars as pl
 from Bio import Entrez
 from broad_babel.query import get_mapper
 
 # %% [markdown]
-# We define
+# We define the fields that we need and an email to provide to the server we will query.
 # %%
 
 Entrez.email = "example@email.com"
@@ -33,7 +35,7 @@ fields = (
     "OtherDesignations",  # This gives us synonyms
 )
 # %% [markdown]
-# We will use a set of genes that we found in a JUMP cluster as an example.
+# As an example, we will use a set of genes that we found in a JUMP cluster.
 # %%
 genes = ("CHRM4", "SCAPER", "GPR176", "LY6K")
 # %% [markdown]

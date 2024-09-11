@@ -1,0 +1,3 @@
+#+TITLE: Individual analysis
+
+This folder contains work-in-progress for specific jump stories that involve JUMP data and no new experiments or images. The repository where those are coordinated is https://github.com/broadinstitute/2023_JUMP_stories. The content of this folder may be moved to an independent repository if deemed necessary.

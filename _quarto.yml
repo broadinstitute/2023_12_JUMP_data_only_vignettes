@@ -4,14 +4,18 @@ project:
 # author: Alán F. Muñoz
 # date: last-modified
 
+language:
+    search-text-placeholder: Search
+
 website:
     title: "JUMP documentation and examples"
     repo-url: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes
     repo-actions: [edit, issue]
     reader-mode: true
     search:
-        location: navbar
+        location: sidebar
         type: overlay
+        keyboard-shortcut: ["?", "H"]
     sidebar:
         style: "floating"
         contents:

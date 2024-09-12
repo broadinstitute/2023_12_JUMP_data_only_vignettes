@@ -19,7 +19,7 @@ This table provides direct link to run the guides on your browser. Google Colab 
 
 | Google Collab                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Retrieve JUMP profiles](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/1_tutorial_basic.ipynb)                   |
+| [Retrieve JUMP profiles](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/1_retrieve_profiles.ipynb)                   |
 | [Add metadata to profiles](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/2_add_metadata.ipynb)                   |
 | [Calculate phenotypic activity](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/3_calculate_activity.ipynb)        |
 | [Display perturbation images](https://colab.research.google.com/github/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/colab/colab/4_display_perturbation_images.ipynb) |

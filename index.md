@@ -5,7 +5,7 @@ This is work in progress. The purpose of this resource is to concentrate all the
 
 ## I just want to access the web tools
 
-[Here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#Quick data access) you can find the up-to-date web tools to explore JUMP from your browser.
+[Here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#Quick data access) you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.
 
 
 ## I am a developer interested in using and writing programatic tools for JUMP
@@ -15,7 +15,7 @@ Our [monorepo](https://github.com/broadinstitute/monorepo/tree/main) hosts Pytho
 
 ## How can I access the How-To guides in a live coding environment?
 
-This table provides direct link to run the guides on your browser. Google Colab is the only supported web interface.
+This table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.
 
 | Google Collab                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

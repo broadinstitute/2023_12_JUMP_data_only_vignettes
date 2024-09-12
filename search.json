@@ -70,7 +70,40 @@
     "href": "explanations/Resources.html",
     "title": "Available resources",
     "section": "",
-    "text": "Available resources\n\n\n\nAvailable resources\n\nHome website: Access news and related publications.\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "text": "Available resources\n\nMore information\nData\nTools",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
+  },
+  {
+    "objectID": "explanations/Resources.html#more-information",
+    "href": "explanations/Resources.html#more-information",
+    "title": "Available resources",
+    "section": "More information",
+    "text": "More information\n\nHome website: Access news and related publications.",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
+  },
+  {
+    "objectID": "explanations/Resources.html#data",
+    "href": "explanations/Resources.html#data",
+    "title": "Available resources",
+    "section": "Data",
+    "text": "Data\n\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nYou can find the metadata of JUMP here, alongside the schema of all columns and including Target-2.",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
+  },
+  {
+    "objectID": "explanations/Resources.html#tools",
+    "href": "explanations/Resources.html#tools",
+    "title": "Available resources",
+    "section": "Tools",
+    "text": "Tools\n\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
     "crumbs": [
       "Explanations",
       "Available resources"

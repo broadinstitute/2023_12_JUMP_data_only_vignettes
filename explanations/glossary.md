@@ -9,12 +9,12 @@ Reference for terms and their definition.
 
 # Glossary and Acronyms
 
--   **Morphological profiling**: Method to study cell phenotypes by quantifying their shape, size and intensity features.
+-   **Morphological profiling** (aka image-based profiling): Method to study cell phenotypes by quantifying their shape, size and intensity features.
 -   **Phenotypic activity**: Metric that indicates how well can we distinguish a perturbation from its negative controls [ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11014546/).
 -   **Phenotypic consistency**: Metric that indicates how well does a perturbation match an annotated resource (e.g., gene-target known interactions).
 -   **Phenotypic distinctiveness**: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment.
 -   **Cosine similarity**: Metric correlated to how close two vectors are. It assumes all the elements in them (usually features) have the same weight.
--   **Retrievability: Umbrella term for the methods that assess the quality of a set of samples in a profiling experiment**: phenotypic activity, consistency and distinctiveness.
+-   **Retrievability: Umbrella term for the methods that assess the quality of matching among a set of samples in a profiling experiment**: phenotypic activity, consistency and distinctiveness.
 -   **Consensus profile**: Aggregated profiles across all biological replicates (e.g., across all wells) of a given perturbation, generally it is the median of every feature.
 
 

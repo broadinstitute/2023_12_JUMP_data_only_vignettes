@@ -1,7 +1,6 @@
 # Overview
 
-This is work in progress. The purpose of this resource is to concentrate all the useful and up-to-date information necessary to make use of [JUMP](https://jump-cellpainting.broadinstitute.org/). It aims to summarise the most useful information, including examples, guides, know-hows and links to more material for deeper dives into data acquisition, processing, sharing and visualisation.
-
+The purpose of this resource is to concentrate all the useful and up-to-date information necessary to make use of [JUMP](https://jump-cellpainting.broadinstitute.org/). JUMP stands for Joint Undertaking for Morphological Profiling, and the JUMP-Cell Painting Consortium it is a collaboration between multiple academic and industrial partners to produce the largest [Cell Painting](https://jump-cellpainting.broadinstitute.org/cell-painting) dataset comprised of images and morphological profiles of genetically or chemically perturbed cells. This website aims to summarise the most useful information, including examples, guides, know-hows and links to more material for deeper dives into data acquisition, processing, sharing and visualization.
 
 ## I just want to access the web tools
 

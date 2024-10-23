@@ -4,7 +4,7 @@ The purpose of this resource is to concentrate all the useful and up-to-date inf
 
 ## I just want to access the web tools
 
-[Here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#Quick data access) you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.
+[Here](https://github.com/broadinstitute/monorepo/blob/main/libs/jump_rr/README.md#Quick%20data%20access) you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.
 
 
 ## I am a developer interested in using and writing programatic tools for JUMP

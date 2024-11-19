@@ -30,7 +30,7 @@ Most chemical compound plates contain 16 negative control wells, while some have
 
 ### Which pipelines produced the final datasets?
 
-Details on the pipelines at each step can be found on [this](http://../explanations/pipelines.md) page.
+Details on the pipelines at each step can be found on [this](../reference/computational_pipelines.md) page.
 
 ### Do we expect one gene’s JCP (JUMP Cell Painting ID) to be associated with multiple targets?
 

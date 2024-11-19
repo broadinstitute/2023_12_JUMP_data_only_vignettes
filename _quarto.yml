@@ -20,15 +20,15 @@ website:
         contents:
             - text: Home
               file: index.md
+            - section: Explanations
+              contents:
+                  - auto: "explanations/*"
             - section: Reference
               contents:
                   - auto: "reference/*"
             - section: How-To Guides
               contents:
                   - auto: "howto/*"
-            - section: Explanations
-              contents:
-                  - auto: "explanations/*"
             - text: Cite
               file: cite.md
         tools:

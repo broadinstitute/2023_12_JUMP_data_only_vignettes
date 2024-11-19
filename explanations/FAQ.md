@@ -44,5 +44,3 @@ Sometimes, two compounds were given separate JCPs because they had different nam
 
 In CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info [here](https://github.com/jump-cellpainting/morphmap/issues/178)).
 
-### Where can I search for more information?
-

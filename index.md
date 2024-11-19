@@ -22,7 +22,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 
 2. Want to fetch and analyze data?
    
-   - Follow our [how-to guides](http://howto/) for common analyses
+   - Follow our [how-to guides](./howto/0_howto.md) for common analyses
 
  
 

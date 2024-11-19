@@ -1,6 +1,9 @@
-# Accessing a live coding environment
+# How-to Guides
+You can use the sidebar on the left to find the most common analyses. They are sorted in the usual order in which data is processed.
 
-This table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.
+## Accessing a live coding environment
+
+This table provides direct link to run the guides on your browser. 
 
 | Google Collab                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

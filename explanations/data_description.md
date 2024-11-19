@@ -108,7 +108,7 @@ Many of the processed datasets and manifest files can be found associated with t
 
 ### Programmatic Access
 
-- [How-to guides](http://howto/) provided  
+- [How-to guides](../howto/0_howto.md) provided  
 - APIs and libraries for programmatic access:  
   - [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata):   
   - [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait): Fetch images using standard gene/compound names into a Python session or filesystem.  

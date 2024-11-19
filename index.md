@@ -16,8 +16,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
      * [JUMP-CP Data Explorer](https://phenaid.ardigen.com/jumpcpexplorer/) by Ardigen, 
      * [JUMP-CP Data Portal](https://www.springscience.com/jump-cp) by Spring Discovery, 
 
-   You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\!
-
+   You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/reference/interactive_tools.html) page for instructions for these tools. 
  
 
 2. Want to fetch and analyze data?

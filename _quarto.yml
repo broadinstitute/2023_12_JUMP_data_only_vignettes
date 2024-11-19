@@ -20,12 +20,17 @@ website:
         contents:
             - text: Home
               file: index.md
+            - section: Reference
+              contents:
+                  - auto: "reference/*"
             - section: How-To Guides
               contents:
                   - auto: "howto/*"
             - section: Explanations
               contents:
                   - auto: "explanations/*"
+            - text: Cite
+              file: cite.md
         tools:
             - icon: github
               href: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes

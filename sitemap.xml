@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/glossary.html</loc>
-    <lastmod>2024-10-23T01:54:34.380Z</lastmod>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/Resources.html</loc>
+    <lastmod>2024-11-19T22:08:15.478Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/FAQ.html</loc>
-    <lastmod>2024-10-23T01:54:34.380Z</lastmod>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/quirks_details.html</loc>
+    <lastmod>2024-11-19T22:08:15.478Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/reference/glossary.html</loc>
+    <lastmod>2024-11-19T22:08:15.482Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/reference/computational_pipelines.html</loc>
+    <lastmod>2024-11-19T22:08:15.482Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/index.html</loc>
-    <lastmod>2024-10-23T01:54:34.380Z</lastmod>
+    <lastmod>2024-11-19T22:08:15.478Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/2_add_metadata.html</loc>
-    <lastmod>2024-10-23T01:55:46.696Z</lastmod>
+    <lastmod>2024-11-19T22:09:52.802Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/5_explore_distance_clusters.html</loc>
-    <lastmod>2024-10-23T01:55:47.929Z</lastmod>
+    <lastmod>2024-11-19T22:09:53.982Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/6_query_genes_externally.html</loc>
-    <lastmod>2024-10-23T01:55:48.333Z</lastmod>
+    <lastmod>2024-11-19T22:09:54.354Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/4_display_perturbation_images.html</loc>
-    <lastmod>2024-10-23T01:55:47.541Z</lastmod>
+    <lastmod>2024-11-19T22:09:53.594Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/3_calculate_activity.html</loc>
-    <lastmod>2024-10-23T01:55:47.149Z</lastmod>
+    <lastmod>2024-11-19T22:09:53.186Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/howto/1_retrieve_profiles.html</loc>
-    <lastmod>2024-10-23T01:55:46.260Z</lastmod>
+    <lastmod>2024-11-19T22:09:52.410Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/readme.html</loc>
-    <lastmod>2024-10-23T01:54:34.380Z</lastmod>
+    <lastmod>2024-11-19T22:08:15.482Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/Resources.html</loc>
-    <lastmod>2024-10-23T01:54:34.380Z</lastmod>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/reference/interactive_tools.html</loc>
+    <lastmod>2024-11-19T22:08:15.482Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/FAQ.html</loc>
+    <lastmod>2024-11-19T22:08:15.478Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/2023_12_JUMP_data_only_vignettes/explanations/data_description.html</loc>
+    <lastmod>2024-11-19T22:08:15.478Z</lastmod>
   </url>
 </urlset>

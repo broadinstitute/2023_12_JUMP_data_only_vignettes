@@ -1,105 +1,152 @@
 [
   {
-    "objectID": "explanations/glossary.html",
-    "href": "explanations/glossary.html",
-    "title": "Glossary and Acronyms",
+    "objectID": "explanations/Resources.html",
+    "href": "explanations/Resources.html",
+    "title": "Available resources",
     "section": "",
-    "text": "Glossary and Acronyms\n\nAcronyms\n\nOther definitions\nReference for terms and their definition.",
+    "text": "Available resources\n\nMore information\nData\nTools",
     "crumbs": [
       "Explanations",
-      "Glossary and Acronyms"
+      "Available resources"
     ]
   },
   {
-    "objectID": "explanations/glossary.html#acronyms",
-    "href": "explanations/glossary.html#acronyms",
-    "title": "Glossary and Acronyms",
-    "section": "Acronyms",
-    "text": "Acronyms\n\nJUMP: Joint Undertaking for Morphological Profiling\nmAP: mean Average Precision\nCRISPR: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, whence genes were knocked-out.\nORF: Open Reading Frame. The ORF dataframe is comprised of overexpressed genes.",
+    "objectID": "explanations/Resources.html#more-information",
+    "href": "explanations/Resources.html#more-information",
+    "title": "Available resources",
+    "section": "More information",
+    "text": "More information\n\nHome website: Access news and related publications.",
     "crumbs": [
       "Explanations",
-      "Glossary and Acronyms"
+      "Available resources"
     ]
   },
   {
-    "objectID": "explanations/FAQ.html",
-    "href": "explanations/FAQ.html",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "Frequently Asked Questions\n\nAnalyses\n\nHow can I reproduce an environment to explore JUMP data?\n\nData\n\nDoes JUMP contain X compound/gene?\nWhere are the datasets specification?\nWhy are some images with corresponding images but no downstream analysis?\nWhy do some perturbations have so many replicates\nHow were the profiles created?\nDo we we expect one JCP to have multiple targets?\nDo JCPs within either the CRISPR or ORF share the same gene?\nWeb interfaces\nFrequently Asked Questions and links to their answers. They are grouped based on whether they pertain to data, libraries or analyses.",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#analyses",
-    "href": "explanations/FAQ.html#analyses",
-    "title": "Frequently Asked Questions",
-    "section": "Analyses",
-    "text": "Analyses\n\n\nHow can I reproduce an environment to explore JUMP data?\n(WIP) The easiest way to set things up will be installing from pip in your enviromnment of choice:\npip install jump-deps",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#data",
-    "href": "explanations/FAQ.html#data",
-    "title": "Frequently Asked Questions",
+    "objectID": "explanations/Resources.html#data",
+    "href": "explanations/Resources.html#data",
+    "title": "Available resources",
     "section": "Data",
-    "text": "Data\n\n\nDoes JUMP contain X compound/gene?\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository.\n\n\n\nWhere are the datasets specification?\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nWhy are some images with corresponding images but no downstream analysis?\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nWhy do some perturbations have so many replicates\nMost plates contain 16 negative control wells, while some have as many as 28 wells. One replicate of four of the compound positive controls are added to wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nHow were the profiles created?\nWe used snakemake and pycytominer to generate these. The details can be found in this repo.\n\n\n\nDo we we expect one JCP to have multiple targets?\nYes, there will be many with multiple targets. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4.\nTwo were considered to be two different compounds because they had different names and broad_sample names. But after all the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nDo JCPs within either the CRISPR or ORF share the same gene?\nIn CRISPR each JCP ID corresponds to a different gene. But in ORF there are sometimes multiple reagents targeting the same gene. In this case, we compute consensus profiles at the gene level (more info here).\n\n\n\nWeb interfaces\n\nWhat is the source of the replicability metric?\nThese two files (ORF and CRISPR) contain the mAP and corrected p values for replicate retrieval. They won’t contain all ORF and CRISPR reagents because so of them were filtered out for qc reasons.\nX_Feature: For each row, is the Feature value an average for all the cells in the Metadata_image using the listed Mask? Or is it associated with a single cell in that image?\nAny Feature is the average of all cells and all replicates (typically four in total) for the specific mask and feature.\nHow are Statistic and Median calculated for each row? Are they calculated in relation to the average of the “Feature” values for the negative controls in the same plate?\n\nStatistic is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates, typically each replicate is in an independent plate).\nMedian is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.",
+    "text": "Data\n\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nYou can find the metadata of JUMP here, alongside the schema of all columns and including Target-2.",
     "crumbs": [
       "Explanations",
-      "Frequently Asked Questions"
+      "Available resources"
+    ]
+  },
+  {
+    "objectID": "explanations/Resources.html#tools",
+    "href": "explanations/Resources.html#tools",
+    "title": "Available resources",
+    "section": "Tools",
+    "text": "Tools\n\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "crumbs": [
+      "Explanations",
+      "Available resources"
+    ]
+  },
+  {
+    "objectID": "explanations/quirks_details.html",
+    "href": "explanations/quirks_details.html",
+    "title": "JUMP documentation and examples",
+    "section": "",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 2 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
+    "crumbs": [
+      "Explanations",
+      "Quirks and details"
+    ]
+  },
+  {
+    "objectID": "explanations/quirks_details.html#quirks-and-details",
+    "href": "explanations/quirks_details.html#quirks-and-details",
+    "title": "JUMP documentation and examples",
+    "section": "",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 2 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
+    "crumbs": [
+      "Explanations",
+      "Quirks and details"
+    ]
+  },
+  {
+    "objectID": "reference/glossary.html",
+    "href": "reference/glossary.html",
+    "title": "Glossary and Acronyms",
+    "section": "",
+    "text": "Reference for terms and their definition.\n\nImage-based profiling (also called morphological profiling): Method to study cell phenotypes by quantifying their shape, size and intensity features. The many features that are captured make up the profile of the cell or the population of cells in a sample.\n\nPhenotypic activity: Metric that indicates how well we can distinguish a perturbation from its negative controls, which quantifies how strong the phenotype is (Kalinin, et al. elaborates on the term).\n\nPhenotypic consistency: Metric that indicates how well a perturbation’s profile matches profiles of samples that are expected to be biologically related, according to an annotated resource (e.g., known gene-gene or compound-target interactions (Kalinin, et al.).\n\nPhenotypic distinctiveness: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment (not limited to negative controls, as in phenotypic activity).\n\nCosine similarity: Metric capturing how close two vectors are. It assumes all the elements in them (usually features) have the same weight.\n\nRetrievability: Umbrella term for the methods that assess the quality of matching among a set of samples in a profiling experiment: phenotypic activity, consistency, and distinctiveness.\n\nConsensus profile: Aggregated profiles across all biological replicates (e.g., across all wells) of a given perturbation, generally it is the median of every feature.\n\n\n\n\nJUMP: Joint Undertaking for Morphological Profiling\n\nmAP: mean Average Precision (Kalinin, et al. explains mAP in the context of image-based profiling)\n\nCRISPR: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, in which genes were knocked out.\n\nORF: Open Reading Frame. This method was used to produce the ORF datasets, in which genes were overexpressed.\n\n\n\n\nThese definitions are related to cytomining libraries and may not be relevant to the more recent tools. They are kept here in case you encounter them in papers/metadata.\n\nposcon_diverse: Non-primary positive controls, this is experiment-specific.\n\nposcon_cp: Standard positive control used for compound studies (cp stands for compound probes).\n\nq-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results.",
+    "crumbs": [
+      "Reference",
+      "Glossary and Acronyms"
+    ]
+  },
+  {
+    "objectID": "reference/glossary.html#acronyms",
+    "href": "reference/glossary.html#acronyms",
+    "title": "Glossary and Acronyms",
+    "section": "",
+    "text": "JUMP: Joint Undertaking for Morphological Profiling\n\nmAP: mean Average Precision (Kalinin, et al. explains mAP in the context of image-based profiling)\n\nCRISPR: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, in which genes were knocked out.\n\nORF: Open Reading Frame. This method was used to produce the ORF datasets, in which genes were overexpressed.",
+    "crumbs": [
+      "Reference",
+      "Glossary and Acronyms"
+    ]
+  },
+  {
+    "objectID": "reference/glossary.html#other-definitions",
+    "href": "reference/glossary.html#other-definitions",
+    "title": "Glossary and Acronyms",
+    "section": "",
+    "text": "These definitions are related to cytomining libraries and may not be relevant to the more recent tools. They are kept here in case you encounter them in papers/metadata.\n\nposcon_diverse: Non-primary positive controls, this is experiment-specific.\n\nposcon_cp: Standard positive control used for compound studies (cp stands for compound probes).\n\nq-value: Expected False Discovery Rate (FDR): the proportion of false positives among all positive results.",
+    "crumbs": [
+      "Reference",
+      "Glossary and Acronyms"
+    ]
+  },
+  {
+    "objectID": "reference/computational_pipelines.html",
+    "href": "reference/computational_pipelines.html",
+    "title": "Computational Pipelines",
+    "section": "",
+    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.\n\n\n\nThe complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
+    "crumbs": [
+      "Reference",
+      "Computational Pipelines"
+    ]
+  },
+  {
+    "objectID": "reference/computational_pipelines.html#image-processing-pipeline",
+    "href": "reference/computational_pipelines.html#image-processing-pipeline",
+    "title": "Computational Pipelines",
+    "section": "",
+    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.",
+    "crumbs": [
+      "Reference",
+      "Computational Pipelines"
+    ]
+  },
+  {
+    "objectID": "reference/computational_pipelines.html#profile-generation",
+    "href": "reference/computational_pipelines.html#profile-generation",
+    "title": "Computational Pipelines",
+    "section": "",
+    "text": "The complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
+    "crumbs": [
+      "Reference",
+      "Computational Pipelines"
     ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Overview",
+    "title": "Getting Started with JUMP",
     "section": "",
-    "text": "The purpose of this resource is to concentrate all the useful and up-to-date information necessary to make use of JUMP. JUMP stands for Joint Undertaking for Morphological Profiling, and the JUMP-Cell Painting Consortium it is a collaboration between multiple academic and industrial partners to produce the largest Cell Painting dataset comprised of images and morphological profiles of genetically or chemically perturbed cells. This website aims to summarise the most useful information, including examples, guides, know-hows and links to more material for deeper dives into data acquisition, processing, sharing and visualization.\n\n\nHere you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.\n\n\n\nOur monorepo hosts Python libraries that may help you access JUMP data in a high-throughput manner.\n\n\n\nThis table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).\n\n\n\nTo provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges in challenge, hampering collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.",
+    "text": "What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.\n\n\nHere you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.\n\n\nThis table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
     "crumbs": [
       "Home"
     ]
   },
   {
-    "objectID": "index.html#i-just-want-to-access-the-web-tools",
-    "href": "index.html#i-just-want-to-access-the-web-tools",
-    "title": "Overview",
+    "objectID": "index.html#choose-your-own-path",
+    "href": "index.html#choose-your-own-path",
+    "title": "Getting Started with JUMP",
     "section": "",
-    "text": "Here you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#i-am-a-developer-interested-in-using-and-writing-programatic-tools-for-jump",
-    "href": "index.html#i-am-a-developer-interested-in-using-and-writing-programatic-tools-for-jump",
-    "title": "Overview",
-    "section": "",
-    "text": "Our monorepo hosts Python libraries that may help you access JUMP data in a high-throughput manner.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#how-can-i-access-the-how-to-guides-in-a-live-coding-environment",
-    "href": "index.html#how-can-i-access-the-how-to-guides-in-a-live-coding-environment",
-    "title": "Overview",
-    "section": "",
-    "text": "This table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#what-is-the-purpose-of-this-website",
-    "href": "index.html#what-is-the-purpose-of-this-website",
-    "title": "Overview",
-    "section": "",
-    "text": "To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We believe complexity is one of the biggest challenges in challenge, hampering collaboration and novel biological insights. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.",
+    "text": "Here you can find the up-to-date web tools to explore JUMP from your browser. These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.\n\n\nThis table provides direct link to run the guides on your browser. Google Colab is the only supported live-coding web interface.\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
     "crumbs": [
       "Home"
     ]
@@ -131,7 +178,7 @@
     "href": "howto/6_query_genes_externally.html",
     "title": "Query information of genes",
     "section": "",
-    "text": "This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use Biopython, this only explores a subset of the options, the full Entrez documentation, which contains all the options, is a useful reference to bookmark. ## Procedure\n\nimport polars as pl\nfrom Bio import Entrez\nfrom broad_babel.query import get_mapper\n\nDownloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.\n\n\nWe define the fields that we need and an email to provide to the server we will query.\n\nEntrez.email = \"example@email.com\"\nfields = (\n    \"Name\",\n    \"Description\",\n    \"Summary\",\n    \"OtherDesignations\",  # This gives us synonyms\n)\n\nAs an example, we will use a set of genes that we found in a JUMP cluster.\n\ngenes = (\"CHRM4\", \"SCAPER\", \"GPR176\", \"LY6K\")\n\nGet a dictionary that maps Gene symbols to Entrez IDs\n\nids = get_mapper(\n    query=genes,\n    input_column=\"standard_key\",\n    output_columns=\"standard_key,NCBI_Gene_ID\",\n)\n\n# Fetch the summaries for these genes\nentries = []\nfor id_ in ids.values():\n    stream = Entrez.esummary(db=\"gene\", id=id_)\n    record = Entrez.read(stream)\n\n    entries.append(\n        {k: record[\"DocumentSummarySet\"][\"DocumentSummary\"][0][k] for k in fields}\n    )\n\n\n# Show the resultant information in a human-readable format\n\n\nwith pl.Config(fmt_str_lengths=1000):\n    print(pl.DataFrame(entries))\n\nshape: (4, 4)\n┌────────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┐\n│ Name   ┆ Description                 ┆ Summary                     ┆ OtherDesignations           │\n│ ---    ┆ ---                         ┆ ---                         ┆ ---                         │\n│ str    ┆ str                         ┆ str                         ┆ str                         │\n╞════════╪═════════════════════════════╪═════════════════════════════╪═════════════════════════════╡\n│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │\n│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │\n│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │\n│        ┆                             ┆ cell surface receptors      ┆                             │\n│        ┆                             ┆ involved in responses to    ┆                             │\n│        ┆                             ┆ hormones, growth factors,   ┆                             │\n│        ┆                             ┆ and neurotransmitters (Hata ┆                             │\n│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │\n│        ┆                             ┆ 7893747]).[supplied by      ┆                             │\n│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │\n│ CHRM4  ┆ cholinergic receptor        ┆ The muscarinic cholinergic  ┆ muscarinic acetylcholine    │\n│        ┆ muscarinic 4                ┆ receptors belong to a       ┆ receptor M4|acetylcholine   │\n│        ┆                             ┆ larger family of G          ┆ receptor, muscarinic 4      │\n│        ┆                             ┆ protein-coupled receptors.  ┆                             │\n│        ┆                             ┆ The functional diversity of ┆                             │\n│        ┆                             ┆ these receptors is defined  ┆                             │\n│        ┆                             ┆ by the binding of           ┆                             │\n│        ┆                             ┆ acetylcholine and includes  ┆                             │\n│        ┆                             ┆ cellular responses such as  ┆                             │\n│        ┆                             ┆ adenylate cyclase           ┆                             │\n│        ┆                             ┆ inhibition,                 ┆                             │\n│        ┆                             ┆ phosphoinositide            ┆                             │\n│        ┆                             ┆ degeneration, and potassium ┆                             │\n│        ┆                             ┆ channel mediation.          ┆                             │\n│        ┆                             ┆ Muscarinic receptors        ┆                             │\n│        ┆                             ┆ influence many effects of   ┆                             │\n│        ┆                             ┆ acetylcholine in the        ┆                             │\n│        ┆                             ┆ central and peripheral      ┆                             │\n│        ┆                             ┆ nervous system. The         ┆                             │\n│        ┆                             ┆ clinical implications of    ┆                             │\n│        ┆                             ┆ this receptor are unknown;  ┆                             │\n│        ┆                             ┆ however, mouse studies link ┆                             │\n│        ┆                             ┆ its function to adenylyl    ┆                             │\n│        ┆                             ┆ cyclase inhibition.         ┆                             │\n│        ┆                             ┆ [provided by RefSeq, Jul    ┆                             │\n│        ┆                             ┆ 2008]                       ┆                             │\n│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │\n│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │\n│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │\n│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │\n│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │\n│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │\n│        ┆                             ┆ to be located in cell       ┆                             │\n│        ┆                             ┆ surface; cytoplasm; and     ┆                             │\n│        ┆                             ┆ plasma membrane. Predicted  ┆                             │\n│        ┆                             ┆ to be active in acrosomal   ┆                             │\n│        ┆                             ┆ vesicle. [provided by       ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Apr 2022]        ┆                             │\n│ SCAPER ┆ S-phase cyclin A associated ┆ Predicted to enable nucleic ┆ S phase cyclin A-associated │\n│        ┆ protein in the ER           ┆ acid binding activity and   ┆ protein in the endoplasmic  │\n│        ┆                             ┆ zinc ion binding activity.  ┆ reticulum|zinc finger       │\n│        ┆                             ┆ Located in cytosol and      ┆ protein 291                 │\n│        ┆                             ┆ nuclear speck. [provided by ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Apr 2022]        ┆                             │\n└────────┴─────────────────────────────┴─────────────────────────────┴─────────────────────────────┘",
+    "text": "This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use Biopython, this only explores a subset of the options, the full Entrez documentation, which contains all the options, is a useful reference to bookmark. ## Procedure\n\nimport polars as pl\nfrom Bio import Entrez\nfrom broad_babel.query import get_mapper\n\nDownloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.\n\n\nWe define the fields that we need and an email to provide to the server we will query.\n\nEntrez.email = \"example@email.com\"\nfields = (\n    \"Name\",\n    \"Description\",\n    \"Summary\",\n    \"OtherDesignations\",  # This gives us synonyms\n)\n\nAs an example, we will use a set of genes that we found in a JUMP cluster.\n\ngenes = (\"CHRM4\", \"SCAPER\", \"GPR176\", \"LY6K\")\n\nGet a dictionary that maps Gene symbols to Entrez IDs\n\nids = get_mapper(\n    query=genes,\n    input_column=\"standard_key\",\n    output_columns=\"standard_key,NCBI_Gene_ID\",\n)\n\n# Fetch the summaries for these genes\nentries = []\nfor id_ in ids.values():\n    stream = Entrez.esummary(db=\"gene\", id=id_)\n    record = Entrez.read(stream)\n\n    entries.append(\n        {k: record[\"DocumentSummarySet\"][\"DocumentSummary\"][0][k] for k in fields}\n    )\n\n\n# Show the resultant information in a human-readable format\n\n\nwith pl.Config(fmt_str_lengths=1000):\n    print(pl.DataFrame(entries))\n\nshape: (4, 4)\n┌────────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┐\n│ Name   ┆ Description                 ┆ Summary                     ┆ OtherDesignations           │\n│ ---    ┆ ---                         ┆ ---                         ┆ ---                         │\n│ str    ┆ str                         ┆ str                         ┆ str                         │\n╞════════╪═════════════════════════════╪═════════════════════════════╪═════════════════════════════╡\n│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │\n│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │\n│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │\n│        ┆                             ┆ cell surface receptors      ┆                             │\n│        ┆                             ┆ involved in responses to    ┆                             │\n│        ┆                             ┆ hormones, growth factors,   ┆                             │\n│        ┆                             ┆ and neurotransmitters (Hata ┆                             │\n│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │\n│        ┆                             ┆ 7893747]).[supplied by      ┆                             │\n│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │\n│ CHRM4  ┆ cholinergic receptor        ┆ The muscarinic cholinergic  ┆ muscarinic acetylcholine    │\n│        ┆ muscarinic 4                ┆ receptors belong to a       ┆ receptor M4|acetylcholine   │\n│        ┆                             ┆ larger family of G          ┆ receptor, muscarinic 4      │\n│        ┆                             ┆ protein-coupled receptors.  ┆                             │\n│        ┆                             ┆ The functional diversity of ┆                             │\n│        ┆                             ┆ these receptors is defined  ┆                             │\n│        ┆                             ┆ by the binding of           ┆                             │\n│        ┆                             ┆ acetylcholine and includes  ┆                             │\n│        ┆                             ┆ cellular responses such as  ┆                             │\n│        ┆                             ┆ adenylate cyclase           ┆                             │\n│        ┆                             ┆ inhibition,                 ┆                             │\n│        ┆                             ┆ phosphoinositide            ┆                             │\n│        ┆                             ┆ degeneration, and potassium ┆                             │\n│        ┆                             ┆ channel mediation.          ┆                             │\n│        ┆                             ┆ Muscarinic receptors        ┆                             │\n│        ┆                             ┆ influence many effects of   ┆                             │\n│        ┆                             ┆ acetylcholine in the        ┆                             │\n│        ┆                             ┆ central and peripheral      ┆                             │\n│        ┆                             ┆ nervous system. The         ┆                             │\n│        ┆                             ┆ clinical implications of    ┆                             │\n│        ┆                             ┆ this receptor are unknown;  ┆                             │\n│        ┆                             ┆ however, mouse studies link ┆                             │\n│        ┆                             ┆ its function to adenylyl    ┆                             │\n│        ┆                             ┆ cyclase inhibition.         ┆                             │\n│        ┆                             ┆ [provided by RefSeq, Jul    ┆                             │\n│        ┆                             ┆ 2008]                       ┆                             │\n│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │\n│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │\n│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │\n│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │\n│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │\n│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │\n│        ┆                             ┆ to be located in cell       ┆                             │\n│        ┆                             ┆ surface and plasma          ┆                             │\n│        ┆                             ┆ membrane. Predicted to be   ┆                             │\n│        ┆                             ┆ active in acrosomal         ┆                             │\n│        ┆                             ┆ vesicle. [provided by       ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Nov 2024]        ┆                             │\n│ SCAPER ┆ S-phase cyclin A associated ┆ Predicted to enable nucleic ┆ S phase cyclin A-associated │\n│        ┆ protein in the ER           ┆ acid binding activity and   ┆ protein in the endoplasmic  │\n│        ┆                             ┆ zinc ion binding activity.  ┆ reticulum|zinc finger       │\n│        ┆                             ┆ Acts upstream of or within  ┆ protein 291                 │\n│        ┆                             ┆ retina development in       ┆                             │\n│        ┆                             ┆ camera-type eye. Located in ┆                             │\n│        ┆                             ┆ cytosol and nuclear speck.  ┆                             │\n│        ┆                             ┆ [provided by Alliance of    ┆                             │\n│        ┆                             ┆ Genome Resources, Nov 2024] ┆                             │\n└────────┴─────────────────────────────┴─────────────────────────────┴─────────────────────────────┘",
     "crumbs": [
       "How-To Guides",
       "Query information of genes"
@@ -142,7 +189,7 @@
     "href": "howto/6_query_genes_externally.html#overview",
     "title": "Query information of genes",
     "section": "",
-    "text": "This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use Biopython, this only explores a subset of the options, the full Entrez documentation, which contains all the options, is a useful reference to bookmark. ## Procedure\n\nimport polars as pl\nfrom Bio import Entrez\nfrom broad_babel.query import get_mapper\n\nDownloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.\n\n\nWe define the fields that we need and an email to provide to the server we will query.\n\nEntrez.email = \"example@email.com\"\nfields = (\n    \"Name\",\n    \"Description\",\n    \"Summary\",\n    \"OtherDesignations\",  # This gives us synonyms\n)\n\nAs an example, we will use a set of genes that we found in a JUMP cluster.\n\ngenes = (\"CHRM4\", \"SCAPER\", \"GPR176\", \"LY6K\")\n\nGet a dictionary that maps Gene symbols to Entrez IDs\n\nids = get_mapper(\n    query=genes,\n    input_column=\"standard_key\",\n    output_columns=\"standard_key,NCBI_Gene_ID\",\n)\n\n# Fetch the summaries for these genes\nentries = []\nfor id_ in ids.values():\n    stream = Entrez.esummary(db=\"gene\", id=id_)\n    record = Entrez.read(stream)\n\n    entries.append(\n        {k: record[\"DocumentSummarySet\"][\"DocumentSummary\"][0][k] for k in fields}\n    )\n\n\n# Show the resultant information in a human-readable format\n\n\nwith pl.Config(fmt_str_lengths=1000):\n    print(pl.DataFrame(entries))\n\nshape: (4, 4)\n┌────────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┐\n│ Name   ┆ Description                 ┆ Summary                     ┆ OtherDesignations           │\n│ ---    ┆ ---                         ┆ ---                         ┆ ---                         │\n│ str    ┆ str                         ┆ str                         ┆ str                         │\n╞════════╪═════════════════════════════╪═════════════════════════════╪═════════════════════════════╡\n│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │\n│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │\n│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │\n│        ┆                             ┆ cell surface receptors      ┆                             │\n│        ┆                             ┆ involved in responses to    ┆                             │\n│        ┆                             ┆ hormones, growth factors,   ┆                             │\n│        ┆                             ┆ and neurotransmitters (Hata ┆                             │\n│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │\n│        ┆                             ┆ 7893747]).[supplied by      ┆                             │\n│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │\n│ CHRM4  ┆ cholinergic receptor        ┆ The muscarinic cholinergic  ┆ muscarinic acetylcholine    │\n│        ┆ muscarinic 4                ┆ receptors belong to a       ┆ receptor M4|acetylcholine   │\n│        ┆                             ┆ larger family of G          ┆ receptor, muscarinic 4      │\n│        ┆                             ┆ protein-coupled receptors.  ┆                             │\n│        ┆                             ┆ The functional diversity of ┆                             │\n│        ┆                             ┆ these receptors is defined  ┆                             │\n│        ┆                             ┆ by the binding of           ┆                             │\n│        ┆                             ┆ acetylcholine and includes  ┆                             │\n│        ┆                             ┆ cellular responses such as  ┆                             │\n│        ┆                             ┆ adenylate cyclase           ┆                             │\n│        ┆                             ┆ inhibition,                 ┆                             │\n│        ┆                             ┆ phosphoinositide            ┆                             │\n│        ┆                             ┆ degeneration, and potassium ┆                             │\n│        ┆                             ┆ channel mediation.          ┆                             │\n│        ┆                             ┆ Muscarinic receptors        ┆                             │\n│        ┆                             ┆ influence many effects of   ┆                             │\n│        ┆                             ┆ acetylcholine in the        ┆                             │\n│        ┆                             ┆ central and peripheral      ┆                             │\n│        ┆                             ┆ nervous system. The         ┆                             │\n│        ┆                             ┆ clinical implications of    ┆                             │\n│        ┆                             ┆ this receptor are unknown;  ┆                             │\n│        ┆                             ┆ however, mouse studies link ┆                             │\n│        ┆                             ┆ its function to adenylyl    ┆                             │\n│        ┆                             ┆ cyclase inhibition.         ┆                             │\n│        ┆                             ┆ [provided by RefSeq, Jul    ┆                             │\n│        ┆                             ┆ 2008]                       ┆                             │\n│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │\n│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │\n│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │\n│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │\n│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │\n│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │\n│        ┆                             ┆ to be located in cell       ┆                             │\n│        ┆                             ┆ surface; cytoplasm; and     ┆                             │\n│        ┆                             ┆ plasma membrane. Predicted  ┆                             │\n│        ┆                             ┆ to be active in acrosomal   ┆                             │\n│        ┆                             ┆ vesicle. [provided by       ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Apr 2022]        ┆                             │\n│ SCAPER ┆ S-phase cyclin A associated ┆ Predicted to enable nucleic ┆ S phase cyclin A-associated │\n│        ┆ protein in the ER           ┆ acid binding activity and   ┆ protein in the endoplasmic  │\n│        ┆                             ┆ zinc ion binding activity.  ┆ reticulum|zinc finger       │\n│        ┆                             ┆ Located in cytosol and      ┆ protein 291                 │\n│        ┆                             ┆ nuclear speck. [provided by ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Apr 2022]        ┆                             │\n└────────┴─────────────────────────────┴─────────────────────────────┴─────────────────────────────┘",
+    "text": "This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use Biopython, this only explores a subset of the options, the full Entrez documentation, which contains all the options, is a useful reference to bookmark. ## Procedure\n\nimport polars as pl\nfrom Bio import Entrez\nfrom broad_babel.query import get_mapper\n\nDownloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.\n\n\nWe define the fields that we need and an email to provide to the server we will query.\n\nEntrez.email = \"example@email.com\"\nfields = (\n    \"Name\",\n    \"Description\",\n    \"Summary\",\n    \"OtherDesignations\",  # This gives us synonyms\n)\n\nAs an example, we will use a set of genes that we found in a JUMP cluster.\n\ngenes = (\"CHRM4\", \"SCAPER\", \"GPR176\", \"LY6K\")\n\nGet a dictionary that maps Gene symbols to Entrez IDs\n\nids = get_mapper(\n    query=genes,\n    input_column=\"standard_key\",\n    output_columns=\"standard_key,NCBI_Gene_ID\",\n)\n\n# Fetch the summaries for these genes\nentries = []\nfor id_ in ids.values():\n    stream = Entrez.esummary(db=\"gene\", id=id_)\n    record = Entrez.read(stream)\n\n    entries.append(\n        {k: record[\"DocumentSummarySet\"][\"DocumentSummary\"][0][k] for k in fields}\n    )\n\n\n# Show the resultant information in a human-readable format\n\n\nwith pl.Config(fmt_str_lengths=1000):\n    print(pl.DataFrame(entries))\n\nshape: (4, 4)\n┌────────┬─────────────────────────────┬─────────────────────────────┬─────────────────────────────┐\n│ Name   ┆ Description                 ┆ Summary                     ┆ OtherDesignations           │\n│ ---    ┆ ---                         ┆ ---                         ┆ ---                         │\n│ str    ┆ str                         ┆ str                         ┆ str                         │\n╞════════╪═════════════════════════════╪═════════════════════════════╪═════════════════════════════╡\n│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │\n│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │\n│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │\n│        ┆                             ┆ cell surface receptors      ┆                             │\n│        ┆                             ┆ involved in responses to    ┆                             │\n│        ┆                             ┆ hormones, growth factors,   ┆                             │\n│        ┆                             ┆ and neurotransmitters (Hata ┆                             │\n│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │\n│        ┆                             ┆ 7893747]).[supplied by      ┆                             │\n│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │\n│ CHRM4  ┆ cholinergic receptor        ┆ The muscarinic cholinergic  ┆ muscarinic acetylcholine    │\n│        ┆ muscarinic 4                ┆ receptors belong to a       ┆ receptor M4|acetylcholine   │\n│        ┆                             ┆ larger family of G          ┆ receptor, muscarinic 4      │\n│        ┆                             ┆ protein-coupled receptors.  ┆                             │\n│        ┆                             ┆ The functional diversity of ┆                             │\n│        ┆                             ┆ these receptors is defined  ┆                             │\n│        ┆                             ┆ by the binding of           ┆                             │\n│        ┆                             ┆ acetylcholine and includes  ┆                             │\n│        ┆                             ┆ cellular responses such as  ┆                             │\n│        ┆                             ┆ adenylate cyclase           ┆                             │\n│        ┆                             ┆ inhibition,                 ┆                             │\n│        ┆                             ┆ phosphoinositide            ┆                             │\n│        ┆                             ┆ degeneration, and potassium ┆                             │\n│        ┆                             ┆ channel mediation.          ┆                             │\n│        ┆                             ┆ Muscarinic receptors        ┆                             │\n│        ┆                             ┆ influence many effects of   ┆                             │\n│        ┆                             ┆ acetylcholine in the        ┆                             │\n│        ┆                             ┆ central and peripheral      ┆                             │\n│        ┆                             ┆ nervous system. The         ┆                             │\n│        ┆                             ┆ clinical implications of    ┆                             │\n│        ┆                             ┆ this receptor are unknown;  ┆                             │\n│        ┆                             ┆ however, mouse studies link ┆                             │\n│        ┆                             ┆ its function to adenylyl    ┆                             │\n│        ┆                             ┆ cyclase inhibition.         ┆                             │\n│        ┆                             ┆ [provided by RefSeq, Jul    ┆                             │\n│        ┆                             ┆ 2008]                       ┆                             │\n│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │\n│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │\n│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │\n│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │\n│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │\n│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │\n│        ┆                             ┆ to be located in cell       ┆                             │\n│        ┆                             ┆ surface and plasma          ┆                             │\n│        ┆                             ┆ membrane. Predicted to be   ┆                             │\n│        ┆                             ┆ active in acrosomal         ┆                             │\n│        ┆                             ┆ vesicle. [provided by       ┆                             │\n│        ┆                             ┆ Alliance of Genome          ┆                             │\n│        ┆                             ┆ Resources, Nov 2024]        ┆                             │\n│ SCAPER ┆ S-phase cyclin A associated ┆ Predicted to enable nucleic ┆ S phase cyclin A-associated │\n│        ┆ protein in the ER           ┆ acid binding activity and   ┆ protein in the endoplasmic  │\n│        ┆                             ┆ zinc ion binding activity.  ┆ reticulum|zinc finger       │\n│        ┆                             ┆ Acts upstream of or within  ┆ protein 291                 │\n│        ┆                             ┆ retina development in       ┆                             │\n│        ┆                             ┆ camera-type eye. Located in ┆                             │\n│        ┆                             ┆ cytosol and nuclear speck.  ┆                             │\n│        ┆                             ┆ [provided by Alliance of    ┆                             │\n│        ┆                             ┆ Genome Resources, Nov 2024] ┆                             │\n└────────┴─────────────────────────────┴─────────────────────────────┴─────────────────────────────┘",
     "crumbs": [
       "How-To Guides",
       "Query information of genes"
@@ -189,47 +236,113 @@
     "text": "JUMP hub\nFocal point for JUMP information and data analysis pipelines.\nAdditionally, this repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data.\nPython notebooks are in the colab branch. Notebooks are autogenerated using these scripts."
   },
   {
-    "objectID": "explanations/Resources.html",
-    "href": "explanations/Resources.html",
-    "title": "Available resources",
+    "objectID": "reference/interactive_tools.html",
+    "href": "reference/interactive_tools.html",
+    "title": "JUMP documentation and examples",
     "section": "",
-    "text": "Available resources\n\nMore information\nData\nTools",
+    "text": "Interactive Tools\nThere are several no-code options for exploring JUMP data. See Usage instructions for each below.\n\nJUMPer tools\n\nThese are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.\n\nAvailable here\n\nTools to search similarities between perturbations, browse images, and inspect enriched features\n\nNo account creation required\n\n\n\nMorpheus\nExplore matrices of data and perform basic calculations.\n\nAvailable here\n\nTools to search similarities between perturbations, browse images, and inspect enriched features\n\nNo account creation required\n\nArdigen JUMP-CP Explorer\n\nFree public access at phenaid.ardigen.com/jumpcpexplorer\n\nSearch similarities between phenotypes and perturbations\n\nAccount creation required\n\nSpring Discovery JUMP-CP Portal\n\nAvailable at springscience.com/jump-cp\n\nData exploration interface\n\nAccount creation required\n\n\n\n\nUsage\n\nJUMPer tools\n\nWhat is the source and version of the replicability metrics displayed in Broad’s JUMPer tools?\nThese two files (ORF and CRISPR) contain the mAP and corrected p values for replicate retrieval (phenotypic activity). They won’t contain all ORF and CRISPR reagents because some of them were filtered out for QC reasons.\nX_Feature: For each row, is the Feature value an average for all the cells in the Metadata_image using the listed Mask(region of the cell: Nucleus, Cell, or Cytoplasm)? Or is it associated with a single cell in that image?\nAny Feature is the average of all cells and all replicates (typically four in total) for the specific mask and feature.\nHow are Statistic and Median calculated for each row?\n\nStatistic is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates from which those replicates came; typically each replicate is in an independent plate).\n\nMedian is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.\n\n\n\n\nMorpheus\n\nHow can I use Morpheus to view relationships among samples?\n\n\n\nDownload the ORF and/or CRISPR data from https://doi.org/10.5281/zenodo.14025602 or from https://zenodo.org/records/14165010 (a smaller file with only genes having cosine similarity &gt; 0.5 with other genes).\n\nDrag and drop one of those files into Morpheus (at https://software.broadinstitute.org/morpheus/ in your web browser; no need to install it)\n\nGo to Tools &gt; Similarity Matrix and choose Metric = cosine similarity and Compute matrix for = Columns\n\nCluster the genes using Tools &gt; Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns\n\nClick the gear icon towards the top right and choose “Annotations” tab\n\nChoose Symbol (for Rows and Columns) so that gene names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.\n\nPlay around!\n\nTo find a gene of interest, in the search box type Symbol: then start typing the name and it will appear as highlighted in the scroll bar so you can scroll to find it. But if you are looking for top matches to a gene, note that clustering can have weird behavior, putting the closest match pretty far away depending on the other data points. The broad.io Datasette links more directly answer the “top/bottom matches” question and take less hands-on time to configure and less compute time to load.\n\ndoubleclick a gene name and the data matrix will sort to show you the closest matches on one end and the strongest anti-correlators at the other. To go back to your original view, just keep clicking the same gene you originally sorted by, it will change back to the previous sort eventually.\n\nnote that in clustered view you can’t see anti-correlations which anecdotally seem more strong/common in CRISPR data. So clusters are a bit more interesting in ORF data.\n\nIf you would like to trim the similarity matrix to only show genes with a strong match, you can follow this procedure:\n\nAdd a new annotation by going to Tools &gt; Create Calculated Annotation, with the name ‘#Matches’ with the formula COUNTIF(“&gt;0.7”) This counts the number of genes where the similarity is above 0.7 (you can pick whatever threshold you prefer). Repeat this step for both rows and columns. Warning: although this seems like a simple step, for some reason it is fairly intensive and might require a suitably powerful computer - if the browser asks to Wait or Exit, waiting sometimes works.\n\nFilter samples where ‘#Matches’ &gt;=2 (because every sample matches itself); again repeat this for both rows and columns.\n\nThis will yield ~350 genes in the ORF data, for example. You can increase the number of matches to filter (to 3 or 4, as you prefer).",
     "crumbs": [
-      "Explanations",
-      "Available resources"
+      "Reference",
+      "Interactive Tools"
     ]
   },
   {
-    "objectID": "explanations/Resources.html#more-information",
-    "href": "explanations/Resources.html#more-information",
-    "title": "Available resources",
-    "section": "More information",
-    "text": "More information\n\nHome website: Access news and related publications.",
+    "objectID": "explanations/FAQ.html",
+    "href": "explanations/FAQ.html",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps\n\n\n\n\n\n\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
     "crumbs": [
       "Explanations",
-      "Available resources"
+      "Frequently Asked Questions"
     ]
   },
   {
-    "objectID": "explanations/Resources.html#data",
-    "href": "explanations/Resources.html#data",
-    "title": "Available resources",
-    "section": "Data",
-    "text": "Data\n\nWe provide Open Source Web “JUMPer” interfaces for all three datasets (CRISPR, ORF and Compound). For more details follow this link.\nYou can find the metadata of JUMP here, alongside the schema of all columns and including Target-2.",
+    "objectID": "explanations/FAQ.html#analyses",
+    "href": "explanations/FAQ.html#analyses",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps",
     "crumbs": [
       "Explanations",
-      "Available resources"
+      "Frequently Asked Questions"
     ]
   },
   {
-    "objectID": "explanations/Resources.html#tools",
-    "href": "explanations/Resources.html#tools",
-    "title": "Available resources",
-    "section": "Tools",
-    "text": "Tools\n\nArdigen provides a website to explore a representation (requires creating a free account).\nSpring Science also provides a website for data exploration (account needed).",
+    "objectID": "explanations/FAQ.html#data",
+    "href": "explanations/FAQ.html#data",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
     "crumbs": [
       "Explanations",
-      "Available resources"
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html",
+    "href": "explanations/data_description.html",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "This collection comprises 4 datasets:\n\nPrincipal dataset (cpg0016): 116k chemical and ~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells\n\n3 pilot datasets testing:\n\nDifferent perturbation conditions (cpg0000-jump-pilot, including different cell types)\n\nStaining conditions (cpg0001-cellpainting-protocol)\n\nMicroscopes (cpg0002-jump-scope)\n\n\n\n\n\n\n\n\nWe chose U2OS (osteosarcoma) cells for our major data production work because phenotypes are equally or more visible than the few other lines we’ve tested and there is existing data in this cell type (namely, cpg0012-wawer-bioactivecompoundprofiling)\n\n\n\n\n\nGenetic Perturbations:\n\nCRISPR knockdowns of 7,977 genes (pooled guides targeting each gene are arrayed into plates)\n\nORF (overexpression) reagents for 15,131 unique genes, with some overlap with CRISPR targets\n\n\nChemical Perturbations:\n\nPartners exchanged ~115,795 compounds\n\n~5 replicates of each compound\n\nPerformed as 1-2 replicates at 3-5 different sites globally\n\nDo note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.\n\n\n\n\n\nJUMP-Target:\n\n306 compounds and 160 corresponding genetic perturbations\n\nDesigned to assess connectivity (gene-compound matching, based on annotated gene targets of each compound) in profiling assays\n\nIncludes 384-well plate maps\n\nDocumentation\n\nJUMP-MOA:\n\n90 compounds in quadruplicate, laid out on a 384-well plate\n\nRepresents 47 mechanism-of-action classes\n\nDesigned for assessing connectivity between genes and compounds\n\nDocumentation\n\nPositive Controls:\n\nSet of 8 compounds per sample plate\n\nList of recommended controls\n\n\n\n\n\nThe experiments used an optimized Cell Painting protocol, published in Cimini et al. Nature Protocols 2023, which builds upon the original Bray et al. Nature Protocols 2016. For detailed implementation guidance, see the Cell Painting wiki.\n\n\n\n\nFrom 12 sources (data-generating centers):\n\nRaw microscopy images\n\nCellProfiler analysis output\n\nSingle-cell profiles\n\nWell-aggregated profiles (all single cells in a given sample well)\n\nMetadata files\n\n\n\n\nImages\n\n5 channels (DNA, RNA, ER, AGP, Mito) per imaging site within a well\n\nMultiple sites (images) per well\n\nCellProfiler Output\n\nCell segmentation images\n\nImage-level quality metrics\n\nProfile Data\n\nSingle-cell level profiles\n\nWell-aggregated profiles\n\nNormalized features\n\nWell-aggregated profiles after feature selection applied\n\nAssembled Subsets\n\nCombined datasets in parquet format\n\nURLs available in profile index\n\n\n\n\n\n\n\n\nHosted in the Cell Painting Gallery (registry.opendata.aws/cellpainting-gallery/). Access and download is free through AWS Open Data Program.\n\n\n\nMany of the processed datasets and manifest files can be found associated with the Broad Institute Imaging Platform community.\n\n\n\n\nHow-to guides provided\n\nAPIs and libraries for programmatic access:\n\ncpgdata:\n\njump-portrait: Fetch images using standard gene/compound names into a Python session or filesystem.\n\njump-babel: Translate perturbation names and access very basic metadata.\n\n\n\n\n\n\n\n\n\nAll pilot dataset components available\n\nPrincipal dataset: most components available from 12 sources\n\nKey metadata files accessible\n\nAssembled profile subsets ready for analysis\n\n\n\n\n\nExtension of metadata and notebooks to pilots (issue)\n\nCurated compound annotations from ChEMBL (issue)\n\nDeep learning embeddings using pre-trained networks (issue)\n\n\n\n\n\nCross-modality matching still being improved (the three modalities are ORF, CRISPR, and chemicals)\n\nSome wells/plates/sources excluded for quality control\n\nWithin-modality matching generally reliable\n\nYou can find more details here.\nFor the most current updates, subscribe to our email list.",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html#dataset-collection",
+    "href": "explanations/data_description.html#dataset-collection",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "This collection comprises 4 datasets:\n\nPrincipal dataset (cpg0016): 116k chemical and ~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells\n\n3 pilot datasets testing:\n\nDifferent perturbation conditions (cpg0000-jump-pilot, including different cell types)\n\nStaining conditions (cpg0001-cellpainting-protocol)\n\nMicroscopes (cpg0002-jump-scope)",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html#design-of-the-dataset",
+    "href": "explanations/data_description.html#design-of-the-dataset",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "We chose U2OS (osteosarcoma) cells for our major data production work because phenotypes are equally or more visible than the few other lines we’ve tested and there is existing data in this cell type (namely, cpg0012-wawer-bioactivecompoundprofiling)\n\n\n\n\n\nGenetic Perturbations:\n\nCRISPR knockdowns of 7,977 genes (pooled guides targeting each gene are arrayed into plates)\n\nORF (overexpression) reagents for 15,131 unique genes, with some overlap with CRISPR targets\n\n\nChemical Perturbations:\n\nPartners exchanged ~115,795 compounds\n\n~5 replicates of each compound\n\nPerformed as 1-2 replicates at 3-5 different sites globally\n\nDo note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.\n\n\n\n\n\nJUMP-Target:\n\n306 compounds and 160 corresponding genetic perturbations\n\nDesigned to assess connectivity (gene-compound matching, based on annotated gene targets of each compound) in profiling assays\n\nIncludes 384-well plate maps\n\nDocumentation\n\nJUMP-MOA:\n\n90 compounds in quadruplicate, laid out on a 384-well plate\n\nRepresents 47 mechanism-of-action classes\n\nDesigned for assessing connectivity between genes and compounds\n\nDocumentation\n\nPositive Controls:\n\nSet of 8 compounds per sample plate\n\nList of recommended controls\n\n\n\n\n\nThe experiments used an optimized Cell Painting protocol, published in Cimini et al. Nature Protocols 2023, which builds upon the original Bray et al. Nature Protocols 2016. For detailed implementation guidance, see the Cell Painting wiki.",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html#available-components",
+    "href": "explanations/data_description.html#available-components",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "From 12 sources (data-generating centers):\n\nRaw microscopy images\n\nCellProfiler analysis output\n\nSingle-cell profiles\n\nWell-aggregated profiles (all single cells in a given sample well)\n\nMetadata files\n\n\n\n\nImages\n\n5 channels (DNA, RNA, ER, AGP, Mito) per imaging site within a well\n\nMultiple sites (images) per well\n\nCellProfiler Output\n\nCell segmentation images\n\nImage-level quality metrics\n\nProfile Data\n\nSingle-cell level profiles\n\nWell-aggregated profiles\n\nNormalized features\n\nWell-aggregated profiles after feature selection applied\n\nAssembled Subsets\n\nCombined datasets in parquet format\n\nURLs available in profile index",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html#data-access",
+    "href": "explanations/data_description.html#data-access",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "Hosted in the Cell Painting Gallery (registry.opendata.aws/cellpainting-gallery/). Access and download is free through AWS Open Data Program.\n\n\n\nMany of the processed datasets and manifest files can be found associated with the Broad Institute Imaging Platform community.\n\n\n\n\nHow-to guides provided\n\nAPIs and libraries for programmatic access:\n\ncpgdata:\n\njump-portrait: Fetch images using standard gene/compound names into a Python session or filesystem.\n\njump-babel: Translate perturbation names and access very basic metadata.",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
+    ]
+  },
+  {
+    "objectID": "explanations/data_description.html#latest-updates",
+    "href": "explanations/data_description.html#latest-updates",
+    "title": "Dataset Overview",
+    "section": "",
+    "text": "All pilot dataset components available\n\nPrincipal dataset: most components available from 12 sources\n\nKey metadata files accessible\n\nAssembled profile subsets ready for analysis\n\n\n\n\n\nExtension of metadata and notebooks to pilots (issue)\n\nCurated compound annotations from ChEMBL (issue)\n\nDeep learning embeddings using pre-trained networks (issue)\n\n\n\n\n\nCross-modality matching still being improved (the three modalities are ORF, CRISPR, and chemicals)\n\nSome wells/plates/sources excluded for quality control\n\nWithin-modality matching generally reliable\n\nYou can find more details here.\nFor the most current updates, subscribe to our email list.",
+    "crumbs": [
+      "Explanations",
+      "Dataset Overview"
     ]
   }
 ]

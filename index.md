@@ -8,7 +8,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 
 ## Choose Your Own Path
 
-1. **Just exploring the data?
+1. Just exploring the data?
    
    - Use a web interface; no programming required:
      * [JUMP-CP Data Explorer](https://phenaid.ardigen.com/jumpcpexplorer/) by Ardigen, 
@@ -20,13 +20,13 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 
  
 
-2. **Want to fetch and analyze data?**
+2. Want to fetch and analyze data?
    
    - Follow our [how-to guides](http://howto/) for common analyses
 
  
 
-3. **Looking to build tools?**
+3. Looking to build tools?
    
    - Use our Python libraries [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata), [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait), [jump-babel](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel) and other libraries in the [monorepo](https://github.com/broadinstitute/monorepo/tree/main)
    - Access the [metadata schema](https://github.com/jump-cellpainting/datasets/tree/main/metadata)

@@ -1,36 +1,28 @@
 ### Interactive Tools
 
-There are several no-code options for exploring JUMP data. See Usage instructions for each below.
+There are several no-code options for exploring JUMP data. These are very useful for querying perturbations without needing experience in data analysis or programming. Detailed usage instructions are below this brief overview listing:
 
-1. **JUMPer tools**  
+1. **JUMPer tools** [here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr)
    
-
-These are very useful for querying perturbations without needing experience in data analysis or programming. They are also very convenient for a one-off query of the dataset.
-
-- Available [here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr)  
-  - Tools to search similarities between perturbations, browse images, and inspect enriched features  
+  - Type in your gene/compound of interest and retrieve a list of similar genes/compounds  
+  - Tools to browse images and inspect enriched features  
   - No account creation required
 
+2. **Morpheus** [here](https://software.broadinstitute.org/morpheus/)
 
-2. **Morpheus**  
-     
-   Explore matrices of data and perform basic calculations.  
-     
-   - Available [here](https://software.broadinstitute.org/morpheus/)  
-   - Tools to search similarities between perturbations, browse images, and inspect enriched features  
+   - Explore matrices of data and perform basic calculations
+   - Explore heatmaps showing similarity among clustered samples 
    - No account creation required
 
-3. **Ardigen JUMP-CP Explorer**  
-     
-   - Free public access at [phenaid.ardigen.com/jumpcpexplorer](https://phenaid.ardigen.com/jumpcpexplorer/)  
-   - Search similarities between phenotypes and perturbations  
-   - Account creation required
+3. **Ardigen phenAID JUMP-CP Explorer** [here](https://phenaid.ardigen.com/jumpcpexplorer/)  
 
-4. **Spring Discovery JUMP-CP Portal**  
-     
-   - Available at [springscience.com/jump-cp](https://www.springscience.com/jump-cp)  
-   - Data exploration interface  
-   - Account creation required
+   - Search similarities among perturbations and more
+   - Account creation required, but access is free
+
+5. **Spring Discovery JUMP-CP Portal** [here](https://www.springscience.com/jump-cp)
+        
+   - Data exploration interface includes plate views, single-cell phenotype classification tools, image browsing and more
+   - Account creation required, but access is free
 
 ### Usage
 

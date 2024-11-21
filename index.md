@@ -17,18 +17,16 @@ What is the purpose of this website? To provide up-to-date info on everything JU
      * [JUMP-CP Data Portal](https://www.springscience.com/jump-cp) by Spring Discovery, 
 
    You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\!
-
  
 
 2. Want to fetch and analyze data?
    
    - Follow our [how-to guides](./howto/0_howto.md) for common analyses
 
- 
 
 3. Looking to build tools?
    
-   - Use our Python libraries [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata), [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait), [jump-babel](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel) and other libraries in the [monorepo](https://github.com/broadinstitute/monorepo/tree/main)
+   - Use our Python libraries [cp_measure](https://github.com/afermg/cp_measure), [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata), [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait), [jump-babel](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel) and other libraries in the [monorepo](https://github.com/broadinstitute/monorepo/tree/main)
    - Access the [metadata schema](https://github.com/jump-cellpainting/datasets/tree/main/metadata)
 
 ## Need help or more information?

@@ -6,6 +6,7 @@ There are several no-code options for exploring JUMP data. These are very useful
    
   - Type in your gene/compound of interest and retrieve a list of similar genes/compounds  
   - Tools to browse images and inspect enriched features  
+
   - No account creation required
 
 2. **Morpheus** [here](https://software.broadinstitute.org/morpheus/)
@@ -19,34 +20,34 @@ There are several no-code options for exploring JUMP data. These are very useful
    - Search similarities among perturbations and more
    - Account creation required, but access is free
 
-5. **Spring Discovery JUMP-CP Portal** [here](https://www.springscience.com/jump-cp)
+4. **Spring Discovery JUMP-CP Portal** [here](https://www.springscience.com/jump-cp)
         
    - Data exploration interface includes plate views, single-cell phenotype classification tools, image browsing and more
    - Account creation required, but access is free
 
 ### Usage
 
-#### JUMPer tools
+#### JUMPrr tools
 
-* What is the source and version of the replicability metrics displayed in Broad’s [JUMPer tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr)?  
-    
-  These two files ([ORF](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz) and [CRISPR](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz)) contain the mAP and corrected p values for replicate retrieval (phenotypic activity). They won't contain all ORF and CRISPR reagents because some of them were filtered out for QC reasons.  
-    
-* X\_Feature: For each row, is the `Feature` value an average for all the cells in the `Metadata_image` using the listed `Mask`(region of the cell: Nucleus, Cell, or Cytoplasm)? Or is it associated with a single cell in that image?  
-    
-  Any `Feature` is the average of all cells and all replicates (typically four in total) for the specific mask and feature.  
-    
-* How are `Statistic` and `Median` calculated for each row?   
-    
-  - `Statistic` is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates from which those replicates came; typically each replicate is in an independent plate).  
+* What is the source and version of the replicability metrics displayed in Broad’s [JUMPrr tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr)?
+  
+  These two files ([ORF](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz) and [CRISPR](https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz)) contain the mAP and corrected p values for replicate retrieval (phenotypic activity). They won't contain all ORF and CRISPR reagents because some of them were filtered out for QC reasons.
+  
+* X\_Feature: For each row, is the `Feature` value an average for all the cells in the `Metadata_image` using the listed `Mask`(region of the cell: Nucleus, Cell, or Cytoplasm)? Or is it associated with a single cell in that image?
+  
+  Any `Feature` is the average of all cells and all replicates (typically four in total) for the specific mask and feature.
+  
+* How are `Statistic` and `Median` calculated for each row? 
+  
+  - `Statistic` is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates from which those replicates came; typically each replicate is in an independent plate).
   - `Median` is the median feature across all (\~4) replicates. Each of these replicates' value was in turn the mean of all the sites and cells in a given well.
 
 #### Morpheus
 
-* How can I use [Morpheus](https://software.broadinstitute.org/morpheus/) to view relationships among samples?   
-1. Download the ORF and/or CRISPR data from [https://doi.org/10.5281/zenodo.14025602](https://doi.org/10.5281/zenodo.14025602) or from [https://zenodo.org/records/14165010](https://zenodo.org/records/14165010) (a smaller file with only genes having cosine similarity \> 0.5 with other genes).  
-2. Drag and drop one of those files into Morpheus (at https://software.broadinstitute.org/morpheus/ in your web browser; no need to install it)  
-3. Go to Tools \> Similarity Matrix and choose Metric \= cosine similarity and Compute matrix for \= Columns  
+* How can I use [Morpheus](https://software.broadinstitute.org/morpheus/) to view relationships among samples? 
+1. Download the ORF and/or CRISPR data from [https://doi.org/10.5281/zenodo.14025602](https://doi.org/10.5281/zenodo.14025602) or from [https://zenodo.org/records/14165010](https://zenodo.org/records/14165010) (a smaller file with only genes having cosine similarity \> 0.5 with other genes).
+2. Drag and drop one of those files into Morpheus (at https://software.broadinstitute.org/morpheus/ in your web browser; no need to install it)
+3. Go to Tools \> Similarity Matrix and choose Metric \= cosine similarity and Compute matrix for \= Columns
 4. Cluster the genes using Tools \> Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns
 
    ![][image1]

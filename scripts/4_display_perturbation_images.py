@@ -78,11 +78,11 @@ def display_site(
     counter = 0
 
     channel_rgb = {
-        "DNA": "#FF0000",  # Blue
-        "ER": "#65fe08",  # Green
-        "Mito": "#FFFF00",  # Red
-        "AGP": "#FFFF00",  # Yellow
-        "RNA": "#FFA500",  # Orange
+        "AGP": "#FF7F00", # Orange
+        "DNA": "#0000FF", # Blue
+        "ER": "#00FF00", # Green
+        "Mito": "#FF0000", # Red
+        "RNA": "#FFFF00", # Yellow
     }
 
     for ax, (channel, rgb) in zip(axes, channel_rgb.items()):

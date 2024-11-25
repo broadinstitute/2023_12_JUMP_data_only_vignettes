@@ -206,18 +206,7 @@
     "href": "howto/0_howto.html",
     "title": "How-to Guides",
     "section": "",
-    "text": "You can use the sidebar on the left to find the most common analyses. They are sorted in the usual order in which data is processed.\n\n\nThis table provides direct links to run the guides on your browser (as Jupyter notebooks).\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
-    "crumbs": [
-      "How-To Guides",
-      "How-to Guides"
-    ]
-  },
-  {
-    "objectID": "howto/0_howto.html#accessing-a-live-coding-environment",
-    "href": "howto/0_howto.html#accessing-a-live-coding-environment",
-    "title": "How-to Guides",
-    "section": "",
-    "text": "This table provides direct links to run the guides on your browser (as Jupyter notebooks).\n\n\n\nGoogle Collab\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nAlternatively, you can download the notebooks from their respective pages and run them in your local Python environment. We have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
+    "text": "How-to Guides\n\n\n\nYou can use the sidebar on the left to find tutorials demoing the most common analyses, or click the links in the list below to run the guides directly on your browser in a Google Colab live coding environment.\n\n\n\n\nRetrieve JUMP profiles\n\n\nAdd metadata to profiles\n\n\nCalculate phenotypic activity\n\n\nDisplay perturbation images\n\n\nExplore perturbation clusters\n\n\nQuery genes for more info\n\n\n\nIf you are running the analyses on your computer, we have published a package containing all dependencies, you need only install in your environment using pip install jump_deps (Python 3.10 or 3.11).",
     "crumbs": [
       "How-To Guides",
       "How-to Guides"

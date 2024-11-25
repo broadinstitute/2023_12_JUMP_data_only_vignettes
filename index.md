@@ -18,8 +18,8 @@ This resource was developed by [Alan Muñoz González](https://github.com/afermg
      * [JUMP-CP Data Explorer](https://phenaid.ardigen.com/jumpcpexplorer/) by Ardigen 
      * [JUMP-CP Data Portal](https://www.springscience.com/jump-cp) by Spring Discovery
 
-   You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\!
- 
+   You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](./reference/interactive_tools.md) page for instructions for these tools. 
+
 
 2. Want to fetch and analyze data?
    

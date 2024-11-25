@@ -3,7 +3,7 @@ You can use the sidebar on the left to find the most common analyses. They are s
 
 ## Accessing a live coding environment
 
-This table provides direct link to run the guides on your browser. 
+This table provides direct links to run the guides on your browser (as Jupyter notebooks). 
 
 | Google Collab                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

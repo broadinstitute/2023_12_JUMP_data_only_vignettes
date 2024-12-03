@@ -6,8 +6,6 @@ JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort 
 
 What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.
 
-This resource was developed by [Alan Muñoz González](https://github.com/afermg).
-
 ## Choose Your Own Path
 
 1. Just exploring the data?
@@ -39,3 +37,7 @@ This resource was developed by [Alan Muñoz González](https://github.com/afermg
   - Morphmap biorxiv (coming soon! Experimental details are in JUMP data production biorxiv for now)
 - Raise an issue or ask a question on [Github](https://github.com/jump-cellpainting/datasets/issues)
 - Subscribe to updates at [jump-cellpainting.broadinstitute.org/more-info](https://jump-cellpainting.broadinstitute.org/more-info)
+
+## Acknowledgements
+This resource was developed by [Alan F. Muñoz](https://github.com/afermg) .
+

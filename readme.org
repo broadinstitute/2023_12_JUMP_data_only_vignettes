@@ -1,3 +1,0 @@
-#+title: JUMP information central
-
-Focal point for JUMP information and data analysis pipelines.

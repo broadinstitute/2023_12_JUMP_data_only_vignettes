@@ -1,2 +1,0 @@
-jump_deps==0.0.7
-jupyter==1.0.0

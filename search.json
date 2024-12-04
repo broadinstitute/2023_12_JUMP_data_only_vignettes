@@ -176,7 +176,7 @@
     "href": "cite.html",
     "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.\n\n\nPlease use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\n\n\n\nTo cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).",
+    "text": "All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.\n\n\nPlease use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\n\n\n\nTo cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
     "crumbs": [
       "Cite"
     ]
@@ -186,7 +186,7 @@
     "href": "cite.html#citing-the-resource-as-a-whole",
     "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "Please use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023",
+    "text": "Please use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
     "crumbs": [
       "Cite"
     ]
@@ -196,7 +196,7 @@
     "href": "cite.html#citing-individual-datasets",
     "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "To cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).",
+    "text": "To cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
     "crumbs": [
       "Cite"
     ]

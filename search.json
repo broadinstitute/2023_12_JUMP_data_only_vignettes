@@ -355,7 +355,7 @@
     "href": "explanations/quirks_details.html",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 2 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
     "crumbs": [
       "Explanations",
       "Quirks and details"
@@ -366,7 +366,7 @@
     "href": "explanations/quirks_details.html#quirks-and-details",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 2 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.",
     "crumbs": [
       "Explanations",
       "Quirks and details"

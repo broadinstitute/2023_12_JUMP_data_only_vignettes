@@ -401,13 +401,21 @@ Do note that these numbers were based on JUMP Cell Painting IDs and there may be
 </li>
 <li>Well-aggregated profiles after feature selection applied</li>
 </ul></li>
-<li><p><strong>Assembled Subsets</strong></p>
+<li><p><strong>Index </strong> You can find the profile : https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv</p>
 <ul>
-<li>Combined datasets in parquet format<br>
-</li>
-<li>URLs available in <a href="https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv">profile index</a></li>
+<li>Parquet tables in which profiles were preprocessed with varying optimized pipelines.</li>
+<li>The “Interpretable” tables means that they are processed to the point where features retain their original mapping from the original features’ names (relating to size, shape, intensity, etc.).</li>
 </ul></li>
+<li><p><strong>Processed JUMP reference tables (JUMP_rr tables)</strong> <a href="https://zenodo.org/records/14046034">This</a> dataset provides multiple precomputed analysis tables to make JUMP data exploration accessible:</p></li>
 </ol>
+<ul>
+<li>‘X_features.parquet’ contains a ranking of the features that distinguish a given perturbation from negative controls.</li>
+<li>‘X_gallery.parquet’ is for visualization of the images with all channels collapsed into one.</li>
+<li>‘X_cosinesim…parquet’ contains the pairwise cosine similarity of all perturbations within a given dataset (i.e., orf, crispr). This allows searching for the closest matches for each perturbation of interest or looking at all relationships in a heatmap.</li>
+<li>‘X…significance…parquet’ is the statistical significance for the phenotypic activity of a given sample (see broad.io/crispr_feature for a formal definition). It shows which perturbations yielded a phenotype distinguishable from negative controls.</li>
+<li>‘full’ tables contain all the data points from the resulting analysis. Their non-full counterpart contains a subset comprised of the most significant entries, meant for in-browser consumption and queries.</li>
+<li>Many of the above tables can be interactively viewed using <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">JUMPrr tools</a></li>
+</ul>
 </section>
 </section>
 <section id="data-access" class="level2">

@@ -91,22 +91,23 @@ From 12 sources (data-generating centers):
 
    
 
-4. **Profiles processed with alternate pipelines**  
-     
-   - Profiles in parquet format, where profiles were processed with varying optimized pipelines.
-   - "Interpretable" means the profiles are not the optimal, final profiles of that type but instead are the last step before certain processing steps that lose the direct mapping from the original features' names (relating to size, shape, intensity, etc.). 
-   - Download files here: https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv
+4. **Index **
+   You can find the profile : https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv
+
+   - Parquet tables in which profiles were preprocessed with varying optimized pipelines.
+   - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). 
 
 
 
-5. **Processed JUMP Datasets**
-   - This dataset provides multiple precomputed analysis tables for JUMP exploration:
-     - significance is the statistical significance for the phenotypic activity of a given sample (see broad.io/crispr_feature for a formal definition). It shows which perturbations yielded a phenotype distinguishable from negative controls.
-     - cosinesim contains the cosine similarity of all perturbations vs all other perturbations within a given dataset. This allows searching for the closest matches for each perturbation of interest, or looking at all relationships in a heatmap.
-     - features contains a ranking of the features that distinguish a given perturbation from negative controls.
-     - gallery is for visualization of the images with all channels collapsed into one.
-   - Many of the above files can be interactively viewed using [JUMPrr tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access)
-   - Download files here: https://zenodo.org/records/14046034
+6. **Processed JUMP reference tables (JUMP_rr tables)**
+   [This](https://zenodo.org/records/14046034) dataset provides multiple precomputed analysis tables to make JUMP data exploration accessible:
+
+  - 'X_features.parquet' contains a ranking of the features that distinguish a given perturbation from negative controls.
+  - 'X_gallery.parquet' is for visualization of the images with all channels collapsed into one.
+  - 'X_cosinesim...parquet' contains the pairwise cosine similarity of all perturbations within a given dataset (i.e., orf, crispr). This allows searching for the closest matches for each perturbation of interest or looking at all relationships in a heatmap.
+  - 'X...significance...parquet' is the statistical significance for the phenotypic activity of a given sample (see broad.io/crispr_feature for a formal definition). It shows which perturbations yielded a phenotype distinguishable from negative controls.
+  - 'full' tables contain all the data points from the resulting analysis. Their non-full counterpart contains a subset comprised of the most significant entries, meant for in-browser consumption and queries. 
+  - Many of the above tables can be interactively viewed using [JUMPrr tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access)
 
 
 

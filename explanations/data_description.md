@@ -91,10 +91,24 @@ From 12 sources (data-generating centers):
 
    
 
-4. **Assembled Subsets**  
+4. **Profiles processed with alternate pipelines**  
      
-   - Combined datasets in parquet format  
-   - URLs available in [profile index](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv)
+   - Profiles in parquet format, where profiles were processed with varying optimized pipelines.
+   - "Interpretable" means the profiles are not the optimal, final profiles of that type but instead are the last step before certain processing steps that lose the direct mapping from the original features' names (relating to size, shape, intensity, etc.). 
+   - Download files here: https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv
+
+
+
+5. **Processed JUMP Datasets**
+   - This dataset provides multiple precomputed analysis tables for JUMP exploration:
+     - significance is the statistical significance for the phenotypic activity of a given sample (see broad.io/crispr_feature for a formal definition). It shows which perturbations yielded a phenotype distinguishable from negative controls.
+     - cosinesim contains the cosine similarity of all perturbations vs all other perturbations within a given dataset. This allows searching for the closest matches for each perturbation of interest, or looking at all relationships in a heatmap.
+     - features contains a ranking of the features that distinguish a given perturbation from negative controls.
+     - gallery is for visualization of the images with all channels collapsed into one.
+   - Many of the above files can be interactively viewed using [JUMPrr tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access)
+   - Download files here: https://zenodo.org/records/14046034
+
+
 
 ## Data Access
 

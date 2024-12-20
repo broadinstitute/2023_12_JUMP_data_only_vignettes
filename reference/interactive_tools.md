@@ -4,10 +4,9 @@ There are several no-code options for exploring JUMP data. These are very useful
 
 1. **JUMPer tools** [here](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr)
    
-  - Type in your gene/compound of interest and retrieve a list of similar genes/compounds  
-  - Tools to browse images and inspect enriched features  
-
-  - No account creation required
+   - Type in your gene/compound of interest and retrieve a list of similar genes/compounds  
+   - Tools to browse images and inspect enriched features  
+   - No account creation required
 
 2. **Morpheus** [here](https://software.broadinstitute.org/morpheus/)
 

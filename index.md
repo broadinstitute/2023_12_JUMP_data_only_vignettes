@@ -34,10 +34,11 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 - Read the papers creating the datasets for experimental and analysis details:
   - [CPJUMP1](https://www.nature.com/articles/s41592-024-02241-6)
   - [JUMP data production biorxiv](https://www.biorxiv.org/content/10.1101/2023.03.23.534023)
-  - Morphmap biorxiv (coming soon! Experimental details are in JUMP data production biorxiv for now)
+  - [Morphmap](https://www.biorxiv.org/content/10.1101/2024.12.02.624527)
 - Raise an issue or ask a question on [Github](https://github.com/jump-cellpainting/datasets/issues)
 - Subscribe to updates at [jump-cellpainting.broadinstitute.org/more-info](https://jump-cellpainting.broadinstitute.org/more-info)
 
 ## Acknowledgements
-This resource was developed by [Alan F. Muñoz](https://github.com/afermg) .
+
+This resource was developed by [Alan F. Muñoz](https://github.com/afermg)
 
